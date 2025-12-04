@@ -1,0 +1,219 @@
+/* RESET VITE SUPPRIMÉ — plus aucun risque que le nom disparaisse */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #fafafa;
+}
+
+/* ROOT */
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* HEADER MODERNE */
+.header {
+  background: white;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 15px 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #ff7b00 !important; /* couleur forte */
+  margin: 0;
+}
+
+
+.navbar {
+  display: flex;
+  gap: 25px;
+}
+
+.nav-item {
+  text-decoration: none;
+  color: #444;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.nav-item:hover {
+  background: #ff7b00;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* MENU SECTIONS */
+.menu-section {
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+.menu-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+  color: #333;
+}
+
+/* MENU GRID */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+/* MENU CARD */
+.menu-card {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  transition: 0.3s ease;
+}
+
+.menu-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 26px rgba(0,0,0,0.12);
+}
+
+/* IMAGE */
+.card-image {
+  position: relative;
+}
+
+.card-image img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* BADGE NEW */
+.badge-new {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #ff7b00;
+  color: white;
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 30px;
+  font-weight: 600;
+}
+
+/* CARD CONTENT */
+.card-content {
+  padding: 18px;
+}
+
+/* CARD HEADER */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 🎯 TITRE DU PRODUIT — GARANTI VISIBLE */
+.card-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #222 !important; /* force affichage */
+  line-height: 1.3;
+}
+
+/* BADGE VEGE */
+.badge-vege {
+  background: #d4f8d4;
+  padding: 4px 8px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+}
+
+/* DESCRIPTION */
+.description {
+  margin: 12px 0;
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* FOOTER CARD */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ff7b00;
+}
+
+/* BOUTON */
+.btn-add {
+  background: #ff7b00;
+  color: white;
+  border: none;
+  padding: 9px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 600;
+}
+
+.btn-add:hover {
+  background: #e36f00;
+  transform: translateY(-2px);
+}
+
+/* FOOTER */
+.footer-modern {
+  background: #111;
+  color: #ddd;
+  padding: 40px 20px;
+  margin-top: 60px;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+}
+
+.footer-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #ff7b00;
+}
+
+.footer-text {
+  margin-top: 5px;
+  color: red;
+  font-size: 1rem;
+}
+
+.footer-copy {
+  margin-top: 20px;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
