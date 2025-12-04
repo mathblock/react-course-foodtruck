@@ -16,7 +16,7 @@ const menuItems: MenuProps[] = [
     name: "Burger Classic",
     description: "Délicieux burger avec fromage fondant, salade et sauce maison",
     price: 12.99,
-    category: "plat",
+    category: "plat principale",
     imageUrl: "https://www.example.com/burger.jpg",
     isVegetarian: false,
     isNew: true
@@ -46,7 +46,7 @@ const menuItems: MenuProps[] = [
     name: "Wrap Végétarien",
     description: "Wrap rempli de légumes frais, houmous et feta",
     price: 9.99,
-    category: "plat",
+    category: "plat principale",
     imageUrl: "https://www.example.com/wrap.jpg",
     isVegetarian: true,
     isNew: true
