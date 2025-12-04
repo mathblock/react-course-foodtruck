@@ -1,0 +1,21 @@
+import { type MenuItem } from '../types/menu';
+
+export const menuItems: MenuItem[] = [
+    { id: '1', "name": 'Salade César', description: 'Salade fraîche avec poulet grillé, croûtons et parmesan.', price: 8.99, category: 'entrees', imageUrl: 'https://assets.afcdn.com/recipe/20190704/94705_w1024h1024c1cx2336cy1552cxt0cyt0cxb4672cyb3104.webp', isVegetarian: false },
+    { id: '2', name: 'Soupe à la tomate', description: 'Soupe maison à base de tomates fraîches.', price: 5.49, category: 'entrees', imageUrl: 'https://www.regilait.com/app/uploads/2019/11/soupe_tomate_ig.jpg', isVegetarian: true },
+    { id: '3', name: 'Nachos au fromage', description: 'Nachos croustillants avec fromage fondu et salsa.', price: 6.99, category: 'entrees', imageUrl: 'https://fgdjrynm.filerobot.com/acc/recipes/372a8201e2187aa7330b026da8a7372e0dc9708e4f37445eb02cfe7f784764ff.jpg?h=800&w=800&q=60', isVegetarian: true },
+    { id: '4', name: 'Tacos au poulet', description: 'Tacos garnis de poulet épicé, laitue et salsa.', price: 9.99, category: 'plats', imageUrl: 'https://img.cuisineaz.com/1024x576/2019/04/17/i146583-tacos-poulet-curry.jpeg', isVegetarian: false },
+    { id: '5', name: 'Burger classique', description: 'Burger avec steak, fromage, laitue, tomate et sauce spéciale.', price: 10.49, category: 'plats', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/c/cc/Burger_King_2020.svg', isVegetarian: false },
+    { id: '6', name: 'Pizza Margherita', description: 'Pizza avec sauce tomate, mozzarella et basilic frais.', price: 11.99, category: 'plats', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/8/85/Quando_voc%C3%AA_mora_numa_cidade_com_milhares_de_pizzarias_%2822132311531%29.jpg', isVegetarian: true },
+    { id: '7', name: 'Wrap végétarien', description: 'Wrap rempli de légumes grillés et houmous.', price: 8.49, category: 'plats', imageUrl: 'https://www.elle-et-vire.com/uploads/cache/930w/uploads/recip/recipe/3005/65b9281125186_wrap.jpg', isVegetarian: true },
+    { id: '8', name: 'Brownie au chocolat', description: 'Brownie fondant avec morceaux de chocolat.', price: 4.99, category: 'desserts', imageUrl: 'https://img-3.journaldesfemmes.fr/xeZpAS2yxSQWXi4gXGbycoAzw1U=/800x600/725d3d594aff435c88ee773f11460ec1/ccmcms-jdf/39960846.jpg', isVegetarian: true },
+    { id: '9', name: 'Glace vanille', description: 'Glace crémeuse à la vanille.', price: 3.99, category: 'desserts', imageUrl: 'https://www.mavany.com/wp-content/uploads/2021/06/glace-vanille.png', isVegetarian: true },
+    { id: '10', name: 'Churros', description: 'Churros croustillants saupoudrés de sucre et cannelle.', price: 4.49, category: 'desserts', imageUrl: 'https://images.getrecipekit.com/20230103193202-adobestock_194338949-min.jpeg?aspect_ratio=1:1&quality=90&', isVegetarian: true },
+    { id: '11', name: 'Coca-Cola', description: 'Boisson gazeuse rafraîchissante.', price: 2.49, category: 'boissons', imageUrl: 'https://www.shutterstock.com/image-photo/full-size-cocacola-plastic-bottle-600nw-2642734713.jpg', isVegetarian: true },
+    { id: '12', name: 'Jus d\'orange frais', description: 'Jus d\'orange pressé à froid.', price: 3.49, category: 'boissons', imageUrl: 'https://fr.rc-cdn.community.thermomix.com/recipeimage/90vd41nc-3704c-487912-cfcd2-yt6slisd/b17d91ad-7d45-4918-afe3-d14e942b9b39/main/jus-dorange-rapide.jpg', isVegetarian: true },
+    { id: '13', name: 'Thé glacé citron', description: 'Thé glacé rafraîchissant avec une touche de citron.', price: 2.99, category: 'boissons', imageUrl: 'https://assets.afcdn.com/story/20230607/2220776_w2110h2110c1cx1055cy701cxt0cyt0cxb2110cyb1402.jpg', isVegetarian: true },
+    { id: '14', name: 'Salade grecque', description: 'Salade avec feta, olives, concombre et tomate.', price: 7.99, category: 'entrees', imageUrl: 'https://assets.afcdn.com/recipe/20190704/94666_w1024h1024c1cx2689cy1920cxt0cyt0cxb5378cyb3840.webp', isVegetarian: true, isNew: true },
+    { id: '15', name: 'Pizza BBQ Chicken', description: 'Pizza garnie de poulet BBQ, oignons rouges et coriandre.', price: 12.49, category: 'plats', imageUrl: 'https://www.allrecipes.com/thmb/qZ7LKGV1_RYDCgYGSgfMn40nmks=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/AR-24878-bbq-chicken-pizza-beauty-4x3-39cd80585ad04941914dca4bd82eae3d.jpg', isVegetarian: false, isNew: true },
+];
+
+export default menuItems;
