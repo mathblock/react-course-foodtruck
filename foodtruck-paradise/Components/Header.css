@@ -1,0 +1,21 @@
+.header {
+    background-color: #f8f8f8;
+    padding: 16px;
+    text-align: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.tagline {
+    font-style: italic;
+    color: #555;
+}
+
+.nav-link {
+    margin: 0 8px;
+    text-decoration: none;
+    color: #0077cc;
+}
