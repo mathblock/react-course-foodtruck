@@ -6,7 +6,12 @@ const Header: React.FC = () => {
     <header className="header">
       <div className="container">
         <div className="logo">
-          <h1>Food Truck Paradise</h1>
+          <img 
+            src="../assets/foodtruck-logo.png"
+             alt="Food Truck Logo" 
+            className="logo-image"
+          />
+          <h1>🌮 Food Truck Paradise</h1>
         </div>
         <p className="tagline">
           Des saveurs du monde, directement dans votre rue !

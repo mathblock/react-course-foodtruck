@@ -7,7 +7,7 @@ import type {MenuProps} from "../types/menus";
 const MenuList: React.FC = () => {
    
   const entrees = menuItems.filter((item: MenuProps) => item.category === 'entree');
-  const plats = menuItems.filter((item: MenuProps) => item.category === 'plat principal');
+  const plats = menuItems.filter((item: MenuProps) => item.category === 'plat principale');
   const desserts = menuItems.filter((item: MenuProps) => item.category === 'dessert');
   const boissons = menuItems.filter((item: MenuProps) => item.category === 'boisson');
 
