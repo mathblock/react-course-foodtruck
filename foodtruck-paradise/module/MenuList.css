@@ -1,0 +1,34 @@
+.menu-list {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.menu-section {
+  margin-bottom: 60px;
+}
+
+.menu-section h2 {
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+  color: #2f3542;
+  position: relative;
+  display: inline-block;
+}
+
+.menu-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: #ffa502;
+  border-radius: 2px;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}

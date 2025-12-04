@@ -1,0 +1,112 @@
+/* Header principal */
+.header {
+  background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+  color: white;
+  padding: 2rem 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Container pour centrer le contenu */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+/* Logo et titre */
+.logo h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: 1px;
+}
+
+/* Slogan accrocheur */
+.tagline {
+  font-size: 1.2rem;
+  font-style: italic;
+  margin: 1rem 0 2rem 0;
+  opacity: 0.95;
+  font-weight: 300;
+}
+
+/* Barre de navigation */
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+/* Liens de navigation */
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 0.5rem 1.5rem;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid transparent;
+}
+
+.nav-link:hover {
+  background-color: white;
+  color: #ff6b6b;
+  border-color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.nav-link:active {
+  transform: translateY(0);
+}
+
+/* Responsive - Tablettes */
+@media (max-width: 768px) {
+  .logo h1 {
+    font-size: 2rem;
+  }
+  
+  .tagline {
+    font-size: 1rem;
+  }
+  
+  .nav {
+    gap: 1rem;
+  }
+  
+  .nav-link {
+    font-size: 1rem;
+    padding: 0.4rem 1rem;
+  }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 480px) {
+  .header {
+    padding: 1.5rem 0;
+  }
+  
+  .logo h1 {
+    font-size: 1.5rem;
+  }
+  
+  .tagline {
+    font-size: 0.9rem;
+    margin: 0.5rem 0 1.5rem 0;
+  }
+  
+  .nav {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .nav-link {
+    display: block;
+    width: 100%;
+  }
+}
