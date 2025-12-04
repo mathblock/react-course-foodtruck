@@ -1,0 +1,53 @@
+/* src/index.css */
+
+/*
+   1. Réinitialisation (Reset) pour une meilleure cohérence entre les navigateurs
+*/
+*, *::before, *::after {
+  box-sizing: border-box; /* Modèle de boîte moderne */
+}
+
+/* Réinitialisation des marges et paddings pour la base */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  /* S'assurer que le HTML/Body couvre toute la hauteur pour l'application React */
+  height: 100%;
+}
+
+/*
+   2. Styles de Base Globaux
+*/
+
+body {
+  /* Police de secours si 'Inter' n'est pas chargée */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* La couleur d'arrière-plan principale sera définie dans App.css via la variable --color-background */
+  background-color: #f4f4f7; 
+  color: #212529;
+}
+
+/* 3. Styles Utilitaires pour l'Accessibilité
+*/
+
+a {
+  text-decoration: none; /* Supprime le soulignement par défaut des liens */
+  color: inherit; /* Utilise la couleur du texte parent par défaut */
+}
+
+/* Styles pour les images pour éviter les problèmes de ligne de base */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Styles de base des titres (qui seront affinés dans App.css) */
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}

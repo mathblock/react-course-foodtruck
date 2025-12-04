@@ -1,0 +1,239 @@
+/* src/App.css */
+
+/* --- 1. Variables et Général --- */
+:root {
+    /* Couleurs Premium */
+    --color-primary: #a30000; /* Rouge Brique/Gourmet Profond */
+    --color-secondary: #ffc94b; /* Jaune Or Chaud (Accent) */
+    --color-accent: #007bff; /* Bleu d'Action Classique (Action) */
+    --color-text-dark: #212529; /* Noir Profond */
+    --color-text-light: #f8f9fa;
+    --color-success: #28a745; /* Vert Classique pour Végétarien */
+    --color-background: #f4f4f7; /* Arrière-plan Gris très Clair */
+    --color-card-bg: #ffffff; 
+    --color-shadow: rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: 'Inter', 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-background);
+    color: var(--color-text-dark);
+    line-height: 1.6;
+    
+    min-height: 100vh; 
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.app main {
+    
+    flex-grow: 1; 
+    padding: 40px 0;
+}
+
+
+.header {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    padding: 25px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1 {
+    margin: 0;
+    font-size: 2.4em;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.tagline {
+    font-style: italic;
+    margin: 5px 0 0;
+    font-size: 1.1em;
+    font-weight: 300;
+    opacity: 0.8;
+}
+
+.nav a {
+    color: var(--color-text-light);
+    text-decoration: none;
+    margin-left: 30px;
+    font-weight: 600;
+    transition: color 0.3s, border-bottom 0.3s;
+    padding-bottom: 5px;
+    border-bottom: 3px solid transparent; 
+}
+
+.nav a:hover {
+    color: var(--color-secondary);
+    border-bottom-color: var(--color-secondary);
+}
+
+
+.menu-category h2 {
+    color: var(--color-primary);
+    border-bottom: 3px solid var(--color-secondary);
+    padding-bottom: 10px;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    font-size: 2em;
+    font-weight: 700;
+}
+
+.category-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+
+.menu-card {
+    background-color: var(--color-card-bg);
+    border-radius: 12px;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); 
+    border: 1px solid #e0e0e0; 
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-card:hover {
+    
+    transform: translateY(-8px); 
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card-image {
+    position: relative;
+    height: 220px;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.card-header h3 {
+    margin: 0;
+    font-size: 1.6em;
+    font-weight: 700;
+    color: var(--color-text-dark); 
+}
+
+.description {
+    font-size: 0.95em;
+    color: #555;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 15px;
+    border-top: 1px solid #ecf0f1;
+}
+
+.price {
+    font-size: 1.8em;
+    font-weight: 900;
+    color: var(--color-primary); 
+}
+
+.btn-add {
+    background-color: var(--color-secondary); 
+    color: var(--color-text-dark); 
+    border: none;
+    padding: 10px 25px;
+    border-radius: 4px; 
+    cursor: pointer;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-add:hover {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+
+.badge {
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: inline-block;
+    letter-spacing: 0.5px;
+}
+
+.badge-new {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: var(--color-secondary); 
+    color: var(--color-text-dark); 
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.badge-vege {
+    background-color: var(--color-success); 
+    color: white;
+    font-size: 0.8em; 
+    padding: 4px 8px;
+    border-radius: 4px;
+    line-height: 1;
+}
+
+
+.footer {
+    background-color: var(--color-text-dark);
+    color: var(--color-text-light);
+    padding: 25px 0;
+    text-align: center;
+    font-size: 0.9em;
+    margin-top: 40px;
+}
+
+.footer p {
+    margin: 5px 0;
+}
