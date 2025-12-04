@@ -1,5 +1,7 @@
 # Food Truck Paradise - Évaluation React
 
+## Kevin GREGOIRE + Roland LONTSIE
+
 ## Informations Générales
 
 **Format** : Projet guidé en binôme  
