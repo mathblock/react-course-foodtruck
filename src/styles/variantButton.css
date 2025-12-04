@@ -1,0 +1,14 @@
+.button-primary {
+  background-color: blue;
+  color: white;
+}
+
+.button-secondary {
+  background-color: gray;
+  color: white;
+}
+
+.button-danger {
+  background-color: red;
+  color: white;
+}

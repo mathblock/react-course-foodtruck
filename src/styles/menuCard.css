@@ -1,0 +1,118 @@
+.card_container {
+  background: white;  
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+  height: 100%;
+}
+
+.card_container:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.card_header {
+  height: 220px;
+  width: 100%;
+  overflow: hidden;
+  height: 220px;
+  background: #f5f5f5;
+}
+
+.card_header img {
+  height: 220px;
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.card_container:hover .card_header img {
+  transform: scale(1.05);
+}
+
+.card_content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.card_content h1 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.card_content > p:nth-of-type(1) {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+  margin: 0;
+  flex: 1;
+}
+
+.card_content > p:nth-of-type(2) {
+  font-size: 22px;
+  font-weight: 700;
+  color: #2563eb;
+  margin: 0;
+}
+
+.card_content > p:nth-of-type(2)::before {
+  content: '€';
+  margin-right: 2px;
+}
+
+.card_footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.order_button button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  white-space: nowrap;
+}
+
+.order_button button:hover {
+  background: #1d4ed8;
+}
+
+.order_button button:active {
+  transform: scale(0.98);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .card_container {
+    max-width: 100%;
+  }
+  
+  .card_header {
+    height: 200px;
+  }
+}
