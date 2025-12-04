@@ -1,12 +1,12 @@
-# 🌮 Food Truck Paradise - Évaluation React
+# Food Truck Paradise - Évaluation React
 
-## 📋 Informations Générales
+## Informations Générales
 
 **Format** : Projet guidé en binôme  
 **Durée** : 1h30  
 **Organisation** : Travail en binôme recommandé
 
-## 🎯 Objectifs Pédagogiques
+## Objectifs Pédagogiques
 
 À la fin de cette évaluation, vous serez capable de :
 
@@ -17,7 +17,7 @@
 - ✅ Organiser une application React avec plusieurs composants
 - ✅ Appliquer du styling CSS de base
 
-## 🚀 Résultat Attendu
+## Résultat Attendu
 
 Votre application finale devra comporter :
 
@@ -28,11 +28,11 @@ Votre application finale devra comporter :
 
 ---
 
-## ⏱️ Planning de l'Évaluation
+## Planning de l'Évaluation
 
 ### Étape 1 : Structure des données (20 min)
 
-#### 📝 Tâche 1.1 : Créer l'interface TypeScript
+#### Tâche 1.1 : Créer l'interface TypeScript
 
 Créez le fichier `src/types/menu.ts` et définissez une interface `MenuItem` qui contiendra les propriétés suivantes :
 
@@ -45,7 +45,7 @@ Créez le fichier `src/types/menu.ts` et définissez une interface `MenuItem` qu
 - `isVegetarian` : indicateur végétarien (boolean)
 - `isNew` : indicateur nouveauté (boolean, optionnel)
 
-#### 📝 Tâche 1.2 : Créer les données du menu
+#### Tâche 1.2 : Créer les données du menu
 
 Créez le fichier `src/data/menuData.ts` et créez un tableau `menuItems` contenant **au minimum 15 items** répartis sur les différentes catégories.
 
@@ -62,7 +62,7 @@ Créez le fichier `src/data/menuData.ts` et créez un tableau `menuItems` conten
 
 ### Étape 2 : Composant Header (20 min)
 
-#### 📝 Tâche 2 : Créer le Header
+#### Tâche 2 : Créer le Header
 
 Créez le fichier `src/components/Header.tsx` contenant :
 
@@ -79,7 +79,7 @@ Créez le fichier `src/components/Header.tsx` contenant :
 
 ### Étape 3 : Composant MenuCard (30 min)
 
-#### 📝 Tâche 3 : Créer la carte de menu
+#### Tâche 3 : Créer la carte de menu
 
 Créez le fichier `src/components/MenuCard.tsx` qui affiche un item du menu.
 
@@ -111,7 +111,7 @@ menu-card
 
 ### Étape 4 : Composant Menu et Assemblage (20 min)
 
-#### 📝 Tâche 4.1 : Créer le composant Menu
+#### Tâche 4.1 : Créer le composant Menu
 
 Créez le fichier `src/components/Menu.tsx` qui :
 
@@ -129,14 +129,14 @@ Créez le fichier `src/components/Menu.tsx` qui :
 
 💡 **Conseil** : Utilisez `.filter()` pour filtrer par catégorie, puis `.map()` pour afficher les `MenuCard`.
 
-#### 📝 Tâche 4.2 : Créer le Footer
+#### Tâche 4.2 : Créer le Footer
 
 Créez le fichier `src/components/Footer.tsx` avec :
 
 - Les informations de copyright
 - L'année en cours
 
-#### 📝 Tâche 4.3 : Assembler l'application
+#### Tâche 4.3 : Assembler l'application
 
 Dans `src/App.tsx` :
 
@@ -158,9 +158,11 @@ Dans `src/App.tsx` :
 
 ---
 
-## 📦 Livrables
+## Livrables
 
 À la fin de l'évaluation, votre projet doit contenir :
+
+Sur une branche dédiée `evaluation-react/votre-nom` :
 
 - ✅ `src/types/menu.ts` - Interface TypeScript
 - ✅ `src/data/menuData.ts` - Données avec 15+ items
@@ -171,7 +173,7 @@ Dans `src/App.tsx` :
 - ✅ `src/App.tsx` - Assemblage final
 - ✅ `src/App.css` - Styles CSS
 
-## 🎨 Critères d'Évaluation
+## Critères d'Évaluation
 
 | Critère                              | Points      |
 | ------------------------------------ | ----------- |
@@ -184,7 +186,7 @@ Dans `src/App.tsx` :
 | Styling CSS cohérent                 | 10 pts      |
 | **TOTAL**                            | **100 pts** |
 
-## 💡 Conseils
+## Conseils
 
 - **Testez régulièrement** votre application avec `npm run dev`
 - **Committez souvent** pour sauvegarder votre progression
@@ -192,7 +194,7 @@ Dans `src/App.tsx` :
 - **Demandez de l'aide** si vous êtes bloqué plus de 10 minutes
 - **Communiquez** avec votre binôme
 
-## 🚨 Points d'Attention
+## Points d'Attention
 
 - N'oubliez pas d'exporter vos composants avec `export default`
 - Vérifiez le typage TypeScript de vos props
