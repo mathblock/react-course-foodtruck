@@ -6,6 +6,8 @@
 **Durée** : 1h30  
 **Organisation** : Travail en binôme recommandé
 
+Sur une branche dédiée `evaluation-react/votre-nom`, vous allez créer une application React TypeScript pour un food truck fictif nommé "Food Truck Paradise". L'application affichera un menu de plats avec des images, des descriptions, des prix, et des badges pour les plats végétariens et les nouveautés.
+
 ## Objectifs Pédagogiques
 
 À la fin de cette évaluation, vous serez capable de :
