@@ -9,4 +9,3 @@ export interface MenuProps{
     isNew: boolean;
 }
 
-//export default MenuProps;
