@@ -1,6 +1,6 @@
 
 import './App.css'
-import Footer from './composants/footer'
+import Footers from './composants/footer'
 import Header from './composants/header'
 import CategorizedMenuList from './composants/menu'
 
@@ -12,7 +12,7 @@ function App() {
       }}>
         <Header />
         <CategorizedMenuList/>
-        <Footer/>
+        <Footers/>
       </div>
 
   )
