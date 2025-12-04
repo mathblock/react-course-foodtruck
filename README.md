@@ -179,12 +179,12 @@ Sur une branche dédiée `evaluation-react/votre-nom` :
 
 | Critère                              | Points      |
 | ------------------------------------ | ----------- |
-| Structure TypeScript correcte        | 20 pts      |
-| Données complètes (15+ items)        | 10 pts      |
-| Composant Header fonctionnel         | 15 pts      |
+| Structure TypeScript correcte        | 5 pts      |
+| Données complètes (15+ items)        | 15 pts      |
+| Composant Header fonctionnel         | 20 pts      |
 | Composant MenuCard avec props typées | 20 pts      |
 | Utilisation correcte de .map()       | 15 pts      |
-| Assemblage et architecture           | 10 pts      |
+| Assemblage et architecture           | 15 pts      |
 | Styling CSS cohérent                 | 10 pts      |
 | **TOTAL**                            | **100 pts** |
 
