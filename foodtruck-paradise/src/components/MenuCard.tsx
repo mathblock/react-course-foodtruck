@@ -10,13 +10,28 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "./ui/button";
 import { ShoppingCart, Vegan } from "lucide-react";
 import type { MenuItem } from "@/types/menu";
+import { useState } from "react";
 
-export function MenuCard({ item }: { item: MenuItem }) {
+type MenuCardProps = {
+    item: MenuItem;
+    onAddToCart: (item: MenuItem) => void;
+};
+
+export function MenuCard({ item, onAddToCart }: MenuCardProps) {
+    const [isAdding, setIsAdding] = useState(false);
+
+    const handleAddToCart = () => {
+        onAddToCart(item);
+        setIsAdding(true);
+        setTimeout(() => setIsAdding(false), 500);
+    };
+
+
     return (
         <Card key={item.id} className="w-75 m-5 flex justify-between">
             <CardContent>
                 <img className="rounded-lg m-b-5" src={item.imageURL} />
-                <div className="flex my-5">
+                <div className="flex my-5 gap-3">
                     {item.category == "entrees" ? (
                         <Badge>Entrée</Badge>
                     ) : item.category == "plats" ? (
@@ -35,9 +50,9 @@ export function MenuCard({ item }: { item: MenuItem }) {
             </CardHeader>
             <CardFooter className="justify-between">
                 <p className="font-bold">{item.price} $</p>
-                <Button>
+                <Button className="cursor-pointer" onClick={handleAddToCart} >
                     <ShoppingCart className="mr-2" />
-                    Add to basket
+                    {isAdding ? "Ajouté " : "Ajouter au panier"}
                 </Button>
             </CardFooter>
 
