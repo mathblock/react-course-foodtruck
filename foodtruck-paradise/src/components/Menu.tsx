@@ -4,12 +4,12 @@ import { useState } from 'react';
 import type { MenuItem } from '../types/menu';
 
 interface MenuProps {
-  addToCart: (item: MenuItem) => void;
+  onAddToCart: (item: MenuItem) => void;
   favorites: string[];
   toggleFavorite: (id: string) => void;
 }
 
-const Menu = ({ addToCart, favorites, toggleFavorite }: MenuProps) => {
+const Menu = ({ onAddToCart, favorites, toggleFavorite }: MenuProps) => {
   const categories = [
     { key: 'entrees', label: '🥗 Entrées' },
     { key: 'plats', label: '🍴 Plats Principaux' },
@@ -83,7 +83,7 @@ const Menu = ({ addToCart, favorites, toggleFavorite }: MenuProps) => {
             <h2>{category.label}</h2>
             <div className="menu-grid">
               {items.map(item => (
-                <MenuCard key={item.id} item={item} addToCart={addToCart} favorites={favorites} toggleFavorite={toggleFavorite} />
+                <MenuCard key={item.id} item={item} onAddToCart={onAddToCart} favorites={favorites} toggleFavorite={toggleFavorite} />
               ))}
             </div>
           </section>

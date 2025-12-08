@@ -9,10 +9,6 @@ export interface MenuItem {
   isNew?: boolean;
 }
 
-export interface CartItem {
-  menuItem: MenuItem;
-  quantity: number;
-}
 
 export interface PromoCode {
   code: string;

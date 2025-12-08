@@ -4,7 +4,8 @@ import Menu from './components/Menu';
 import Footer from './components/Footer';
 import CartSummary from './components/CartSummary';
 import './App.css';
-import type { CartItem, MenuItem } from './types/menu';
+import type { MenuItem } from './types/menu';
+import type { CartItem } from './types/cart';
 
 
 
@@ -91,7 +92,7 @@ function App() {
       case 'menu':
         return (
           <main>
-            <Menu addToCart={addToCart} favorites={favorites} toggleFavorite={toggleFavorite} />
+            <Menu onAddToCart={addToCart} favorites={favorites} toggleFavorite={toggleFavorite} />
           </main>
         );
       case 'about':
@@ -115,7 +116,7 @@ function App() {
       default:
         return (
           <main>
-            <Menu addToCart={addToCart} favorites={favorites} toggleFavorite={toggleFavorite} />
+            <Menu onAddToCart={addToCart} favorites={favorites} toggleFavorite={toggleFavorite} />
           </main>
         );
     }
@@ -123,9 +124,9 @@ function App() {
 
   return (
     <div className="app">
-      <Header onNavClick={setCurrentPage} totalItems={totalItems} isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
+      <Header onNavClick={setCurrentPage} cartItemsCount={totalItems} isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
       {renderPage()}
-      <CartSummary cart={cart} isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} updateQuantity={updateQuantity} removeFromCart={removeFromCart} />
+      <CartSummary cart={cart} isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} onUpdateQuantity={updateQuantity} onRemove={removeFromCart} />
       <Footer />
     </div>
   );
