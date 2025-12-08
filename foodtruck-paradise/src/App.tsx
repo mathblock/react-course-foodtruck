@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Header from './components/Header';
 import Menu from './components/Menu';
 import Footer from './components/Footer';
-import CartOverlay from './components/CartOverlay';
+import CartSummary from './components/CartSummary';
 import './App.css';
 import type { CartItem, MenuItem } from './types/menu';
 
@@ -10,7 +10,50 @@ import type { CartItem, MenuItem } from './types/menu';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('menu'); 
-  const [cart, setCart] = useState<CartItem[]>([]);
+  const [cart, setCartState] = useState<CartItem[]>(() => {
+    const savedCart = localStorage.getItem('cart');
+    try {
+      // les données initiales du panier sont chargées depuis le localStorage
+      return savedCart ? JSON.parse(savedCart) : [];
+    } catch (error) {
+      console.warn('Failed to parse cart from localStorage:', error);
+      localStorage.removeItem('cart');
+      return [];
+    }
+  });
+  const [favorites, setFavoritesState] = useState<string[]>(() => {
+    const savedFavorites = localStorage.getItem('favorites');
+    try {
+      return savedFavorites ? JSON.parse(savedFavorites) : [];
+    } catch (error) {
+      console.warn('Failed to parse favorites from localStorage:', error);
+      localStorage.removeItem('favorites');
+      return [];
+    }
+  });
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const setCart = (items: CartItem[] | ((prev: CartItem[]) => CartItem[])) => {
+    setCartState(prevCart => {
+      // si on passe une fonction, on l'appelle avec le panier précédent (prevCart)
+      const newItems = typeof items === 'function' ? items(prevCart) : items;
+      // met à jour le localStorage
+      localStorage.setItem('cart', JSON.stringify(newItems));
+      return newItems;
+    });
+  };
+
+  const setFavorites = (items: string[] | ((prev: string[]) => string[])) => {
+    setFavoritesState(prev => {
+      const newItems = typeof items === 'function' ? items(prev) : items;
+      localStorage.setItem('favorites', JSON.stringify(newItems));
+      return newItems;
+    });
+  };
+
+  const toggleFavorite = (id: string) => {
+    setFavorites(prev => prev.includes(id) ? prev.filter(f => f !== id) : [...prev, id]);
+  };
   
   const addToCart = (item: MenuItem) => {
     setCart(prevCart => {
@@ -27,6 +70,20 @@ function App() {
     });
   };
   
+  const updateQuantity = (id: string, newQuantity: number) => {
+    setCart(items =>
+      items.map(item =>
+        item.menuItem.id === id ? { ...item, quantity: newQuantity } : item
+      ).filter(item => item.quantity > 0)
+    );
+  };
+
+  const removeFromCart = (id: string) => {
+    setCart(items => items.filter(item => item.menuItem.id !== id));
+  };
+  
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
   // pseudo router puisque je ne sais pas si on peut utiliser react-router et que l'on doit faire
   // plusieurs pages
   const renderPage = () => {
@@ -34,7 +91,7 @@ function App() {
       case 'menu':
         return (
           <main>
-            <Menu addToCart={addToCart} />
+            <Menu addToCart={addToCart} favorites={favorites} toggleFavorite={toggleFavorite} />
           </main>
         );
       case 'about':
@@ -58,7 +115,7 @@ function App() {
       default:
         return (
           <main>
-            <Menu addToCart={addToCart} />
+            <Menu addToCart={addToCart} favorites={favorites} toggleFavorite={toggleFavorite} />
           </main>
         );
     }
@@ -66,9 +123,9 @@ function App() {
 
   return (
     <div className="app">
-      <Header onNavClick={setCurrentPage} />
+      <Header onNavClick={setCurrentPage} totalItems={totalItems} isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
       {renderPage()}
-      <CartOverlay cart={cart} setCart={setCart} />
+      <CartSummary cart={cart} isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} updateQuantity={updateQuantity} removeFromCart={removeFromCart} />
       <Footer />
     </div>
   );

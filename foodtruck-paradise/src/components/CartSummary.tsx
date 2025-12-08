@@ -2,52 +2,26 @@ import React, { useState } from 'react';
 import type { CartItem } from '../types/menu';
 import { promoCodes } from '../data/menuData';
 
-interface CartOverlayProps {
+interface CartSummaryProps {
     cart: CartItem[];
-    setCart: React.Dispatch<React.SetStateAction<CartItem[]>>;
+    isCartOpen: boolean;
+    setIsCartOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    updateQuantity: (id: string, quantity: number) => void;
+    removeFromCart: (id: string) => void;
 }
 
-const CartOverlay: React.FC<CartOverlayProps> = ({ cart, setCart }) => {
-    const [isOpen, setIsOpen] = useState(false);
+const CartSummary: React.FC<CartSummaryProps> = ({ cart, isCartOpen, setIsCartOpen, updateQuantity, removeFromCart }) => {
     const [inputCode, setInputCode] = useState('');
 
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-
-    const updateCount = (id: string, delta: number) => {
-        setCart(items =>
-            // met à jour la quantité
-            items.map(item =>
-                item.menuItem.id === id ? { ...item, quantity: item.quantity + delta } : item
-            )
-                // supprime les articles avec une quantité de 0
-                .filter(item => item.quantity > 0)
-        );
-    };
-
     const getDiscountPercent = (code: string): number => {
-        const promo = promoCodes.find(p => p.code === code);
+        const promo = promoCodes.find(p => p.code.toLowerCase() === code.toLowerCase());
         return promo ? promo.percent : 0;
     };
-
-    const removeFromCart = (id: string) => {
-        setCart(items => items.filter(item => item.menuItem.id !== id));
-    }
-
     return (
         <>
-            <div
-                className="cart-icon"
-                onClick={() => setIsOpen(!isOpen)}
-            >
-                🛒
-                {totalItems > 0 && (
-                    <span className="cart-count">
-                        {totalItems}
-                    </span>
-                )}
-            </div>
-            {isOpen && (
+            {isCartOpen && (
                 <div className="cart-overlay">
+                    <button className="close-btn" onClick={() => setIsCartOpen(false)}>×</button>
                     <h3>Articles dans le panier</h3>
                     {cart.map(item => (
                         <div key={item.menuItem.id} className="cart-item">
@@ -55,15 +29,16 @@ const CartOverlay: React.FC<CartOverlayProps> = ({ cart, setCart }) => {
                             <div className="cart-item-details">
                                 <p className="cart-item-name">{item.menuItem.name}</p>
                                 <div className="quantity-controls">
-                                    <button className="quantity-btn" onClick={() => updateCount(item.menuItem.id, -1)}>
+                                    <button className="quantity-btn" onClick={() => updateQuantity(item.menuItem.id, item.quantity - 1)}>
                                         -
                                     </button>
                                     <span className="quantity">{item.quantity}</span>
-                                    <button className="quantity-btn" onClick={() => updateCount(item.menuItem.id, 1)}>
+                                    <button className="quantity-btn" onClick={() => updateQuantity(item.menuItem.id, item.quantity + 1)}>
                                         +
                                     </button>
+                                    <span className="item-total">{(item.menuItem.price * item.quantity).toFixed(2)} €</span>
                                     <button className="quantity-btn align-right" onClick={() => removeFromCart(item.menuItem.id)}>
-                                        x
+                                        🗑️
                                     </button>
                                 </div>
                             </div>
@@ -109,4 +84,4 @@ const CartOverlay: React.FC<CartOverlayProps> = ({ cart, setCart }) => {
     );
 };
 
-export default CartOverlay;
+export default CartSummary;
