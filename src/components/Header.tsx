@@ -1,6 +1,10 @@
 import React from 'react';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+    cartItemsCount: number;
+}
+
+const Header: React.FC<HeaderProps> = ({ cartItemsCount }) => {
     return (
         <header className="header">
             <div className="container">
@@ -14,6 +18,10 @@ const Header: React.FC = () => {
                     <a href="#menu" className="nav-link">Menu</a>
                     <a href="#about" className="nav-link">À propos</a>
                     <a href="#contact" className="nav-link">Contact</a>
+                    <button className="cart-button">
+                        Panier
+                        {cartItemsCount > 0 && <span className="cart-badge">{cartItemsCount}</span>}
+                    </button>
                 </nav>
             </div>
         </header>

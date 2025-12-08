@@ -1,53 +1,79 @@
-import menuData from '../data/menuData';
+import { useState } from 'react';
+import menuData, { type MenuItem } from '../data/menuData';
 import MenuCard from './MenuCard';
 
-const Menu = () => {
+interface MenuProps {
+    onAddToCart: (item: MenuItem) => void;
+}
+
+const Menu = ({ onAddToCart }: MenuProps) => {
+    const [activeCategory, setActiveCategory] = useState<string>('tous');
+    const [searchTerm, setSearchTerm] = useState<string>('');
+
+    const filteredItems = menuData
+        .filter((item) => activeCategory === 'tous' || item.category === activeCategory)
+        .filter((item) =>
+            item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            item.description.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+
+    const categories = [
+        { id: 'tous', label: 'Tous' },
+        { id: 'entrees', label: '🥗 Entrées' },
+        { id: 'plats', label: '🍔 Plats' },
+        { id: 'desserts', label: '🍰 Desserts' },
+        { id: 'boissons', label: '🥤 Boissons' },
+    ];
 
     return (
         <div className="menu-container">
-            <section className="menu-section">
-                <h2>🍴 Plats Principaux</h2>
-                <div className="menu-grid">
-                    {menuData
-                        .filter((item) => item.category === 'plats')
-                        .map((item) => (
-                            <MenuCard key={item.id} item={item} />
-                        ))}
-                </div>
-            </section>
+            
+            <div className="search-bar">
+                <input 
+                    type="text" 
+                    placeholder="Rechercher un plat..." 
+                    className="search-input"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                {searchTerm && (
+                    <button 
+                        onClick={() => setSearchTerm('')}
+                        style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.2rem' }}
+                    >
+                        x
+                    </button>
+                )}
+            </div>
 
-            <section className="menu-section">
-                <h2>🥗 Entrées</h2>
-                <div className="menu-grid">
-                    {menuData
-                        .filter((item) => item.category === 'entrees')
-                        .map((item) => (
-                            <MenuCard key={item.id} item={item} />
-                        ))}
-                </div>
-            </section>
+            <div className="category-filters">
+                {categories.map((cat) => (
+                    <button
+                        key={cat.id}
+                        className={`filter-btn ${activeCategory === cat.id ? 'active' : ''}`}
+                        onClick={() => setActiveCategory(cat.id)}
+                    >
+                        {cat.label}
+                    </button>
+                ))}
+            </div>
 
-            <section className="menu-section">
-                <h2>🍰 Desserts</h2>
-                <div className="menu-grid">
-                    {menuData
-                        .filter((item) => item.category === 'desserts')
-                        .map((item) => (
-                            <MenuCard key={item.id} item={item} />
-                        ))}
-                </div>
-            </section>
+            <p style={{ textAlign: 'center', marginBottom: '2rem', color: '#666' }}>
+                {filteredItems.length} résultat{filteredItems.length > 1 ? 's' : ''} trouvé{filteredItems.length > 1 ? 's' : ''}
+            </p>
 
-            <section className="menu-section">
-                <h2>🥤 Boissons</h2>
-                <div className="menu-grid">
-                    {menuData
-                        .filter((item) => item.category === 'boissons')
-                        .map((item) => (
-                            <MenuCard key={item.id} item={item} />
-                        ))}
+            {filteredItems.length === 0 ? 
+            (
+                <div style={{ textAlign: 'center', padding: '2rem', fontSize: '1.2rem', color: '#666' }}>
+                    Aucun produit ne correspond à votre recherche.
                 </div>
-            </section>
+            ) : (
+                <div className="menu-grid">
+                    {filteredItems.map((item) => (
+                        <MenuCard key={item.id} item={item} onAddToCart={onAddToCart} />
+                    ))}
+                </div>
+            )}
         </div>
     );
 }
