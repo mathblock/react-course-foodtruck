@@ -13,10 +13,10 @@ import type { MenuItem } from "@/types/menu";
 
 export function MenuCard({ item }: { item: MenuItem }) {
     return (
-        <Card key={item.id} className="w-75 m-5">
+        <Card key={item.id} className="w-75 m-5 flex justify-between">
             <CardContent>
-                <img src={item.imageURL} />
-                <div className="flex gap-3">
+                <img className="rounded-lg m-b-5" src={item.imageURL} />
+                <div className="flex my-5">
                     {item.category == "entrees" ? (
                         <Badge>Entrée</Badge>
                     ) : item.category == "plats" ? (

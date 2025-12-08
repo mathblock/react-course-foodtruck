@@ -8,7 +8,7 @@ export const menuItems: MenuItem[] = [
         description: "Mélange de légumes croquants avec vinaigrette citronnée.",
         price: 6.50,
         category: "entrees",
-        imageURL: "/images/salade.jpg",
+        imageURL: "https://images.unsplash.com/photo-1607532941433-304659e8198a?q=80&w=300",
         isVegetarian: true,
         isNew: false
     },
@@ -18,7 +18,7 @@ export const menuItems: MenuItem[] = [
         description: "Préparée quotidiennement avec des ingrédients frais.",
         price: 5.00,
         category: "entrees",
-        imageURL: "/images/soupe.jpg",
+        imageURL: "https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=300",
         isVegetarian: true,
         isNew: true
     },
@@ -28,7 +28,7 @@ export const menuItems: MenuItem[] = [
         description: "Tortillas croustillantes avec fromage fondant et salsa.",
         price: 7.00,
         category: "entrees",
-        imageURL: "/images/nachos.jpg",
+        imageURL: "https://images.unsplash.com/photo-1582169296194-e4d644c48063?q=80&w=300&auto=format&fit=crop",
         isVegetarian: false,
         isNew: false
     },
@@ -38,7 +38,7 @@ export const menuItems: MenuItem[] = [
         description: "Pain grillé avec tomates, basilic et huile d’olive.",
         price: 6.00,
         category: "entrees",
-        imageURL: "/images/bruschetta.jpg",
+        imageURL: "https://images.unsplash.com/photo-1630230596637-28f416b537ff?q=80&w=300&auto=format&fit=crop",
         isVegetarian: true,
         isNew: false
     },
@@ -50,7 +50,7 @@ export const menuItems: MenuItem[] = [
         description: "Tortillas garnies de poulet épicé, légumes et sauce maison.",
         price: 12.00,
         category: "plats",
-        imageURL: "/images/tacos.jpg",
+        imageURL: "https://images.unsplash.com/photo-1570461226513-e08b58a52c53?q=80&w=300&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         isVegetarian: false,
         isNew: false
     },
@@ -60,7 +60,7 @@ export const menuItems: MenuItem[] = [
         description: "Steak de bœuf grillé, cheddar, laitue et tomates.",
         price: 13.50,
         category: "plats",
-        imageURL: "/images/burger.jpg",
+        imageURL: "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?q=80&w=300&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         isVegetarian: false,
         isNew: true
     },
@@ -70,7 +70,7 @@ export const menuItems: MenuItem[] = [
         description: "Sauce tomate, mozzarella et basilic frais.",
         price: 11.00,
         category: "plats",
-        imageURL: "/images/pizza.jpg",
+        imageURL: "https://images.unsplash.com/photo-1598023696416-0193a0bcd302?q=80&w=300&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         isVegetarian: true,
         isNew: false
     },
@@ -80,7 +80,7 @@ export const menuItems: MenuItem[] = [
         description: "Légumes grillés, houmous et salade dans une tortilla.",
         price: 10.50,
         category: "plats",
-        imageURL: "/images/wrap.jpg",
+        imageURL: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?q=80&w=300&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         isVegetarian: true,
         isNew: true
     },
@@ -92,7 +92,7 @@ export const menuItems: MenuItem[] = [
         description: "Brownie au chocolat servi tiède.",
         price: 4.50,
         category: "desserts",
-        imageURL: "/images/brownie.jpg",
+        imageURL: "https://images.unsplash.com/photo-1624353365286-3f8d62daad51?q=80&w=300&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         isVegetarian: true,
         isNew: false
     },
@@ -102,7 +102,7 @@ export const menuItems: MenuItem[] = [
         description: "Crème glacée artisanale à la vanille.",
         price: 3.80,
         category: "desserts",
-        imageURL: "/images/glace.jpg",
+        imageURL: "https://images.unsplash.com/photo-1588195539297-f0b4efdb5472?q=80&w=300&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         isVegetarian: true,
         isNew: false
     },
@@ -112,7 +112,7 @@ export const menuItems: MenuItem[] = [
         description: "Churros croustillants avec sauce chocolat.",
         price: 5.50,
         category: "desserts",
-        imageURL: "/images/churros.jpg",
+        imageURL: "https://images.unsplash.com/photo-1624371414361-e670edf4898d?q=80&w=300&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         isVegetarian: true,
         isNew: true
     },
@@ -124,7 +124,7 @@ export const menuItems: MenuItem[] = [
         description: "Boisson gazeuse rafraîchissante.",
         price: 2.50,
         category: "boissons",
-        imageURL: "/images/soda-cola.jpg",
+        imageURL: "https://plus.unsplash.com/premium_photo-1725075086083-89117890371d?q=80&w=300&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         isVegetarian: true,
         isNew: false
     },
@@ -134,7 +134,7 @@ export const menuItems: MenuItem[] = [
         description: "Pur jus pressé à froid.",
         price: 3.50,
         category: "boissons",
-        imageURL: "/images/jus-orange.jpg",
+        imageURL: "https://plus.unsplash.com/premium_photo-1667543228378-ec4478ab2845?q=80&w=300&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         isVegetarian: true,
         isNew: true
     },
@@ -144,7 +144,7 @@ export const menuItems: MenuItem[] = [
         description: "Thé noir infusé, citron et léger sucre.",
         price: 3.00,
         category: "boissons",
-        imageURL: "/images/the-glace.jpg",
+        imageURL: "https://images.unsplash.com/photo-1656936632107-0bfa69ea06de?q=80&w=300&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         isVegetarian: true,
         isNew: false
     }
