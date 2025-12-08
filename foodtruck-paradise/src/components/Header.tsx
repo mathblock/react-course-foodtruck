@@ -21,10 +21,10 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onOpenCart }) => {
           <a href="#about" className="nav-link">À propos</a>
           <a href="#contact" className="nav-link">Contact</a>
           
-          {/* TON CODE EXACT, juste rendu cliquable */}
+          
           <div 
             style={{ position: 'relative', display: 'inline-block', cursor: 'pointer' }}
-            onClick={onOpenCart}   // ← C’EST LA SEULE LIGNE AJOUTÉE
+            onClick={onOpenCart}   
           >
             <span style={{ fontSize: '1.8rem' }}>Panier</span>
             {cartItemsCount > 0 && (
