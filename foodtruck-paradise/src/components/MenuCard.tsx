@@ -4,8 +4,10 @@ import type { MenuItem } from '../types/menu';
 
 interface MenuCardProps {
     item: MenuItem;
+    onAddToCart: (item: MenuItem) => void;
 }
-function MenuCard ({ item }: MenuCardProps) {
+
+function MenuCard ({ item, onAddToCart }: MenuCardProps) { 
     return (
         <div className="menu-card">
             <div className="card-image">
@@ -20,7 +22,7 @@ function MenuCard ({ item }: MenuCardProps) {
                 <p className="description">{item.description}</p>
                 <div className="card-footer">
                     <span className="price">{item.price.toFixed(2)} €</span>
-                    <button className="btn-add">Ajouter</button>
+                    <button className="btn-add" onClick={() => onAddToCart(item)}>Ajouter au panier</button>
                 </div>
             </div>
         </div>
