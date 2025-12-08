@@ -1,37 +1,71 @@
 import menuData from "@/data/menuData";
-import MenuCard from "./MenuCard";
+import type { MenuItem } from "@/types/menu";
+import { useState } from "react";
+import { Button } from "./ui/button";
+import MenuFiltrer from "./MenuFiltrer";
+import MenuDefaut from "./MenuDefaut";
+import type { Category, MenuProps } from "@/types/utils";
 
-const categories = [
+const categories: Category[] = [
   { key: "entrees", label: "🥗 Entrées", color: "bg-green-50" },
   { key: "plats", label: "🍴 Plats Principaux", color: "bg-yellow-50" },
   { key: "desserts", label: "🍰 Desserts", color: "bg-pink-50" },
   { key: "boissons", label: "🥤 Boissons", color: "bg-blue-50" },
 ];
 
-function Menu() {
+function Menu({ onAddToCart }: MenuProps) {
+  const [activeCategory, setActiveCategory] = useState<string>("tous");
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
+  const menuFiltrer: MenuItem[] = menuData
+    .filter(
+      (item: MenuItem) =>
+        activeCategory === "tous" || item.category === activeCategory
+    )
+    .filter(
+      (item: MenuItem) =>
+        item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.description.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
   return (
     <section id="menu" className="py-12 px-6 bg-white">
       <h2 className="text-4xl font-extrabold text-center text-yellow-900 mb-12 drop-shadow">
         Notre Menu
       </h2>
-      <div className="flex flex-col gap-10">
-        {categories.map((cat) => (
-          <div
-            key={cat.key}
-            className={`rounded-xl shadow-md p-6 ${cat.color}`}
-          >
-            <h3 className="text-2xl font-bold text-yellow-900 mb-6 flex items-center gap-2">
+
+      <div id="filtreRecherche">
+        <div id="recherche" className="flex items-center gap-2 mb-6">
+          <input
+            type="text"
+            placeholder="Rechercher un produit..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="border rounded px-3 py-1 flex-1"
+          />
+          <Button onClick={() => setSearchTerm("")}>❌</Button>
+        </div>
+
+        <div id="filtre" className="flex justify-center gap-2 mb-6">
+          <Button onClick={() => setActiveCategory("tous")}>Tous</Button>
+          {categories.map((cat) => (
+            <Button key={cat.key} onClick={() => setActiveCategory(cat.key)}>
               {cat.label}
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {menuData
-                .filter((item) => item.category === cat.key)
-                .map((item) => (
-                  <MenuCard key={item.id} {...item} />
-                ))}
-            </div>
-          </div>
-        ))}
+            </Button>
+          ))}
+        </div>
+      </div>
+
+      <div id="affichageResultat">
+        {activeCategory === "tous" && searchTerm === "" ? (
+          <MenuDefaut
+            categories={categories}
+            menuData={menuData}
+            onAddToCart={onAddToCart}
+          />
+        ) : (
+          <MenuFiltrer menuFiltrer={menuFiltrer} onAddToCart={onAddToCart} />
+        )}
       </div>
     </section>
   );
