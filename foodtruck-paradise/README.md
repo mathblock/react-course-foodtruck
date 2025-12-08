@@ -1,3 +1,8 @@
+# code Promo
+MIAM5 : 5% de réduction sur votre commande
+SUPER10 : 10% de réduction sur votre commande
+FOODTRUCK10 : 10% de réduction sur votre commande
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

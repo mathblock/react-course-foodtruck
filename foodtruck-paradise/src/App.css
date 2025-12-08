@@ -99,6 +99,26 @@ main {
   object-fit: cover;
 }
 
+.cart-item-image {
+  width: 100px;
+  height: 100px;
+  min-width: 100px;
+  max-width: 100px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.cart-item {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.5rem;
+  background: white;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
 .badge-new {
   position: absolute;
   top: 10px;
@@ -182,8 +202,101 @@ main {
   margin: 20px 0;
 }
 
-.section h2 {
-  font-size: 1.8rem;
-  margin-bottom: 20px;
+
+.quantity-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  font-weight: bold;
+}
+
+.item-subtotal {
+  font-weight: bold;
+  min-width: 120px;
+  text-align: right;
   color: #333;
+}
+
+.promo-section {
+  padding: 1rem 0;
+  border-top: 1px solid #eee;
+  margin-top: 1rem;
+}
+
+.promo-input-group {
+  display: flex;
+  gap: 10px;
+}
+
+.promo-input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.btn-apply {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.promo-error {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.promo-success {
+  color: green;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.summary-row.discount {
+  color: green;
+}
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background-color: #fff3e0;
+  border-radius: 8px;
+  border-top: 2px solid #ff6b35;
+  color: #d35400;
+}
+
+.btn-checkout {
+  width: 100%;
+  padding: 1rem;
+  margin-top: 1rem;
+  background: linear-gradient(to right, #27ae60, #2ecc71);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-checkout:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
