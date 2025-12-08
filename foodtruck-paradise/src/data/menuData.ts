@@ -1,4 +1,4 @@
-import type { MenuItem } from '../types/menu';
+import type { MenuItem, PromoCode } from '../types/menu';
 
 export const menuItems: MenuItem[] = [
   {
@@ -170,5 +170,20 @@ export const menuItems: MenuItem[] = [
     isVegetarian: true,
     category: "boissons",
     isNew: false,
+  },
+];
+
+export const promoCodes: PromoCode[] = [
+  {
+    code: "SAVE10",
+    percent: 10,
+  },
+  {
+    code: "DISCOUNT20",
+    percent: 20,
+  },
+  {
+    code: "FOODTRUCK15",
+    percent: 15,
   },
 ];

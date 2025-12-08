@@ -2,9 +2,10 @@ import type { MenuItem } from '../types/menu';
 
 interface MenuCardProps {
   item: MenuItem;
+  addToCart: (item: MenuItem) => void;
 }
 
-const MenuCard = ({ item }: MenuCardProps) => {
+const MenuCard = ({ item, addToCart }: MenuCardProps) => {
   return (
     <div className="menu-card">
       <div className="card-image">
@@ -19,7 +20,7 @@ const MenuCard = ({ item }: MenuCardProps) => {
         <p className="description">{item.description}</p>
         <div className="card-footer">
           <span className="price">{item.price.toFixed(2)} €</span>
-          <button className="btn-add">Ajouter</button>
+          <button className="btn-add" onClick={() => addToCart(item)}>Ajouter</button>
         </div>
       </div>
     </div>

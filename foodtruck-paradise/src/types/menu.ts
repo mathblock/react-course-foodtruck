@@ -8,3 +8,13 @@ export interface MenuItem {
   isVegetarian: boolean;
   isNew?: boolean;
 }
+
+export interface CartItem {
+  menuItem: MenuItem;
+  quantity: number;
+}
+
+export interface PromoCode {
+  code: string;
+  percent: number;
+}
