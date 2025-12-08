@@ -33,8 +33,8 @@ function CartSummary({ cartItems, updateQuantity, removeFromCart }: CartProps) {
 
                                 <div className="cart-item-info">
                                     <h4>{cartItem.item.name}</h4>
-                                    <div className="cart-item-price">{cartItem.item.price.toFixed(2)} € x {cartItem.quantity}</div>
-                                    <div className="cart-item-subtotal">{(cartItem.item.price * cartItem.quantity).toFixed(2)} €</div>
+                                    <div className="cart-item-price">{cartItem.item.price} € x {cartItem.quantity}</div>
+                                    <div className="cart-item-subtotal">{(cartItem.item.price * cartItem.quantity)} €</div>
                                 </div>
 
                                 <div className="cart-item-actions">
