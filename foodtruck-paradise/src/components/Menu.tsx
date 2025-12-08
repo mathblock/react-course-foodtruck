@@ -77,15 +77,21 @@ export function Menu({ onAddToCart }: MenuProps) {
                         Aucun résultat trouvé.
                     </p>
                 ) : (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                        {filteredItems.map((item) => (
-                            <MenuCard
-                                key={item.id}
-                                item={item}
-                                onAddToCart={onAddToCart}
-                            />
-                        ))}
-                    </div>
+                    <>
+                        <p className="mb-4 text-sm text-muted-foreground">
+                            {filteredItems.length} résultat(s)
+                        </p>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                            {filteredItems.map((item) => (
+                                <MenuCard
+                                    key={item.id}
+                                    item={item}
+                                    onAddToCart={onAddToCart}
+                                />
+                            ))}
+                        </div>
+                    </>
                 )}
             </section>
         </div>
