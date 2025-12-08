@@ -4,7 +4,7 @@ export const Badge= (props:{Icon:LucideIcon,text:string, green?:boolean})=>{
     const styles={
     container:{
         padding:'4px 8px',
-        backgroundColor: props.green?'#e0e0e0':'green',
+        backgroundColor: !props.green?'#e0e0e0':'green',
         borderRadius:'12px',
         display:'flex',
         alignItems:'center',
@@ -14,7 +14,7 @@ export const Badge= (props:{Icon:LucideIcon,text:string, green?:boolean})=>{
 }
     return (
         <div className="badge-container" style={styles.container}>
-            <props.Icon className="badge-icon" />
+            <props.Icon size={16} className="badge-icon" />
             <span className="badge-text">{props.text}</span>
         </div>
     )

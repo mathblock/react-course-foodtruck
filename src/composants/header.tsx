@@ -1,6 +1,8 @@
+import { ShoppingCart } from 'lucide-react';
 import '../styles/header.css';
+import CartBadge from './cartBadge';
 
-const Header = () =>{
+const Header = ({cartItemCount}:{cartItemCount:number}) =>{
     return (
         <div className='header-container'>
             <div className="header-left">
@@ -11,7 +13,9 @@ const Header = () =>{
                 <a href="#menu">Menu</a>
                 <a href="#about">À propos</a>
                 <a href="#contact">Contact</a>
+                <CartBadge  cartItemCount={cartItemCount} />
             </div>
+            
         </div>
     )
 }

@@ -2,9 +2,10 @@ import { Globe, Vegan } from "lucide-react";
 import type Menu from "../types/menu";
 import { Badge } from "./badge";
 import '../styles/menuCard.css'
+import type { CartItem } from "../types/cart";
 
 
-export const Menucard= (props:Menu)=>{
+export const Menucard= (props:Menu & {addToCart: (menuId: CartItem) => void})=>{
     return (
         <div className="card_container">
             <div className="card-header">
@@ -20,7 +21,7 @@ export const Menucard= (props:Menu)=>{
                         {props.isNew && <Badge Icon={Globe} text="New"  />}
                     </div>
                     <div className="order_button">
-                        <button>Add</button>
+                        <button onClick={() => props.addToCart({ item: props, quantity: 1 })}>Add</button>
                     </div>
                 </div>
             </div>

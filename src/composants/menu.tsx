@@ -2,6 +2,8 @@ import { Salad, UtensilsCrossed, Dessert, Coffee } from "lucide-react";
 import  type Menu  from "../types/menu";
 import { Menucard } from "./menuCard";
 import { menuItems } from "../data/menuData";
+import type { CartItem } from "../types/cart";
+import { useState } from "react";
 
 interface CategoryConfig {
   title: string;
@@ -35,10 +37,12 @@ const categoryConfig: Record<string, CategoryConfig> = {
 
 const CategorySection = ({ 
   category, 
-  menus 
+  menus ,
+  addToCart
 }: { 
   category: string; 
-  menus: Menu[] 
+  menus: Menu[] ,
+  addToCart: (menuId: CartItem) => void
 }) => {
   const config = categoryConfig[category];
   const Icon = config.icon;
@@ -80,17 +84,31 @@ const CategorySection = ({
         gap: '24px'
       }}>
         {menus.map(menu => (
-          <Menucard key={menu.id} {...menu} />
+          <Menucard key={menu.id} {...menu} addToCart={addToCart} />
         ))}
       </div>
     </section>
   );
 };
 
-export default function CategorizedMenuList() {
+export default function CategorizedMenuList({addToCart}: {addToCart: (menuId: CartItem) => void }) {
+   // Ordre des catégories
+  const categoryOrder: Array<keyof typeof categoryConfig> = ['entrees', 'plats', 'desserts', 'boissons'];
+  const [activeCategory, setActiveCategory] = useState<string>('');
+  const [searchTerm, setSearchTerm] = useState<string>('');
+
   // Grouper les menus par catégorie
   const menus=menuItems;
-  const groupedMenus = menus.reduce((acc, menu) => {
+  const filteredItems = () => menuItems
+  .filter(
+    (item) => activeCategory === "" || item.category === activeCategory
+  )
+  .filter(
+    (item) =>
+      item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.description.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  const groupedMenus = filteredItems().reduce((acc, menu) => {
     if (!acc[menu.category]) {
       acc[menu.category] = [];
     }
@@ -98,13 +116,13 @@ export default function CategorizedMenuList() {
     return acc;
   }, {} as Record<string, Menu[]>);
 
-  // Ordre des catégories
-  const categoryOrder: Array<keyof typeof categoryConfig> = ['entrees', 'plats', 'desserts', 'boissons'];
+ 
+  
 
   return (
     <div style={{
-      width:'100%',
-      margin: '0 auto',
+      width:'1000px',
+      marginTop: '100px',
       padding: '40px 20px',
       backgroundColor: '#fafafa',
       minHeight: '100vh'
@@ -121,13 +139,43 @@ export default function CategorizedMenuList() {
         }}>
           Notre Carte
         </h1>
-        <p style={{
-          fontSize: '18px',
-          color: '#666',
-          margin: 0
-        }}>
-          Découvrez nos délicieuses créations
-        </p>
+        <div className="search-bar" style={{ marginTop: '16px' }}>
+          <input
+            type="text"
+            placeholder="Rechercher..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            style={{
+              width: '70%',
+              padding: '12px 16px',
+              border: '1px solid #ddd',
+              borderRadius: '24px',
+              fontSize: '16px',
+              outline: 'none',
+              transition: 'border-color 0.3s',
+            }}
+          />
+          <select
+            value={activeCategory}
+            onChange={(e) => setActiveCategory(e.target.value)}
+            style={{
+              marginLeft: '12px',
+              padding: '12px 16px',
+              border: '1px solid #ddd',
+              borderRadius: '24px',
+              fontSize: '16px',
+              outline: 'none',
+              transition: 'border-color 0.3s',
+            }}
+          >
+            <option value="">Toutes les catégories</option>
+            {categoryOrder.map((category) => (
+              <option key={category} value={category}>
+                {categoryConfig[category].title}
+              </option>
+            ))}
+          </select>
+        </div>
       </header>
 
       {categoryOrder.map(category => {
@@ -139,6 +187,7 @@ export default function CategorizedMenuList() {
             key={category} 
             category={category} 
             menus={categoryMenus} 
+            addToCart={addToCart}
           />
         );
       })}

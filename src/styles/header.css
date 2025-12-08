@@ -3,7 +3,7 @@
     justify-content: space-between;
     padding: 1rem ;
     width: 85%;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     
@@ -18,7 +18,7 @@
 
 .title{
     font-size: 200%;
-    /* color: ; */
+    color: #ff9800 ;
 }
 .logo{
     height: 60px;
