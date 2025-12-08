@@ -21,7 +21,7 @@ export const Menucard= (props:Menu & {addToCart: (menuId: CartItem) => void})=>{
                         {props.isNew && <Badge Icon={Globe} text="New"  />}
                     </div>
                     <div className="order_button">
-                        <button onClick={() => props.addToCart({ item: props, quantity: 1 })}>Add</button>
+                        <button onClick={() => props.addToCart({ item: props, quantity: 1, isfavorite: false })}>Add</button>
                     </div>
                 </div>
             </div>

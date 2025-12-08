@@ -40,6 +40,15 @@ function App() {
     storeService.clearCart(); 
   };
 
+  const toggleFavorite = (menuItemId: number) => {
+    setCart((prevCart) => {
+      return prevCart.map((item) =>
+        item.item.id === menuItemId ? { ...item, isfavorite: !item.isfavorite } : item
+      );
+    });
+    storeService.updateCart(cart);
+  };
+
   const updateQuantity = (menuItemId: number, quantity: number) => {
     setCart((prevCart) => {
       return prevCart.map((item) =>
@@ -59,10 +68,12 @@ function App() {
         <CategorizedMenuList addToCart={addToCart} />
         {cart.length > 0 && (
           <CartSummary
+
             cartItems={cart}
             updateQuantity={updateQuantity}
             removeFromCart={removeFromCart}
             clearCart={clearCart}
+            toggleFavorite={toggleFavorite}
           />
         )}
         <Footers/>

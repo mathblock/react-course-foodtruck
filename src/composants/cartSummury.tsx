@@ -1,4 +1,4 @@
-import { CircleX, Trash } from "lucide-react";
+import { CircleX, Heart, HeartIcon, Trash } from "lucide-react";
 import type { CartItem } from "../types/cart";
 import '../styles/cartSummary.css'
 
@@ -7,11 +7,13 @@ const CartSummary = (
         cartItems,
         updateQuantity,
         removeFromCart,
+        toggleFavorite,
         clearCart
     }: {
         cartItems: CartItem[],
         updateQuantity: (menuItemId: number, quantity: number) => void,
         removeFromCart: (menuItemId: number) => void,
+        toggleFavorite: (menuItemId: number) => void,
         clearCart: () => void
     }) => {
         const total = cartItems.reduce(
@@ -29,9 +31,13 @@ const CartSummary = (
                 </button>
             </div>
             <ul>
-                {cartItems.map(({ item, quantity }) => (
+                {cartItems.map(({ item, quantity, isfavorite }) => (
                     <li key={item.id} className="cart-item">
-                        <img src={item.imageUrl} alt={item.name} className="cart-item-image" />
+                        <span className="cart-item-image"
+                        onClick={() => toggleFavorite(item.id)}>
+                            <img src={item.imageUrl} alt={item.name} height={50} />
+                            <HeartIcon className="heart-icon" size={16} fill={isfavorite ? "red" : "gray"} />
+                        </span>
 
                         <span className="cart-item-name">{item.name}</span>
                         <span className="cart-item-price">{item.price.toFixed(2)}€</span>
