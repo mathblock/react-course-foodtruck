@@ -1,73 +1,54 @@
-# React + TypeScript + Vite
+# 🌮 Food Truck Paradise
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Food Truck Paradise est une application web moderne développée avec React et TypeScript, offrant une expérience immersive pour découvrir et commander de la street-food mauricienne revisitée.
 
-Currently, two official plugins are available:
+![Aperçu de l'application](/public/images/tacos.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌟 Fonctionnalités
 
-## React Compiler
+### 🛍️ Menu & Commande
+*   **Catalogue interactif** : Découvrez une variété de plats (Entrées, Plats de résistance, Desserts, Boissons).
+*   **Filtrage & Recherche** : Trouvez rapidement vos envies par catégorie ou par mots-clés.
+*   **Panier dynamique** : Ajoutez des articles, ajustez les quantités et visualisez le total en temps réel. Le bouton "Ajouter" vous indique si un article est déjà dans votre panier.
+*   **Page Panier dédiée** : Un espace clair pour gérer votre commande avant le paiement.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### ❤️ Favoris
+*   **Gestion des favoris** : Marquez vos plats préférés d'un simple clic sur le cœur.
+*   **Page Favoris** : Retrouvez tous vos coups de cœur centralisés sur une seule page.
 
-## Expanding the ESLint configuration
+### 🎨 Design & Expérience
+*   **Thème Mauricien** : Un header aux couleurs du drapeau de l'île Maurice (Rouge, Bleu, Jaune, Vert).
+*   **Animations** : Les articles du panier apparaissent avec une animation fluide en cascade.
+*   **Responsive** : Une interface adaptée à tous les écrans.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🚀 Installation et Lancement
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+1.  **Prérequis** : Assurez-vous d'avoir [Node.js](https://nodejs.org/) installé.
+2.  **Cloner le projet** :
+    ```bash
+    git clone https://github.com/votre-repo/foodtruck-paradise.git
+    cd foodtruck-paradise
+    ```
+3.  **Installer les dépendances** :
+    ```bash
+    npm install
+    ```
+4.  **Lancer l'application** :
+    ```bash
+    npm run dev
+    ```
+5.  **Accéder à l'application** : Ouvrez votre navigateur sur `http://localhost:5173`.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🛠️ Technologies Utilisées -> Vite + React + TypeScript
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+*   **React 19** : Bibliothèque UI.
+*   **TypeScript** : Sécurité de typage.
+*   **Vite** : Outil de build ultra-rapide.
+*   **CSS** : Styles personnalisés et animations.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📸 Aperçu
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Ceci est un projet académique/démo mettant en valeur l'utilisation de React pour une application e-commerce simple et esthétique.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+*Projet réalisé pour le cours de React.*
