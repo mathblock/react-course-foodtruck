@@ -4,7 +4,7 @@ import { menuItems } from '../data/menuData';
 const Menu = () => {
   const categories = [
     { key: 'entrees', label: '🥗 Entrées' },
-    { key: 'plats', label: '🍴 Plats Principaux' },
+    { key: 'plats', label: '🍴 Plats de resistance' },
     { key: 'desserts', label: '🍰 Desserts' },
     { key: 'boissons', label: '🥤 Boissons' },
   ];
