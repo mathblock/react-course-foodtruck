@@ -1,0 +1,83 @@
+.cart-item-info {
+    flex: 1;
+  }
+  
+  .cart-item-info h4 {
+    margin: 0;
+    font-size: 1rem;
+  }
+  
+  .cart-item-subtotal {
+    min-width: 80px;
+    text-align: right;
+  }
+  
+  .remove-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+  
+  .cart-section {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+
+  /* Limite la largeur du bloc complet */
+.cart-wrapper {
+    max-width: 700px; /* Taille raisonnable pour un panier */
+    margin: 2rem auto; /* Centre le bloc horizontalement */
+    padding: 0 1rem;
+  }
+  
+  .cart-summary {
+    background: #fdfdfd;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Ajoute un peu de relief */
+  }
+  
+  /* Réduit la taille des lignes de produits */
+  .cart-item {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding: 0.75rem;
+    background: white;
+    margin-bottom: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #eee;
+  }
+  
+  /* Force une petite taille d'image */
+  .cart-item-image {
+    width: 60px;  /* Image plus petite */
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+  
+  /* Ajuste les textes pour qu'ils ne soient pas trop gros */
+  .cart-item-info h4 {
+    font-size: 0.95rem;
+    margin: 0 0 4px 0;
+  }
+  
+  .cart-item-info p {
+    font-size: 0.85rem;
+    color: #666;
+    margin: 0;
+  }
+  
+  .quantity-controls {
+    gap: 0.25rem;
+  }
+  
+  .qty-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 0.9rem;
+  }

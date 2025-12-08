@@ -1,30 +1,67 @@
+import { useState } from "react";
+import Header from "./components/Header";
+import Menu from "./components/Menu";
+import Footer from "./components/Footer";
+import type { MenuItem } from "./types/menu";
 
-import React from 'react'
+import CartSummary from "./components/CartSummary";
 
-import './App.css'
-
-import Header from './components/Header'
-import Menu from './components/Menu'
-import Footer from './components/Footer'
-
-
-/* 
-const produit:Product = {
-  name : 'Tacos' ,
-  url : "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=2360&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" ,
-  price : 34 
-} */
+type CartItem = {
+  item: MenuItem;
+  quantity: number;
+};
 
 function App() {
+  const [cart, setCart] = useState<CartItem[]>([]);
+
+  const addToCart = (item: MenuItem) => {
+    setCart((prev) => {
+      const existing = prev.find((i) => i.item.id === item.id);
+      if (existing) {
+        return prev.map((i) =>
+          i.item.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
+        );
+      }
+      return [...prev, { item, quantity: 1 }];
+    });
+  };
+
+  const cartItemsCount = cart.reduce((sum, i) => sum + i.quantity, 0);
+
+  const updateQuantity = (id: string, delta: number) => {
+    setCart((prev) =>
+      prev.map((i) =>
+        i.item.id === id
+          ? { ...i, quantity: Math.max(1, i.quantity + delta) }
+          : i
+      )
+    );
+  };
+
+  const removeFromCart = (id: string) => {
+    setCart((prev) => prev.filter((i) => i.item.id !== id));
+  };
 
   return (
-    <>
-      <Header />
-      <Menu />
+    <div className="app">
+      <Header cartItemsCount={cartItemsCount} />
+      <main>
+        <Menu onAddToCart={addToCart} />
+
+        {/* Affichage conditionnel du résumé du panier */}
+          {cart.length > 0 && (
+            <div className="cart-wrapper">
+              <CartSummary 
+                cart={cart} 
+                onUpdateQuantity={updateQuantity} 
+                onRemove={removeFromCart} 
+              />
+            </div>
+          )}
+      </main>
       <Footer />
-      
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;

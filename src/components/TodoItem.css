@@ -1,0 +1,26 @@
+.todo-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    transition: 0.2s;
+  }
+  
+  .todo-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+  
+  .todo-title {
+    font-size: 15px;
+    color: white;
+  }
+  
+  /* Quand la tâche est terminée */
+  .todo-item.done .todo-title {
+    text-decoration: line-through;
+    opacity: 0.6;
+  }
+  

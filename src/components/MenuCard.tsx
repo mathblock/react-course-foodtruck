@@ -1,47 +1,41 @@
-
-import React from "react";
+import { useState } from "react";
 import type { MenuItem } from "../types/menu";
 import './MenuCard.css'
 
-interface MenuCardProps {
-    item : MenuItem
-}
+type MenuCardProps = {
+  item: MenuItem;
+  onAddToCart: (item: MenuItem) => void;
+};
 
-const MenuCard:React.FC<MenuCardProps> = function({item}){
+export default function MenuCard({ item, onAddToCart }: MenuCardProps) {
+  const [isAdded, setIsAdded] = useState(false);
 
-    return(
-        <div className="menu-card">
-            { /* header of card  */}
-            <div className="card-image">
-                <img src={item.imageUrl} alt={item.name} />
-                {item.isNew && <span className="badge-new">Nouveau</span>}
-            </div>
+  const handleAdd = () => {
+    onAddToCart(item);
+    setIsAdded(true);
+    setTimeout(() => setIsAdded(false), 500);
+  };
 
-            { /* content of card  */}
+  return (
+    <div className="menu-card">
+      <div className="card-image">
+        <img src={item.imageUrl} alt={item.name} />
+        {item.isNew && <span className="badge-new">Nouveau</span>}
+      </div>
 
-            <div className="card-content">
-                <div className="card-header">
-                    <h3>{item.name}</h3>
-                    {item.isVegetarian && <span className="badge-vege">🌱</span>}
-                </div>
-            </div>
-
-            <p className="description">{item.description}</p>
-
-
-            { /*  footer of card  */}
-
-            <div className="footer-card">
-                <span className="price">{item.price.toFixed(2)} $</span>
-                <button className="btn-card"> Ajouter </button>
-            </div>
-
-
+      <div className="card-content">
+        <div className="card-header">
+          <h3>{item.name}</h3>
+          {item.isVegetarian && <span>🌱</span>}
         </div>
-    )
 
+        <p className="description">{item.description}</p>
+
+        <div className="card-footer">
+          <span className="price">{item.price.toFixed(2)} €</span>
+          <button onClick={handleAdd}>{isAdded ? "Ajouté ✅" : "Ajouter"}</button>
+        </div>
+      </div>
+    </div>
+  );
 }
-
-
-
-export default MenuCard
