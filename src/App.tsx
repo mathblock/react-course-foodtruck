@@ -1,6 +1,7 @@
 
 import './App.css'
-import Footers from './composants/footer'
+import Footers
+ from './composants/footer'
 import Header from './composants/header'
 import CategorizedMenuList from './composants/menu'
 
