@@ -1,5 +1,6 @@
 import React from 'react';
 import "../module/Header.css";
+import { Link } from 'react-router-dom';
 
 interface HeaderProps {
   cartItemsCount: number;
@@ -17,9 +18,9 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onOpenCart }) => {
         </div>
         <p className="tagline">Des saveurs du monde, directement dans votre rue !</p>
         <nav className="nav">
-          <a href="#menu" className="nav-link">Menu</a>
-          <a href="#about" className="nav-link">À propos</a>
-          <a href="#contact" className="nav-link">Contact</a>
+          <Link to="#menu" className="nav-link">Menu</Link>
+          <Link to="#about" className="nav-link">À propos</Link>
+          <Link to="#contact" className="nav-link">Contact</Link>
           
           
           <div 

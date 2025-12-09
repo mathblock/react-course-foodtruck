@@ -1,16 +1,20 @@
+// src/components/Menu1.tsx  (ou MenuList.tsx)
 import { useState } from "react";
 import "../module/MenuList.css";
 import MenuCard from "./MenuCard";
 import menuItems from "../data/menuData";
 import type { MenuProps } from "../types/menus";
+import { useOutletContext } from "react-router-dom";
 
-interface MenuListProps {
-  onAddToCart: (item: MenuProps) => void;
+interface LayoutContext {
+  addToCart: (item: MenuProps) => void;
 }
 
-const MenuList: React.FC<MenuListProps> = ({ onAddToCart }) => {
+const MenuList = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [activeCategory, setActiveCategory] = useState("tous");
+
+  const { addToCart } = useOutletContext<LayoutContext>();
 
   const filtered = menuItems
     .filter(item => activeCategory === "tous" || item.category === activeCategory)
@@ -20,16 +24,15 @@ const MenuList: React.FC<MenuListProps> = ({ onAddToCart }) => {
     );
 
   const categories = [
-    { id: "tous", label: "Tous", emoji: "👌🏾" },
-    { id: "entree", label: "Entrées", emoji: "🥘" },
-    { id: "plat principale", label: "Plats", emoji: "🍽️" },
-    { id: "dessert", label: "Desserts", emoji: "🍧" },
-    { id: "boisson", label: "Boissons", emoji: "🍷" },
+    { id: "tous", label: "Tous", emoji: "Tout" },
+    { id: "entree", label: "Entrées", emoji: "Salade" },
+    { id: "plat principale", label: "Plats", emoji: "Plat" },
+    { id: "dessert", label: "Desserts", emoji: "Glace" },
+    { id: "boisson", label: "Boissons", emoji: "Verre" },
   ];
 
   return (
     <div className="menu-list">
-      {/* Barre de recherche */}
       <div style={{ maxWidth: 600, margin: "2rem auto", position: "relative" }}>
         <input
           type="text"
@@ -63,13 +66,11 @@ const MenuList: React.FC<MenuListProps> = ({ onAddToCart }) => {
         )}
       </div>
 
-      {/* Filtres catégories */}
-      <div className="category-filters" style={{ textAlign: "center", margin: "2rem 0" }}>
+      <div style={{ textAlign: "center", margin: "2rem 0" }}>
         {categories.map(cat => (
           <button
             key={cat.id}
             onClick={() => setActiveCategory(cat.id)}
-            className={activeCategory === cat.id ? "active" : ""}
             style={{
               margin: "0 0.5rem",
               padding: "0.6rem 1.4rem",
@@ -77,7 +78,8 @@ const MenuList: React.FC<MenuListProps> = ({ onAddToCart }) => {
               border: "2px solid #ddd",
               background: activeCategory === cat.id ? "#e74c3c" : "white",
               color: activeCategory === cat.id ? "white" : "#333",
-              cursor: "pointer"
+              cursor: "pointer",
+              fontSize: "1rem"
             }}
           >
             {cat.emoji} {cat.label}
@@ -94,9 +96,14 @@ const MenuList: React.FC<MenuListProps> = ({ onAddToCart }) => {
           Aucun plat trouvé
         </p>
       ) : (
-        <div className="menu-grid" style={{ display: "grid", gap: "2rem", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))" }}>
+        <div style={{ 
+          display: "grid", 
+          gap: "2rem", 
+          gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+          padding: "0 1rem"
+        }}>
           {filtered.map((item) => (
-            <MenuCard key={item.id} item={item} onAddToCart={onAddToCart} />
+            <MenuCard key={item.id} item={item} onAddToCart={addToCart} />
           ))}
         </div>
       )}
