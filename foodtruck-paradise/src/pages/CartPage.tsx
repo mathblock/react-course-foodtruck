@@ -5,13 +5,7 @@ import PaymentForm, { type PaymentData } from '../components/PaymentForm';
 import { simulatePayment, type PaymentResult } from '../utils/paymentService';
 
 function CartPage() {
-    const cart = useCart();
-    
-    if (!cart) {
-        return <div>Erreur: Contexte du panier non disponible</div>;
-    }
-    
-    const { items, subtotal, discount, total, promoCode } = cart;
+    const { items, subtotal, discount, total, promoCode } = useCart();
     
     const [showPayment, setShowPayment] = useState(false);
     const [isProcessing, setIsProcessing] = useState(false);

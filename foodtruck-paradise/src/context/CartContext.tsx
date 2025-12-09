@@ -1,118 +1,141 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useReducer, ReactNode } from 'react';
 import { type CartItem } from '../types/cart';
 import { type MenuItem } from '../types/menu';
 import { type PromoCode, promoCodes } from '../data/promoCodes';
 
+interface CartState {
+    items: CartItem[];
+    promoCode: PromoCode | null;
+}
+
 interface CartContextType {
-  items: CartItem[];
-  subtotal: number;
-  discount: number;
-  total: number;
-  promoCode: PromoCode | null;
-  addToCart: (item: MenuItem, quantity: number) => void;
-  removeFromCart: (itemId: string) => void;
-  updateQuantity: (itemId: string, quantity: number) => void;
-  clearCart: () => void;
-  applyPromoCode: (code: string) => boolean;
-  removePromoCode: () => void;
+    items: CartItem[];
+    promoCode: PromoCode | null;
+    subtotal: number;
+    discount: number;
+    total: number;
+    addToCart: (item: MenuItem) => void;
+    removeFromCart: (itemId: string) => void;
+    updateQuantity: (itemId: string, quantity: number) => void;
+    applyPromoCode: (code: string) => boolean;
+    removePromoCode: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-export function CartProvider({ children }: { children: ReactNode }) {
-  const [cart, setCart] = useState<CartItem[]>([]);
-  const [appliedPromo, setAppliedPromo] = useState<PromoCode | null>(null);
+type CartAction =
+    | { type: 'ADD_ITEM'; payload: MenuItem }
+    | { type: 'REMOVE_ITEM'; payload: string }
+    | { type: 'UPDATE_QUANTITY'; payload: { itemId: string; quantity: number } }
+    | { type: 'APPLY_PROMO'; payload: PromoCode }
+    | { type: 'REMOVE_PROMO' };
 
-  const subtotal = cart.reduce((total, cartItem) => total + cartItem.item.price * cartItem.quantity, 0);
-  
-  let discount = 0;
-  if (appliedPromo) {
-    if (appliedPromo.minAmount && subtotal >= appliedPromo.minAmount) {
-      discount = subtotal * appliedPromo.discount;
-    } else if (!appliedPromo.minAmount) {
-      discount = subtotal * appliedPromo.discount;
+const cartReducer = (state: CartState, action: CartAction): CartState => {
+    switch (action.type) {
+        case 'ADD_ITEM': {
+            const existingItemIndex = state.items.findIndex(i => i.item.id === action.payload.id);
+            if (existingItemIndex > -1) {
+                const newItems = [...state.items];
+                newItems[existingItemIndex].quantity += 1;
+                return { ...state, items: newItems };
+            }
+            return { ...state, items: [...state.items, { item: action.payload, quantity: 1 }] };
+        }
+        case 'REMOVE_ITEM':
+            return {
+                ...state,
+                items: state.items.filter(i => i.item.id !== action.payload)
+            };
+        case 'UPDATE_QUANTITY':
+            return {
+                ...state,
+                items: state.items.map(i =>
+                    i.item.id === action.payload.itemId
+                        ? { ...i, quantity: Math.max(0, action.payload.quantity) }
+                        : i
+                ).filter(i => i.quantity > 0)
+            };
+        case 'APPLY_PROMO':
+            return { ...state, promoCode: action.payload };
+        case 'REMOVE_PROMO':
+            return { ...state, promoCode: null };
+        default:
+            return state;
     }
-    discount = Math.round(discount * 100) / 100;
-  }
+};
 
-  const total = subtotal - discount;
-
-  const addToCart = (item: MenuItem, quantity: number) => {
-    setCart((prevCart) => {
-      const existingItem = prevCart.find((cartItem) => cartItem.item.id === item.id);
-      if (existingItem) {
-        return prevCart.map((cartItem) =>
-          cartItem.item.id === item.id
-            ? { ...cartItem, quantity: cartItem.quantity + quantity }
-            : cartItem
-        );
-      }
-      return [...prevCart, { item, quantity }];
+export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+    const [state, dispatch] = useReducer(cartReducer, {
+        items: [],
+        promoCode: null
     });
-  };
 
-  const removeFromCart = (itemId: string) => {
-    setCart((prevCart) => prevCart.filter((cartItem) => cartItem.item.id !== itemId));
-  };
+    const subtotal = state.items.reduce((sum, cartItem) => {
+        return sum + (cartItem.item.price * cartItem.quantity);
+    }, 0);
 
-  const updateQuantity = (itemId: string, quantity: number) => {
-    if (quantity <= 0) {
-      removeFromCart(itemId);
-      return;
+    let discount = 0;
+    if (state.promoCode) {
+        if (state.promoCode.minAmount && subtotal < state.promoCode.minAmount) {
+            discount = 0;
+        } else {
+            discount = subtotal * state.promoCode.discount;
+            discount = Math.round(discount * 100) / 100;
+        }
     }
-    setCart((prevCart) =>
-      prevCart.map((cartItem) =>
-        cartItem.item.id === itemId
-          ? { ...cartItem, quantity }
-          : cartItem
-      )
+
+    const total = subtotal - discount;
+
+    const addToCart = (item: MenuItem) => {
+        dispatch({ type: 'ADD_ITEM', payload: item });
+    };
+
+    const removeFromCart = (itemId: string) => {
+        dispatch({ type: 'REMOVE_ITEM', payload: itemId });
+    };
+
+    const updateQuantity = (itemId: string, quantity: number) => {
+        dispatch({ type: 'UPDATE_QUANTITY', payload: { itemId, quantity } });
+    };
+
+    const applyPromoCode = (code: string): boolean => {
+        const promo = promoCodes[code];
+        if (!promo) return false;
+
+        if (promo.minAmount && subtotal < promo.minAmount) {
+            return false;
+        }
+
+        dispatch({ type: 'APPLY_PROMO', payload: promo });
+        return true;
+    };
+
+    const removePromoCode = () => {
+        dispatch({ type: 'REMOVE_PROMO' });
+    };
+
+    return (
+        <CartContext.Provider value={{
+            items: state.items,
+            promoCode: state.promoCode,
+            subtotal,
+            discount,
+            total,
+            addToCart,
+            removeFromCart,
+            updateQuantity,
+            applyPromoCode,
+            removePromoCode
+        }}>
+            {children}
+        </CartContext.Provider>
     );
-  };
+};
 
-  const clearCart = () => {
-    setCart([]);
-  };
-
-  const applyPromoCode = (code: string): boolean => {
-    const upperCode = code.toUpperCase();
-    const promo = promoCodes[upperCode];
-    
-    if (!promo) {
-      return false;
+export const useCart = () => {
+    const context = useContext(CartContext);
+    if (context === undefined) {
+        throw new Error('useCart must be used within a CartProvider');
     }
-    
-    if (promo.minAmount && subtotal < promo.minAmount) {
-      return false;
-    }
-    
-    setAppliedPromo(promo);
-    return true;
-  };
-
-  const removePromoCode = () => {
-    setAppliedPromo(null);
-  };
-
-  return (
-    <CartContext.Provider value={{ 
-      items: cart,
-      subtotal,
-      discount,
-      total,
-      promoCode: appliedPromo,
-      addToCart, 
-      removeFromCart, 
-      updateQuantity, 
-      clearCart,
-      applyPromoCode,
-      removePromoCode
-    }}>
-      {children}
-    </CartContext.Provider>
-  );
-}
-
-export function useCart() {
-  const context = useContext(CartContext);
-  return context;
-}
+    return context;
+};

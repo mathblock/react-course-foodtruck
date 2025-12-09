@@ -86,7 +86,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
             discount = 0;
         } else {
             discount = subtotal * state.promoCode.discount;
-            discount = Math.round(discount * 100) / 100; // Arrondir à 2 décimales
+            discount = Math.round(discount * 100) / 100;
         }
     }
 
