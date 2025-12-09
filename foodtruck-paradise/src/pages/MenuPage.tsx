@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { useMenuFilters } from '../hooks/useMenuFilters';
 import MenuFilters from '../components/menu/MenuFilters';
 import { menuItems } from '../data/menuData';
@@ -111,4 +111,4 @@ function MenuPage() {
         </div>
     );
 }
-export default MenuFilters;
+export default MenuPage;
