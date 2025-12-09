@@ -1,14 +1,12 @@
-import { Link } from 'react-router-dom';
-
 function HomePage() {
   return (
     <div className="home-page">
       <section className="hero">
         <h1>🌮 Bienvenue chez Foodtruck Paradise</h1>
         <p className="subtitle">Les meilleurs plats de rue, directement dans votre assiette</p>
-        <Link to="/menu" className="btn btn-primary">
+        <a href="/menu" className="btn btn-primary">
           Découvrir le menu
-        </Link>
+        </a>
       </section>
       
       <section className="features">
