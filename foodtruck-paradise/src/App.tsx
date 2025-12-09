@@ -1,5 +1,5 @@
 import "./App.css";
-import { MenuCard } from "./assets/menuCard";
+import { MenuCard } from "./components/menuCard";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import { menuItems } from "./data/menuData";
