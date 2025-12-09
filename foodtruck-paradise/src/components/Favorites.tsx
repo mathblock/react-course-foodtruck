@@ -3,15 +3,16 @@ import MenuCard from './MenuCard';
 import type { MenuItem } from '../types/menu';
 import type { CartItem } from '../types/cart';
 
+import { Link } from 'react-router-dom';
+
 interface FavoritesProps {
     favorites: string[];
     onAddToCart: (item: MenuItem) => void;
     onToggleFavorite: (itemId: string) => void;
     cart: CartItem[];
-    onBackToMenu: () => void;
 }
 
-const Favorites = ({ favorites, onAddToCart, onToggleFavorite, cart, onBackToMenu }: FavoritesProps) => {
+const Favorites = ({ favorites, onAddToCart, onToggleFavorite, cart }: FavoritesProps) => {
     const favoriteItems = menuItems.filter((item) => favorites.includes(item.id));
 
     return (
@@ -37,21 +38,21 @@ const Favorites = ({ favorites, onAddToCart, onToggleFavorite, cart, onBackToMen
                 ) : (
                     <div className="no-results">
                         <p>Vous n'avez pas encore de favoris.</p>
-                        <button
-                            onClick={onBackToMenu}
+                        <Link
+                            to="/menu"
                             style={{
+                                display: 'inline-block',
                                 marginTop: '1rem',
                                 padding: '0.8rem 1.5rem',
                                 background: '#ff6b35',
                                 color: 'white',
-                                border: 'none',
+                                textDecoration: 'none',
                                 borderRadius: '4px',
-                                cursor: 'pointer',
                                 fontSize: '1rem'
                             }}
                         >
                             Retourner au Menu
-                        </button>
+                        </Link>
                     </div>
                 )}
             </div>

@@ -1,17 +1,46 @@
-import { useState } from 'react';
-import Header from './components/Header';
+import { useState, useEffect } from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
 import Menu from './components/Menu';
-import Footer from './components/Footer';
 import CartSummary from './components/CartSummary';
 import Favorites from './components/Favorites';
+import Layout from './components/Layout';
+import CategoryPage from './pages/CategoryPage';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import NotFound from './pages/NotFound';
 import type { MenuItem } from './types/menu';
 import type { CartItem } from './types/cart';
 import './App.css';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('menu');
-  const [cart, setCart] = useState<CartItem[]>([]);
-  const [favorites, setFavorites] = useState<string[]>([]);
+  const [cart, setCart] = useState<CartItem[]>(() => {
+    const savedCart = localStorage.getItem('cart');
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+
+  const [favorites, setFavorites] = useState<string[]>(() => {
+    const savedFavorites = localStorage.getItem('favorites');
+    return savedFavorites ? JSON.parse(savedFavorites) : [];
+  });
+
+  const [discount, setDiscount] = useState(0);
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
+
+  useEffect(() => {
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  }, [favorites]);
+
+  const handleApplyPromo = (code: string) => {
+    if (code === 'voyagemaurice10') {
+      setDiscount(0.1);
+      return true;
+    }
+    setDiscount(0);
+    return false;
+  };
 
   const toggleFavorite = (itemId: string) => {
     setFavorites(prev =>
@@ -53,12 +82,15 @@ function App() {
 
   const cartItemsCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
-  // pseudo router puisque je ne sais pas si on peut utiliser react-router et que l'on doit faire
-  // plusieurs pages
-  const renderPage = () => {
-    switch (currentPage) {
-      case 'menu':
-        return (
+  return (
+    <Routes>
+      <Route path="/" element={<Layout
+        cartItemsCount={cartItemsCount}
+        favoritesCount={favorites.length}
+        onApplyPromo={handleApplyPromo}
+        isPromoApplied={discount > 0}
+      />}>
+        <Route index element={
           <main>
             <Menu
               onAddToCart={addToCart}
@@ -67,94 +99,70 @@ function App() {
               cart={cart}
             />
           </main>
-        );
-      case 'favorites':
-        return (
+        } />
+        <Route path="menu" element={
+          <main>
+            <Menu
+              onAddToCart={addToCart}
+              favorites={favorites}
+              onToggleFavorite={toggleFavorite}
+              cart={cart}
+            />
+          </main>
+        } />
+        <Route path="menu/category/:categoryName" element={
+          <CategoryPage
+            onAddToCart={addToCart}
+            favorites={favorites}
+            onToggleFavorite={toggleFavorite}
+            cart={cart}
+          />
+        } />
+        <Route path="favorites" element={
           <main>
             <Favorites
               favorites={favorites}
               onAddToCart={addToCart}
               onToggleFavorite={toggleFavorite}
               cart={cart}
-              onBackToMenu={() => setCurrentPage('menu')}
             />
           </main>
-        );
-      case 'cart':
-        return (
+        } />
+        <Route path="cart" element={
           <main>
             <div className="container">
               <CartSummary
                 cart={cart}
                 onUpdateQuantity={updateQuantity}
                 onRemove={removeFromCart}
+                discount={discount}
               />
               {cart.length === 0 && (
-                <button
-                  onClick={() => setCurrentPage('menu')}
+                <Link
+                  to="/menu"
                   style={{
+                    display: 'inline-block',
                     marginTop: '1rem',
                     padding: '0.8rem 1.5rem',
                     background: '#ff6b35',
                     color: 'white',
                     border: 'none',
                     borderRadius: '4px',
-                    cursor: 'pointer',
+                    textDecoration: 'none',
                     fontSize: '1rem'
                   }}
                 >
                   Retourner au Menu
-                </button>
+                </Link>
               )}
             </div>
           </main>
-        );
-      case 'about':
-        return (
-          <section className="section">
-            <div className="container">
-              <h2>À propos</h2>
-              <p>Food Truck Paradise vous emmène au cœur des saveurs tropicales mauriciennes, où chaque plat raconte l’histoire d’une île multiculturelle. Entre cuisine de rue épicée, influences indiennes, créoles, chinoises et européennes, nous proposons un menu vibrant et coloré, à l’image de Maurice.</p>
-              <br />
-              <p>Découvrez des recettes authentiques revisitées, des options végétariennes inspirées du marché local, ainsi que nos plats signature préparés avec des ingrédients frais, exotiques et pleins de soleil.</p>
-              <br />
-              <p><strong>Food Truck Paradise : là où la street-food mauricienne rencontre le monde, pour une expérience gourmande inoubliable !</strong></p>
-            </div>
-          </section>
-        );
-      case 'contact':
-        return (
-          <section className="section">
-            <div className="container">
-              <h2>Contact</h2>
-              <p>Pour nous contacter, envoyez un email à contact@foodtruckparadise.com ou suivez-nous sur les réseaux sociaux.</p>
-            </div>
-          </section>
-        );
-      default:
-        return (
-          <main>
-            <Menu
-              onAddToCart={addToCart}
-              favorites={favorites}
-              onToggleFavorite={toggleFavorite}
-              cart={cart}
-            />
-          </main>
-        );
-    }
-  };
-
-  return (
-    <div className="app">
-      <Header
-        onNavClick={setCurrentPage}
-        cartItemsCount={cartItemsCount}
-        favoritesCount={favorites.length}
-      />
-      {renderPage()}
-      <Footer />
-    </div>
+        } />
+        <Route path="about" element={<About />} />
+        <Route path="contact" element={<Contact />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   );
 }
 

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import MenuCard from './MenuCard';
 import { menuItems } from '../data/menuData';
 import type { MenuItem } from '../types/menu';
@@ -12,21 +13,22 @@ interface MenuProps {
 }
 
 const Menu = ({ onAddToCart, favorites, onToggleFavorite, cart }: MenuProps) => {
-  const [activeCategory, setActiveCategory] = useState("tous");
   const [searchTerm, setSearchTerm] = useState("");
-
   const categories = [
-    { key: 'tous', label: 'Tous' },
-    { key: 'entrees', label: '🥗 Entrées' },
-    { key: 'plats', label: '🍔 Plats de resistance' },
-    { key: 'desserts', label: '🍰 Desserts' },
-    { key: 'boissons', label: '🥤 Boissons' },
+    { key: 'tous', label: 'Tous', path: '/menu' },
+    { key: 'entrees', label: '🥗 Entrées', path: '/menu/category/entrees' },
+    { key: 'plats', label: '🍔 Plats de resistance', path: '/menu/category/plats' },
+    { key: 'desserts', label: '🍰 Desserts', path: '/menu/category/desserts' },
+    { key: 'boissons', label: '🥤 Boissons', path: '/menu/category/boissons' },
   ];
 
+  /* 
+     Since we are now using routing for categories, we only filter by text search here.
+     The "activeCategory" state is removed as it's no longer needed for local filtering of categories.
+     (Unless we want to highlight "Tous" when on this page, but simpler to just link for now)
+  */
+
   const filteredItems = menuItems
-    .filter(
-      (item) => activeCategory === "tous" || item.category === activeCategory
-    )
     .filter(
       (item) =>
         item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -56,13 +58,18 @@ const Menu = ({ onAddToCart, favorites, onToggleFavorite, cart }: MenuProps) => 
 
       <div className="category-filters">
         {categories.map((category) => (
-          <button
+          /* We use standard HTML anchor logic via react-router Link, 
+             but styled as buttons/tabs. 
+             We check if 'tous' is active since we are on the main menu page.
+           */
+          <Link
             key={category.key}
-            className={`filter-btn ${activeCategory === category.key ? 'active' : ''}`}
-            onClick={() => setActiveCategory(category.key)}
+            to={category.path}
+            className={`filter-btn ${category.key === 'tous' ? 'active' : ''}`}
+            style={{ textDecoration: 'none', display: 'inline-block', textAlign: 'center' }}
           >
             {category.label}
-          </button>
+          </Link>
         ))}
       </div>
 

@@ -4,13 +4,17 @@ interface CartSummaryProps {
     cart: CartItem[];
     onUpdateQuantity: (itemId: string, quantity: number) => void;
     onRemove: (itemId: string) => void;
+    discount?: number;
 }
 
-const CartSummary = ({ cart, onUpdateQuantity, onRemove }: CartSummaryProps) => {
-    const total = cart.reduce(
+const CartSummary = ({ cart, onUpdateQuantity, onRemove, discount = 0 }: CartSummaryProps) => {
+    const subtotal = cart.reduce(
         (sum, cartItem) => sum + cartItem.item.price * cartItem.quantity,
         0
     );
+
+    const discountAmount = subtotal * discount;
+    const total = subtotal - discountAmount;
 
     if (cart.length === 0) {
         return (
@@ -68,8 +72,20 @@ const CartSummary = ({ cart, onUpdateQuantity, onRemove }: CartSummaryProps) => 
                 ))}
             </div>
             <div className="cart-total">
-                <span>Total</span>
-                <span>{total.toFixed(2)} €</span>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+                    <span>Sous-total</span>
+                    <span>{subtotal.toFixed(2)} €</span>
+                </div>
+                {discount > 0 && (
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', color: '#28a745' }}>
+                        <span>Réduction ({(discount * 100).toFixed(0)}%)</span>
+                        <span>-{discountAmount.toFixed(2)} €</span>
+                    </div>
+                )}
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold', fontSize: '1.2rem', marginTop: '1rem', borderTop: '1px solid #eee', paddingTop: '1rem' }}>
+                    <span>Total</span>
+                    <span>{total.toFixed(2)} €</span>
+                </div>
             </div>
             <button className="btn-checkout">Commander</button>
         </div>
