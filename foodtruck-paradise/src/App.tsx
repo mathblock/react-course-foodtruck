@@ -38,23 +38,34 @@ const App: React.FC = () => {
   const cartItemsCount = cart.reduce((sum, i) => sum + i.quantity, 0);
   const total = cart.reduce((sum, i) => sum + i.item.price * i.quantity, 0);
 
-  return (
-    <div className="app">
-      <Header cartItemsCount={cartItemsCount} onOpenCart={() => setIsCartOpen(true)} />
-      <MenuList onAddToCart={addToCart} />
+    return (
+      <div 
+        style={{
+          minHeight: '100vh',
+          maxWidth: '1400px',
+          margin: '0 auto',
+          background: 'white',
+          boxShadow: '0 0 40px rgba(0,0,0,0.15)',
+          display: 'flex',
+          flexDirection: 'column',
+          overflowX: 'hidden'
+        }}
+      >
+        <Header cartItemsCount={cartItemsCount} onOpenCart={() => setIsCartOpen(true)} />
+        <MenuList onAddToCart={addToCart} />
 
-      <CartSidebar
-        isOpen={isCartOpen}
-        onClose={() => setIsCartOpen(false)}
-        cart={cart}
-        onUpdateQuantity={updateQuantity}
-        onRemove={removeFromCart}
-        total={total}
-      />
+        <CartSidebar
+          isOpen={isCartOpen}
+          onClose={() => setIsCartOpen(false)}
+          cart={cart}
+          onUpdateQuantity={updateQuantity}
+          onRemove={removeFromCart}
+          total={total}
+        />
 
-      <Footer />
-    </div>
-  );
+        <Footer />
+      </div>
+    );
 };
 
 export default App;

@@ -1,34 +1,69 @@
+/* MENU EN PLEINE LARGEUR – Blanc, propre et magnifique */
 .menu-list {
-  max-width: 1200px;
+  width: 100%;
+  min-height: 100vh;
+  background: white;                    /* Fond blanc obligatoire */
+  padding: 3rem 2rem;                   /* Espacement confortable */
   margin: 0 auto;
-  padding: 40px 20px;
 }
 
+/* Si tu veux un peu de marge sur les côtés sur très grand écran */
+@media (min-width: 1600px) {
+  .menu-list {
+    padding: 3rem 8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .menu-list {
+    padding: 2rem 1rem;
+  }
+}
+
+/* Sections (au cas où tu les réutilises) */
 .menu-section {
-  margin-bottom: 60px;
+  margin-bottom: 5rem;
 }
 
 .menu-section h2 {
-  font-size: 2.2rem;
-  margin-bottom: 30px;
+  font-size: 2.6rem;
+  margin-bottom: 2.5rem;
   color: #2f3542;
   position: relative;
   display: inline-block;
+  padding-bottom: 0.8rem;
 }
 
 .menu-section h2::after {
   content: '';
   position: absolute;
-  bottom: -8px;
+  bottom: 0;
   left: 0;
-  width: 60px;
-  height: 4px;
-  background: #ffa502;
-  border-radius: 2px;
+  width: 80px;
+  height: 6px;
+  background: linear-gradient(90deg, #ff6b6b, #ffa502);
+  border-radius: 3px;
 }
 
+/* Grille pleine largeur – s'adapte à tous les écrans */
 .menu-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2.5rem;
+  width: 100%;
+}
+
+/* Sur mobile : 1 colonne */
+@media (max-width: 640px) {
+  .menu-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+/* Sur très grand écran : plus de colonnes */
+@media (min-width: 1400px) {
+  .menu-grid {
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  }
 }
