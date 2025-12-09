@@ -2,7 +2,7 @@ function Footer() {
   return (
     <footer className="footer">
       <div className="container">
-        <p>&copy; 2025 Foodtruck Paradise - Tous droits réservés</p>
+        <p>&copy; {new Date().getFullYear()} Foodtruck Paradise - Tous droits réservés</p>
       </div>
     </footer>
   );
