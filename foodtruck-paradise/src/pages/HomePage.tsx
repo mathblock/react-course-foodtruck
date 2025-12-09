@@ -21,7 +21,7 @@ function HomePage() {
           <p>Ingrédients de qualité, sélectionnés avec soin</p>
         </div>
         <div className="feature">
-          <span className="icon">❤️</span>
+          <span className="icon icon-heart"></span>
           <h3>Fait avec amour</h3>
           <p>Des recettes maison préparées par nos chefs</p>
         </div>
