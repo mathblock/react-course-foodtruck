@@ -5,6 +5,7 @@ import { Button } from "./ui/button";
 import MenuFiltrer from "./MenuFiltrer";
 import MenuDefaut from "./MenuDefaut";
 import type { Category, MenuProps } from "@/types/utils";
+import { useNavigate } from "react-router-dom";
 
 const categories: Category[] = [
   { key: "entrees", label: "🥗 Entrées", color: "bg-green-50" },
@@ -16,6 +17,7 @@ const categories: Category[] = [
 function Menu({ onAddToCart }: MenuProps) {
   const [activeCategory, setActiveCategory] = useState<string>("tous");
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const navigate = useNavigate();
 
   const menuFiltrer: MenuItem[] = menuData
     .filter(
@@ -49,7 +51,15 @@ function Menu({ onAddToCart }: MenuProps) {
         <div id="filtre" className="flex justify-center gap-2 mb-6">
           <Button onClick={() => setActiveCategory("tous")}>Tous</Button>
           {categories.map((cat) => (
-            <Button key={cat.key} onClick={() => setActiveCategory(cat.key)}>
+            <Button
+              key={cat.key}
+              onClick={
+                () =>
+                  navigate(
+                    `/menu/category/${cat.key}`
+                  ) /* setActiveCategory(cat.key) */
+              }
+            >
               {cat.label}
             </Button>
           ))}

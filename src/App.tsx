@@ -12,6 +12,7 @@ import CartSummary from "./components/CartSummary";
 import type { RouteApp } from "./types/utils";
 import Layout from "./components/Layout";
 import NotFoundPage from "./NotFoundPage";
+import CategoryPage from "./components/CategoryPage";
 
 function App() {
   const [carts, setCarts] = useState<CartItem[]>(() => {
@@ -105,6 +106,14 @@ function App() {
       element: (
         <main>
           <NotFoundPage />
+        </main>
+      ),
+    },
+    {
+      chemin: "/menu/category/:categoryName",
+      element: (
+        <main>
+          <CategoryPage />
         </main>
       ),
     },
