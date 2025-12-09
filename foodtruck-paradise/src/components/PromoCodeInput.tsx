@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useCart } from '../context/CartContext';
 
 export default function PromoCodeInput() {
     const [inputValue, setInputValue] = useState('');
     const [error, setError] = useState('');
-    const { promoCode, applyPromoCode, removePromoCode } = useCart();
+    const { promoCode, applyPromoCode, removePromoCode, discount } = useCart();
 
     const handleApply = () => {
         const code = inputValue.trim().toUpperCase();
@@ -15,7 +15,7 @@ export default function PromoCodeInput() {
         if (success) {
             setInputValue('');
             setError('');
-        
+
         } else {
             setError('Code promo invalide ou conditions non remplies');
         }
@@ -24,7 +24,9 @@ export default function PromoCodeInput() {
     if (promoCode) {
         return (
             <div className="promo-code-applied">
-                <span className="promo-success">✅ {promoCode.description}</span>
+                <span className="promo-success">
+                    ✅ {promoCode.description} (-{discount.toFixed(2)}€)
+                </span>
                 <button onClick={removePromoCode} className="remove-promo-btn" style={{ marginLeft: '1rem', padding: '0.2rem 0.5rem' }}>
                     Retirer
                 </button>
