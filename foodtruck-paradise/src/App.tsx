@@ -1,3 +1,4 @@
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from "./components/Layout";
@@ -8,21 +9,26 @@ import SignUpPage from "./pages/SignUpPage";
 import { AuthProvider } from "./context/AuthContext";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
+import CartPage from "./pages/CartPage";
+import { CartProvider } from "./context/CartContext";
 
 function App() {  
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<HomePage />} />
-            <Route path="account" element={<MyAccountPage />} />
-            <Route path="signin" element={<SignInPage />} />
-            <Route path="signup" element={<SignUpPage />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <CartProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<HomePage />} />
+              <Route path="account" element={<MyAccountPage />} />
+              <Route path="signin" element={<SignInPage />} />
+              <Route path="signup" element={<SignUpPage />} />
+              <Route path="/cart" element={<CartPage />} />
+              <Route path="*" element={<NotFound />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </CartProvider>
     </AuthProvider>
   );
 }
