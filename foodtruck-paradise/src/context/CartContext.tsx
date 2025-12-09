@@ -1,7 +1,10 @@
-import React, { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
-import { CartItem } from '../types/cart';
-import { MenuItem } from '../types/menu';
-import { PromoCode, promoCodes } from '../data/promoCodes';
+import React, { createContext, useContext, useReducer } from 'react';
+import type { ReactNode } from 'react';
+import type { CartItem } from '../types/cart';
+import type { MenuItem } from '../types/menu';
+import type { PromoCode } from '../data/promoCodes';
+import { promoCodes } from '../data/promoCodes';
+import { menuItems } from '../data/menuData';
 
 interface CartState {
     items: CartItem[];
@@ -66,7 +69,10 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
 
 export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [state, dispatch] = useReducer(cartReducer, {
-        items: [],
+        items: [
+            { item: menuItems[0], quantity: 2 },
+            { item: menuItems[2], quantity: 1 }
+        ],
         promoCode: null
     });
 
@@ -74,15 +80,11 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         return sum + (cartItem.item.price * cartItem.quantity);
     }, 0);
 
-    
-
     let discount = 0;
     if (state.promoCode) {
- 
         if (state.promoCode.minAmount && subtotal < state.promoCode.minAmount) {
-          
             discount = 0;
-           
+        } else {
             discount = subtotal * state.promoCode.discount;
             discount = Math.round(discount * 100) / 100; // Arrondir à 2 décimales
         }
