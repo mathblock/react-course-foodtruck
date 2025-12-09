@@ -6,8 +6,11 @@ import Footers
 import Header from './composants/header'
 import CategorizedMenuList from './composants/menu'
 import type { CartItem } from './types/cart';
-import CartSummary from './composants/cartSummury';
+import CartSummary from './pages/cartSummury';
 import { storeService } from './services/store.service';
+import { Route, Routes } from 'react-router-dom';
+import Layout from './pages/layout';
+import { NotFound } from './pages/NotFound';
 
 function App() {
   const [cart, setCart] =  useState<CartItem[]>(storeService.loadCart());
@@ -61,23 +64,41 @@ function App() {
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   return (
-      <div style={{
-        width:"100%",
-      }}>
-        <Header cartItemCount={cartItemCount} />
-        <CategorizedMenuList addToCart={addToCart} />
-        {cart.length > 0 && (
-          <CartSummary
 
+    <Routes>
+      <Route path="/" element={<Layout cartItemCount={cartItemCount} />} >
+        <Route index element={
+          <CategorizedMenuList addToCart={addToCart} />
+        } />
+        <Route path="/cart" element={
+          <CartSummary
             cartItems={cart}
             updateQuantity={updateQuantity}
             removeFromCart={removeFromCart}
             clearCart={clearCart}
             toggleFavorite={toggleFavorite}
           />
-        )}
-        <Footers/>
-      </div>
+        } />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
+      // <div style={{
+      //   width:"100%",
+      // }}>
+      //   <Header cartItemCount={cartItemCount} />
+      //   <CategorizedMenuList addToCart={addToCart} />
+      //   {cart.length > 0 && (
+      //     <CartSummary
+
+      //       cartItems={cart}
+      //       updateQuantity={updateQuantity}
+      //       removeFromCart={removeFromCart}
+      //       clearCart={clearCart}
+      //       toggleFavorite={toggleFavorite}
+      //     />
+      //   )}
+      //   <Footers/>
+      // </div>
 
   )
 }

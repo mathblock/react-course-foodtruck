@@ -121,8 +121,6 @@ export default function CategorizedMenuList({addToCart}: {addToCart: (menuId: Ca
 
   return (
     <div style={{
-      width:'1000px',
-      marginTop: '100px',
       padding: '40px 20px',
       backgroundColor: '#fafafa',
       minHeight: '100vh'

@@ -1,5 +1,6 @@
 .cart-indicator {
     display: flex;
+    text-decoration: none;
     align-items: center;
     background: #fff;
     border-radius: 24px;
@@ -8,6 +9,8 @@
     position: relative;
     gap: 8px;
 }
+
+
 
 .cart-icon {
     color: #ff9800;

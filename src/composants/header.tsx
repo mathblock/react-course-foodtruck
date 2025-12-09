@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import '../styles/header.css';
 import CartBadge from './cartBadge';
 
@@ -9,9 +10,9 @@ const Header = ({cartItemCount}:{cartItemCount:number}) =>{
                 <h1 className="title">FoodTruck Paradise</h1>
             </div>
             <div className="nav-links">
-                <a href="#menu">Menu</a>
-                <a href="#about">À propos</a>
-                <a href="#contact">Contact</a>
+                <Link to="/">Menu</Link>
+                <Link to="#about">À propos</Link>
+                <Link to="#contact">Contact</Link>
                 <CartBadge cartItemCount={cartItemCount} />
             </div>
             
