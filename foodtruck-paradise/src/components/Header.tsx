@@ -1,25 +1,32 @@
+import { Link, NavLink } from 'react-router-dom';
+
 interface HeaderProps {
-    onNavClick: (page: string) => void;
     cartItemsCount: number;
     favoritesCount: number;
 }
 
-const Header = ({ onNavClick, cartItemsCount, favoritesCount }: HeaderProps) => {
+const Header = ({ cartItemsCount, favoritesCount }: HeaderProps) => {
     return (
         <header className="header">
             <div className="container">
                 <div className="logo">🌮 Food Truck Paradise</div>
                 <p className="tagline">Les meilleurs plats de rue en ville !</p>
                 <nav className="nav">
-                    <button onClick={() => onNavClick('menu')} className="nav-link">Menu</button>
-                    <button onClick={() => onNavClick('about')} className="nav-link">À propos</button>
-                    <button onClick={() => onNavClick('contact')} className="nav-link">Contact</button>
-                    <button className="nav-link" onClick={() => onNavClick('favorites')}>
+                    <NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+                        Menu
+                    </NavLink>
+                    <NavLink to="/about" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+                        À propos
+                    </NavLink>
+                    <NavLink to="/contact" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+                        Contact
+                    </NavLink>
+                    <NavLink to="/favorites" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
                         ❤️ Favoris ({favoritesCount})
-                    </button>
-                    <button className="cart-button" onClick={() => onNavClick('cart')}>
+                    </NavLink>
+                    <Link to="/cart" className="cart-button">
                         Panier ({cartItemsCount})
-                    </button>
+                    </Link>
                 </nav>
             </div>
         </header>
