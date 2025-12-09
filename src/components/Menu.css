@@ -1,35 +1,143 @@
+/* ======================================= */
+/* 1. Conteneur principal et mise en page */
+/* ======================================= */
+.menu-container {
+    max-width: 1200px; /* Limite la largeur pour une meilleure lisibilité */
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ======================================= */
+/* 2. Barre de Recherche (Search Bar) */
+/* ======================================= */
+.search-bar {
+    display: flex;
+    align-items: center;
+    max-width: 500px; /* Limite la largeur du champ de recherche */
+    margin: 20px auto 40px auto; /* Centré, espace en bas */
+    padding: 10px 15px;
+    border: 2px solid #ccc; /* Bordure légère */
+    border-radius: 30px; /* Coins arrondis pour un look moderne */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Petite ombre */
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.search-bar:focus-within {
+    border-color: #FF5733; /* Couleur d'accentuation à l'activation */
+    box-shadow: 0 6px 12px rgba(255, 87, 51, 0.2);
+}
+
+.search-input {
+    flex-grow: 1;
+    border: none;
+    padding: 0;
+    font-size: 16px;
+    outline: none; /* Supprime le contour par défaut lors du focus */
+}
+
 .clear-search {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
     background: none;
     border: none;
     cursor: pointer;
-  }
-  
-  .no-results {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 3rem;
-    background: #f9f9f9;
-    border-radius: 15px;
-  }
-
-  /* --- NOUVEAU: Conteneur de la grille (la classe "grid" dans Menu.tsx) --- */
-.grid {
-  display: grid;
-  /* Utilise CSS Grid pour créer des colonnes répétées et adaptatives */
-  /* auto-fit: remplit l'espace avec autant de colonnes que possible. */
-  /* minmax(280px, 1fr): chaque colonne fait AU MOINS 280px, mais peut s'étendre (1fr) */
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px; /* Espace entre les cartes */
-  max-width: 1200px; /* Limite la largeur du menu pour ne pas s'étaler à l'infini */
-  margin: 2rem auto; /* Centre la grille dans le conteneur principal */
-  padding: 0 1rem; /* Padding horizontal sur les petits écrans */
+    font-size: 18px;
+    padding: 0 5px;
+    margin-left: 10px;
+    opacity: 0.6;
+    transition: opacity 0.2s;
 }
 
-/* --- AMÉLIORATION: Conteneur global du menu --- */
-.menu-container {
-  padding-top: 2rem;
+.clear-search:hover {
+    opacity: 1;
+}
+
+/* ======================================= */
+/* 3. Filtres de Catégories */
+/* ======================================= */
+.category-filters {
+    display: flex;
+    justify-content: center; /* Centrage des boutons */
+    flex-wrap: wrap; /* Permet le retour à la ligne sur petits écrans */
+    gap: 15px; /* Espace entre les boutons */
+    margin-bottom: 30px;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    border: 2px solid #ddd;
+    border-radius: 25px; /* Look de 'pill' */
+    background-color: #f8f8f8;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s, transform 0.1s;
+    user-select: none;
+}
+
+/* État inactif : survol */
+.filter-btn:hover {
+    background-color: #eee;
+    border-color: #bbb;
+}
+
+/* État ACTIF */
+.filter-btn.active {
+    background-color: #FF5733; /* Couleur d'accentuation vive */
+    border-color: #FF5733;
+    color: white;
+    box-shadow: 0 3px 8px rgba(255, 87, 51, 0.4);
+    transform: translateY(-2px); /* Léger effet de soulèvement */
+}
+
+/* ======================================= */
+/* 4. Affichage des résultats et Grille */
+/* ======================================= */
+.results-info {
+    text-align: center;
+    margin-bottom: 25px;
+    font-style: italic;
+    color: #666;
+    font-size: 14px;
+}
+
+.grid {
+    display: grid;
+    /* Mise en page responsive avec auto-fit pour le nombre de colonnes */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px; /* Plus d'espace entre les cartes */
+    padding: 10px;
+}
+
+/* (Optionnel : Ajoutez ici les styles pour .MenuCard si nécessaire) */
+/* (Ex: .menu-card { background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); } ) */
+
+.no-results {
+    grid-column: 1 / -1; /* Prend toute la largeur de la grille */
+    text-align: center;
+    padding: 40px;
+    background-color: #fff3f3;
+    border: 1px dashed #ff5733;
+    border-radius: 10px;
+}
+
+.no-results p {
+    font-size: 1.1em;
+    color: #FF5733;
+    margin-bottom: 20px;
+}
+
+.no-results button {
+    padding: 10px 20px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.no-results button:hover {
+    background-color: #357ABD;
 }

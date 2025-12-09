@@ -30,3 +30,7 @@
   overflow: hidden;    /* Coupe le texte s'il est trop long */
   text-overflow: ellipsis; /* Ajoute "..." à la fin */
 }
+
+p{
+  color: red;
+}
