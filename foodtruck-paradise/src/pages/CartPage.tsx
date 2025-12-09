@@ -21,7 +21,7 @@ function CartPage() {
             if (result.success) {
                 console.log('Paiement réussi:', result);
             }
-        } catch (error) {
+        } catch {
             setPaymentResult({
                 success: false,
                 message: 'Une erreur est survenue lors du paiement',

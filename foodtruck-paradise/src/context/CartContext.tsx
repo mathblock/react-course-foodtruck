@@ -1,5 +1,4 @@
-import React, { createContext, useContext, useReducer } from 'react';
-import { type ReactNode } from 'react';
+import React, { createContext, useContext, useReducer, type ReactNode } from 'react';
 import { type CartItem } from '../types/cart';
 import { type MenuItem } from '../types/menu';
 import { type PromoCode, promoCodes } from '../data/promoCodes';
@@ -133,6 +132,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useCart = () => {
     const context = useContext(CartContext);
     if (context === undefined) {
