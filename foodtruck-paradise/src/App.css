@@ -1,21 +1,70 @@
 /* Styles spécifiques à l'application */
 /*c'est nul*/
-.info-user{
+.info-user {
   display: flex;
   justify-items: center;
   gap: 8px;
 }
 
-.signin-page{
-  padding: 17px;
+.signin-page {
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  justify-items: center;
-  align-content: center;
+  background: linear-gradient(120deg, #f7b42c 0%, #fc575e 100%);
 }
 
-.signup-page{
+.signin-page form {
+  background: #fff;
+  padding: 2.5rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
+  display: flex;
+  flex-direction: column;
+  min-width: 320px;
+  gap: 1.2rem;
+}
+
+.signin-page input {
+  padding: 0.8rem 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.signin-page input:focus {
+  border: 1.5px solid #fc575e;
+}
+
+.signin-page button {
+  background: linear-gradient(90deg, #fc575e 0%, #f7b42c 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.9rem 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.signin-page button:hover {
+  background: linear-gradient(90deg, #f7b42c 0%, #fc575e 100%);
+}
+
+.signin-page .error-message {
+  color: #fc575e;
+  background: #fff0f0;
+  border: 1px solid #fc575e33;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 0.98rem;
+  text-align: center;
+}
+
+.signup-page {
   padding: 10px;
   display: flex;
   align-items: center;
@@ -46,7 +95,7 @@
 
 .clerk-auth p:hover {
   color: #FFD700;
-} 
+}
 
 /* Ferrari Theme - My Account Page */
 .my-account {
@@ -65,7 +114,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: 
+  background-image:
     url('https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=1200'),
     linear-gradient(rgba(220, 0, 0, 0.85), rgba(139, 0, 0, 0.9));
   background-blend-mode: overlay;
@@ -107,6 +156,7 @@
   from {
     text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.5);
   }
+
   to {
     text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.8);
   }
@@ -123,10 +173,13 @@
 }
 
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
     transform: scale(1);
   }
+
   50% {
     opacity: 0.8;
     transform: scale(1.05);
@@ -226,6 +279,7 @@
     opacity: 0;
     transform: translateX(-50px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -237,6 +291,7 @@
     opacity: 0;
     transform: translateX(50px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -276,6 +331,102 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
+.cta-section {
+  display: flex;
+}
+
+/* Edit Mode Styles for My Account */
+.user-info.edit-mode {
+  max-width: 700px;
+  padding: 40px 45px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+/* Avatar preview - reuse user-info image look but smaller */
+.user-info.edit-mode .avatar-preview {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 6px solid #FFD700;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease;
+}
+
+/* Input reuse from signin page for consistent UI */
+.signin-page input,
+.user-info.edit-mode input[type="text"],
+.user-info.edit-mode input[type="file"] {
+  padding: 0.8rem 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.user-info.edit-mode input[type="text"]:focus,
+.user-info.edit-mode input[type="file"]:focus {
+  border: 1.5px solid #fc575e;
+}
+
+/* Edit actions alignment */
+.user-info.edit-mode .edit-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 10px;
+}
+
+/* Reuse sign-out-btn visual style for action buttons, but scale down */
+.sign-out-btn,
+.user-info.edit-mode .edit-save-btn,
+.user-info.edit-mode .edit-cancel-btn {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #DC0000 0%, #8B0000 100%);
+  color: #FFD700;
+  border: 3px solid #FFD700;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.user-info.edit-mode .edit-cancel-btn {
+  background: linear-gradient(135deg, #9a9a9a 0%, #666666 100%);
+  border-color: rgba(0,0,0,0.2);
+  color: #FFF;
+}
+
+.user-info.edit-mode .edit-save-btn:hover,
+.user-info.edit-mode .edit-cancel-btn:hover {
+  transform: translateY(-3px);
+}
+
+.user-info.edit-mode .edit-save-btn:active,
+.user-info.edit-mode .edit-cancel-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Stack small inputs for smaller screens */
+@media (max-width: 640px) {
+  .user-info.edit-mode {
+    padding: 28px;
+  }
+  .user-info.edit-mode .edit-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .user-info.edit-mode .edit-save-btn,
+  .user-info.edit-mode .edit-cancel-btn {
+    width: 100%;
+  }
+}
 
 .icon-heart::before {
   content: '❤️';

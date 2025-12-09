@@ -1,13 +1,16 @@
 import { createContext, useContext, type ReactNode } from 'react';
-import { useUser, useAuth as useClerkAuth } from '@clerk/clerk-react';
-import type { AuthContextType } from "@/types/auth-context";
+import { useUser, useAuth as useClerkAuth, useSignIn, useSignUp, useClerk } from '@clerk/clerk-react';
+import type { AuthContextType, UserRegister } from "@/types/auth-context";
 import type { User } from "@/types/user";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const { user: clerkUser, isLoaded: userLoaded } = useUser();
-  const { isSignedIn, isLoaded: authLoaded } = useClerkAuth();
+  const { isSignedIn, isLoaded: authLoaded, signOut, getToken } = useClerkAuth();
+  const { signIn } = useSignIn();
+  const { signUp } = useSignUp();
+  const clerk = useClerk();
 
   // Map Clerk user to our User type
   const user: User | null = clerkUser ? {
@@ -24,20 +27,61 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const isAuthenticated = isSignedIn;
   const loading = !userLoaded || !authLoaded;
 
-  function login(user: User) {
-    // Since we're using Clerk, login is handled by Clerk's UI
-    // This can be a no-op or throw an error
-    throw new Error('Login is handled by Clerk');
+  async function login(email: string, password: string) {
+    try {
+      await signIn.create({
+        identifier: email,
+        password,
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+ async function signup(userRegister:UserRegister) {
+  const { email, password, firstName, lastName, phone } = userRegister;
+    try {
+      await signUp.create({
+        emailAddress: email,
+        password,
+        firstName,
+        lastName,
+        phoneNumber: phone,
+      });
+      // Vous pouvez ajouter ici une vérification d'email ou une étape supplémentaire si besoin
+    } catch (error) {
+      throw error;
+    }
   }
 
   function logout() {
-    // Since we're using Clerk, logout is handled by Clerk's UI
-    throw new Error('Logout is handled by Clerk');
+    signOut();
   }
 
-  function updateProfile(data: Partial<User>) {
-    // Implement if needed using Clerk's update
-    // For now, no-op
+  async function updateProfile(data: Partial<User>) {
+    if (clerkUser) {
+      await clerkUser.update({
+        firstName: data.firstName,
+        lastName: data.lastName,
+        // Note: Email updates might require additional handling
+      });
+    }
+  }
+
+  async function updateAvatar(file: File) {
+    if (!clerkUser) {
+      throw new Error('User not authenticated');
+    }
+    
+    try {
+      // Use Clerk's built-in method to set profile image
+      await clerkUser.setProfileImage({ file });
+      // Reload user data to reflect changes
+      await clerkUser.reload();
+    } catch (error) {
+      console.error('Avatar upload error:', error);
+      throw new Error('Failed to upload avatar');
+    }
   }
 
   const value: AuthContextType = {
@@ -45,8 +89,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     isAuthenticated,
     loading,
     login,
+    signup,
     logout,
     updateProfile,
+    updateAvatar,
   };
 
   return (
