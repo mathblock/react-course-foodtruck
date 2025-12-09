@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useReducer, ReactNode } from 'react';
+import React, { createContext, useContext, useReducer } from 'react';
+import { type ReactNode } from 'react';
 import { type CartItem } from '../types/cart';
 import { type MenuItem } from '../types/menu';
 import { type PromoCode, promoCodes } from '../data/promoCodes';
