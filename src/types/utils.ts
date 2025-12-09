@@ -44,4 +44,5 @@ export type NavigationMenu = {
 export type RouteApp = {
   chemin: string;
   element: React.ReactNode;
+  ind?: boolean;
 };

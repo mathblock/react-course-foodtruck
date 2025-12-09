@@ -47,7 +47,7 @@ function Header({ cartItemCount }: { cartItemCount: number }) {
         <ul className="flex gap-6 text-lg font-medium">
           {navigations.map((nav) =>
             "cart" in nav ? (
-              <li>
+              <li key={nav.label}>
                 <Link to={nav.chemin} className={nav.classN}>
                   {cartItemCount > 0 && (
                     <div>

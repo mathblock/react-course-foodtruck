@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Menu from "./components/Menu";
 import Footer from "./components/Footer";
@@ -10,6 +10,8 @@ import type { CartItem } from "./types/cart";
 import type { MenuItem } from "./types/menu";
 import CartSummary from "./components/CartSummary";
 import type { RouteApp } from "./types/utils";
+import Layout from "./components/Layout";
+import NotFoundPage from "./NotFoundPage";
 
 function App() {
   const [carts, setCarts] = useState<CartItem[]>(() => {
@@ -68,6 +70,7 @@ function App() {
           <Menu onAddToCart={addToCart} />
         </main>
       ),
+      ind: true,
     },
     {
       chemin: "/about",
@@ -97,24 +100,33 @@ function App() {
         </main>
       ),
     },
+    {
+      chemin: "*",
+      element: (
+        <main>
+          <NotFoundPage />
+        </main>
+      ),
+    },
   ];
 
   return (
     <div>
-      <BrowserRouter>
-        <Header
-          cartItemCount={carts.reduce((sum, item) => sum + item.quantity, 0)}
-        />
-        <Routes>
+      <Header
+        cartItemCount={carts.reduce((sum, item) => sum + item.quantity, 0)}
+      />
+      <Routes>
+        <Route path="/" element={<Layout />}>
           {routeApp.map((route) => (
             <Route
+              index={route.ind}
               key={route.chemin}
               path={route.chemin}
               element={route.element}
             />
           ))}
-        </Routes>
-      </BrowserRouter>
+        </Route>
+      </Routes>
       <Footer />
     </div>
   );
