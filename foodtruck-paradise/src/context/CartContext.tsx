@@ -2,6 +2,7 @@ import React, { createContext, useContext, useReducer, type ReactNode } from 're
 import { type CartItem } from '../types/cart';
 import { type MenuItem } from '../types/menu';
 import { type PromoCode, promoCodes } from '../data/promoCodes';
+import { menuItems } from '../data/menuData';
 
 interface CartState {
     items: CartItem[];
@@ -66,7 +67,10 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
 
 export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [state, dispatch] = useReducer(cartReducer, {
-        items: [],
+        items: [
+            { item: menuItems[0], quantity: 2 },
+            { item: menuItems[2], quantity: 1 }
+        ],
         promoCode: null
     });
 
