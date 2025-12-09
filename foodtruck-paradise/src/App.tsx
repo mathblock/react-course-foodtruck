@@ -7,6 +7,7 @@ import CartSummary from './components/CartSummary';
 import Favorites from './components/Favorites';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import CategoryPage from './pages/CategoryPage';
 import NotFound from './pages/NotFound';
 import type { CartItem } from './types/cart';
 import type { MenuItem } from './types/menu';
@@ -90,6 +91,15 @@ function App() {
                 onRemove={removeFromCart}
               />
             </div>
+          } />
+          <Route path="menu/category/:categoryName" element={
+            <main>
+              <CategoryPage
+                onAddToCart={addToCart}
+                favorites={favorites}
+                onToggleFavorite={toggleFavorite}
+              />
+            </main>
           } />
           <Route path="*" element={<NotFound />} />
         </Route>

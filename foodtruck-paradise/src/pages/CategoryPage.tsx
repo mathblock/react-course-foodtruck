@@ -1,17 +1,18 @@
+
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import MenuCard from './MenuCard';
+import { useParams, Link, Navigate } from 'react-router-dom';
+import MenuCard from '../components/MenuCard';
 import { menuItems } from '../data/menuData';
 import type { MenuItem } from '../types/menu';
 
-interface MenuProps {
+interface CategoryPageProps {
     onAddToCart: (item: MenuItem) => void;
     favorites: string[];
     onToggleFavorite: (itemId: string) => void;
 }
 
-const Menu = ({ onAddToCart, favorites, onToggleFavorite }: MenuProps) => {
-    const [activeCategory, setActiveCategory] = useState<string>('tous');
+const CategoryPage = ({ onAddToCart, favorites, onToggleFavorite }: CategoryPageProps) => {
+    const { categoryName } = useParams<{ categoryName: string }>();
     const [searchTerm, setSearchTerm] = useState<string>('');
 
     const categories = [
@@ -22,8 +23,15 @@ const Menu = ({ onAddToCart, favorites, onToggleFavorite }: MenuProps) => {
         { key: 'boissons', label: '🥤 Boissons' },
     ];
 
+
+    const isValidCategory = categories.some(c => c.key === categoryName) || categoryName === 'tous';
+
+    if (!isValidCategory) {
+        return <Navigate to="/404" />;
+    }
+
     const filteredItems = menuItems
-        .filter(item => activeCategory === 'tous' || item.category === activeCategory)
+        .filter(item => categoryName === 'tous' || item.category === categoryName)
         .filter(item =>
             item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
             item.description.toLowerCase().includes(searchTerm.toLowerCase())
@@ -51,9 +59,8 @@ const Menu = ({ onAddToCart, favorites, onToggleFavorite }: MenuProps) => {
                     <Link
                         key={cat.key}
                         to={cat.key === 'tous' ? '/' : `/menu/category/${cat.key}`}
-                        className={`filter-btn ${activeCategory === cat.key ? 'active' : ''}`}
+                        className={`filter-btn ${categoryName === cat.key ? 'active' : ''}`}
                         style={{ textDecoration: 'none', display: 'inline-block' }}
-                        onClick={() => setActiveCategory(cat.key)}
                     >
                         {cat.label}
                     </Link>
@@ -61,6 +68,7 @@ const Menu = ({ onAddToCart, favorites, onToggleFavorite }: MenuProps) => {
             </div>
 
             <div className="menu-results">
+                <h2>{categories.find(c => c.key === categoryName)?.label}</h2>
                 {filteredItems.length === 0 ? (
                     <div className="no-results">Aucun produit ne correspond à votre recherche.</div>
                 ) : (
@@ -81,4 +89,4 @@ const Menu = ({ onAddToCart, favorites, onToggleFavorite }: MenuProps) => {
     );
 };
 
-export default Menu;
+export default CategoryPage;
