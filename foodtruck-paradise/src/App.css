@@ -7,23 +7,28 @@
 }
 
 .signin-page {
-  min-height: 100vh;
+  min-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(120deg, #f7b42c 0%, #fc575e 100%);
+  background-image:
+    url('https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=1200'),
+    linear-gradient(rgba(220, 0, 0, 0.85), rgba(139, 0, 0, 0.9));
+  background-blend-mode: overlay;
+  background-size: cover;
+  background-position: center;
 }
 
-.signin-page form {
+/* .signin-page form {
   background: #fff;
   padding: 2.5rem 2rem;
   border-radius: 16px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
   display: flex;
   flex-direction: column;
-  min-width: 320px;
+  min-width: 600px;
   gap: 1.2rem;
-}
+} */
 
 .signin-page input {
   padding: 0.8rem 1rem;
@@ -434,4 +439,63 @@
 
 .icon-heart:hover::before {
   content: '💖';
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.popup {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 400px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  animation: popupIn 0.2s ease-out;
+}
+
+@keyframes popupIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.popup-icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.popup p {
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.popup button {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.popup button:hover {
+  background: #c0392b;
 }

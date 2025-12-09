@@ -38,17 +38,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }
 
- async function signup(userRegister:UserRegister) {
-  const { email, password, firstName, lastName, phone } = userRegister;
+ async function signup(firstName:string, lastName:string, email: string, password: string, confirmPassword:string) {
     try {
-      await signUp.create({
+      const signUpAttempt = await signUp.create({
         emailAddress: email,
         password,
         firstName,
         lastName,
-        phoneNumber: phone,
       });
-      // Vous pouvez ajouter ici une vérification d'email ou une étape supplémentaire si besoin
+
+      // Prepare email verification
+      await signUpAttempt.prepareEmailAddressVerification({ strategy: 'email_code' });
+      
+      return signUpAttempt;
     } catch (error) {
       throw error;
     }
