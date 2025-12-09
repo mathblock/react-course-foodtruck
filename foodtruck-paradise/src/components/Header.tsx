@@ -25,7 +25,7 @@ const Header = ({ cartItemsCount, favoritesCount }: HeaderProps) => {
                         ❤️ Favoris ({favoritesCount})
                     </NavLink>
                     <Link to="/cart" className="cart-button">
-                        Panier ({cartItemsCount})
+                        🛒 Panier ({cartItemsCount})
                     </Link>
                 </nav>
             </div>
