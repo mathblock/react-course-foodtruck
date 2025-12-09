@@ -1,13 +1,16 @@
 .todo-container {
-    width: 350px;
+    width: 450px;
+    min-height: 200px;
     margin: 100px auto;
     padding: 25px;
     border-radius: 15px;
+    height: auto;
     background: linear-gradient(135deg, #0f172a, #1e293b);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
     color: white;
     font-family: Arial, sans-serif;
     text-align: center;
+    
   }
   
   .todo-container h2 {
@@ -47,11 +50,99 @@
   }
   
   .todo-list {
-    min-height: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     padding: 10px;
+  /* Retirez toute largeur fixe ici */
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.08);
     font-size: 14px;
     color: #e5e7eb;
   }
+
+  .todo-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Pousse le bouton à l'opposé du texte */
+    padding: 12px;
+    margin-bottom: 10px;
+    background: rgba(255, 255, 255, 0.05); /* Fond légèrement transparent */
+    border-radius: 10px;
+    transition: background 0.3s ease;
+  }
   
+  .todo-item:hover {
+    background: rgba(255, 255, 255, 0.1); /* Effet au survol de la ligne */
+  }
+  
+  /* Regroupement de la checkbox et du titre */
+  .todo-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .todo-title {
+    font-size: 15px;
+    color: #f3f4f6;
+  }
+  
+  /* Style quand c'est terminé */
+  .done .todo-title {
+    text-decoration: line-through;
+    color: #9ca3af; /* Texte grisé */
+  }
+  
+  /* Le bouton supprimer */
+  .todo-delete {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    background-color: #ef4444; /* Rouge moderne */
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+  }
+  
+  .todo-delete:hover {
+    background-color: #dc2626;
+    transform: scale(1.05);
+  }
+  
+  .todo-delete:active {
+    transform: scale(0.95);
+  }
+
+  .todo-update {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    background-color: #17089e; /* Rouge moderne */
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+  }
+
+  .todo-update:hover {
+    background-color: #7a0101ca;
+    transform: scale(1.05);
+  }
+
+  .todo-delete:hover {
+    background-color: #dd7c06f0;
+    transform: scale(1.05);
+  }
+
+  .todo-delete:active {
+    transform: scale(0.95);
+  }
+
+  .group-button {
+    display: flex;
+    gap: 12px;
+  }

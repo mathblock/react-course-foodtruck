@@ -15,3 +15,21 @@
     background: #f9f9f9;
     border-radius: 15px;
   }
+
+  /* --- NOUVEAU: Conteneur de la grille (la classe "grid" dans Menu.tsx) --- */
+.grid {
+  display: grid;
+  /* Utilise CSS Grid pour créer des colonnes répétées et adaptatives */
+  /* auto-fit: remplit l'espace avec autant de colonnes que possible. */
+  /* minmax(280px, 1fr): chaque colonne fait AU MOINS 280px, mais peut s'étendre (1fr) */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px; /* Espace entre les cartes */
+  max-width: 1200px; /* Limite la largeur du menu pour ne pas s'étaler à l'infini */
+  margin: 2rem auto; /* Centre la grille dans le conteneur principal */
+  padding: 0 1rem; /* Padding horizontal sur les petits écrans */
+}
+
+/* --- AMÉLIORATION: Conteneur global du menu --- */
+.menu-container {
+  padding-top: 2rem;
+}

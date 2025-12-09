@@ -1,4 +1,4 @@
-/* import { useState } from "react";
+import { useState } from "react";
 import './Todo.css'
 import TodoItem from "./TodoItem";
 
@@ -19,24 +19,45 @@ export default  function TodoList(){
 
     const [todolist, setTodolist] = useState<Todo[]>([])
     const [title, SetTitle] = useState<string>('')
-    const [completed, setCompleted] = useState<boolean>(false)
 
     const addTodo = (todo:Todo) =>{
         setTodolist([...todolist,todo])
     }
 
+    const toggleTodo = (id:string)=>{
+        setTodolist(todolist.map(todo => todo.id===id ? {...todo , completed :!todo.completed } : todo ))
+    }
+
+    const deleteTodo = (id:string) => {
+        const newTable = todolist.filter(todo => todo.id !==  id)
+        setTodolist(newTable)
+
+    }
+
+    const updateTodoTitle = (id:string,newTile:string):void => {
+        const newTodoList = todolist.map( todo => todo.id === id ? {...todo,title:newTile} : todo)
+        setTodolist(newTodoList)
+    }
+
     const submitButtom = ()=>{
        
        const todo:Todo = {
-            id:Date.toString(),
+            id:Date.now().toString(),
             title:title,
-            completed:completed
-
+            completed:false
        }
 
        addTodo(todo)
         
     }
+
+   const chargeTodolist = ()=>{
+      return (
+        <div className="todo-list">
+                {todolist.length>0 && (todolist.map((item) => <TodoItem key={item.id} todo={item} onToggle= {toggleTodo} delToggle= {deleteTodo} updateToggle={updateTodoTitle}  />))}
+        </div>
+      )
+   } 
     
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -67,10 +88,10 @@ export default  function TodoList(){
 
            
 
-            <div className="todo-list">
-                 {todolist.map(todo => <TodoItem todo />)}
-            </div>
+            {
+                chargeTodolist()
+            }
                 </div>
 
     )
-} */
+}

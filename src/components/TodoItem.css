@@ -1,26 +1,32 @@
 .todo-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.08);
-    transition: 0.2s;
-  }
-  
-  .todo-item:hover {
-    background: rgba(255, 255, 255, 0.15);
-  }
-  
-  .todo-title {
-    font-size: 15px;
-    color: white;
-  }
-  
-  /* Quand la tâche est terminée */
-  .todo-item.done .todo-title {
-    text-decoration: line-through;
-    opacity: 0.6;
-  }
-  
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px; /* Espace entre les éléments */
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box; /* Très important pour inclure le padding */
+}
+
+.todo-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1; /* Le groupe texte + input prend tout l'espace possible */
+  min-width: 0; /* Permet à l'élément de rétrécir */
+}
+
+/* L'input à l'intérieur de la ligne */
+.todo-item input[type="text"] {
+  flex: 1; /* L'input s'étire */
+  min-width: 50px; /* Mais il peut rétrécir jusqu'à 50px */
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.todo-title {
+  white-space: nowrap; /* Empêche le texte de revenir à la ligne */
+  overflow: hidden;    /* Coupe le texte s'il est trop long */
+  text-overflow: ellipsis; /* Ajoute "..." à la fin */
+}
