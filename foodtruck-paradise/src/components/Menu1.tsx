@@ -5,14 +5,16 @@ import MenuCard from "./MenuCard";
 import menuItems from "../data/menuData";
 import type { MenuProps } from "../types/menus";
 import { useOutletContext } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 interface LayoutContext {
   addToCart: (item: MenuProps) => void;
 }
 
 const MenuList = () => {
+  const {categoryName} = useParams<{categoryName: string}>();
   const [searchTerm, setSearchTerm] = useState("");
-  const [activeCategory, setActiveCategory] = useState("tous");
+  const [activeCategory, setActiveCategory] = useState(categoryName || "tous");
 
   const { addToCart } = useOutletContext<LayoutContext>();
 
@@ -24,11 +26,11 @@ const MenuList = () => {
     );
 
   const categories = [
-    { id: "tous", label: "Tous", emoji: "Tout" },
-    { id: "entree", label: "Entrées", emoji: "Salade" },
-    { id: "plat principale", label: "Plats", emoji: "Plat" },
-    { id: "dessert", label: "Desserts", emoji: "Glace" },
-    { id: "boisson", label: "Boissons", emoji: "Verre" },
+    { id: "tous", label: "Tous", emoji: "👌🏾" },
+    { id: "entree", label: "Entrées", emoji: "🍽️" },
+    { id: "plat principale", label: "Plats", emoji: "🥘" },
+    { id: "dessert", label: "Desserts", emoji: "🍧" },
+    { id: "boisson", label: "Boissons", emoji: "🍷" },
   ];
 
   return (
