@@ -1,14 +1,17 @@
 import "./App.css";
+import { MenuCard } from "./assets/menuCard";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import { menuItems } from "./data/menuData";
 import HomePage from "./pages/HomePage";
 
 function App() {
   return (
     <div className="App">
-      <Header />
+      {/* <Header />
       <HomePage />
-      <Footer />
+      <Footer /> */}
+      <MenuCard item={menuItems[0]} />
     </div>
   );
 }
