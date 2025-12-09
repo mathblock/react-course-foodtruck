@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 import MenuFiltrer from "./MenuFiltrer";
 import MenuDefaut from "./MenuDefaut";
-import type { Category, MenuProps } from "@/types/utils";
+import type { Category } from "@/types/utils";
 import { useNavigate } from "react-router-dom";
 
 const categories: Category[] = [
@@ -14,7 +14,7 @@ const categories: Category[] = [
   { key: "boissons", label: "🥤 Boissons", color: "bg-blue-50" },
 ];
 
-function Menu({ onAddToCart }: MenuProps) {
+function Menu() {
   const [activeCategory, setActiveCategory] = useState<string>("tous");
   const [searchTerm, setSearchTerm] = useState<string>("");
   const navigate = useNavigate();
@@ -68,13 +68,9 @@ function Menu({ onAddToCart }: MenuProps) {
 
       <div id="affichageResultat">
         {activeCategory === "tous" && searchTerm === "" ? (
-          <MenuDefaut
-            categories={categories}
-            menuData={menuData}
-            onAddToCart={onAddToCart}
-          />
+          <MenuDefaut categories={categories} menuData={menuData} />
         ) : (
-          <MenuFiltrer menuFiltrer={menuFiltrer} onAddToCart={onAddToCart} />
+          <MenuFiltrer menuFiltrer={menuFiltrer} />
         )}
       </div>
     </section>

@@ -17,11 +17,7 @@ function MenuFiltrer(menuFilterProp: MenuFilterProps) {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {menuFilterProp.menuFiltrer.map((item: MenuItem) => (
-            <MenuCard
-              key={item.id}
-              item={item}
-              onAddToCart={menuFilterProp.onAddToCart}
-            />
+            <MenuCard key={item.id} item={item} />
           ))}
         </div>
       )}

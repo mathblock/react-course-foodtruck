@@ -11,12 +11,14 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "./ui/button";
 import { useState } from "react";
 import type { MenuCardProps } from "@/types/utils";
+import { useCart } from "./CardContext";
 
 function MenuCard(menuCardProp: MenuCardProps) {
   const [added, setAdded] = useState<boolean>(false);
-
+  const { addToCart } = useCart();
+  
   function handleAddToCart() {
-    menuCardProp.onAddToCart(menuCardProp.item);
+    addToCart(menuCardProp.item);
     setAdded(true);
     setTimeout(() => setAdded(false), 500);
   }

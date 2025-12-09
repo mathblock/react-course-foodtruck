@@ -4,14 +4,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { CirclePlus, Trash2 } from "lucide-react";
 import { CircleMinus } from "lucide-react";
-import type { CartSummaryProps } from "@/types/utils";
+import { useCart } from "./CardContext";
 
-function CartSummary(cartSummaryProp: CartSummaryProps) {
+function CartSummary() {
+  const { carts, removeFromCart, updateQuantity } = useCart();
   const [promo, setPromo] = useState<string>("");
   const [discount, setDiscount] = useState<number>(0);
   const [promoApplied, setPromoApplied] = useState<boolean>(false);
 
-  const total = cartSummaryProp.carts.reduce(
+  const total = carts.reduce(
     (sum, cartItem) => sum + cartItem.item.price * cartItem.quantity,
     0
   );
@@ -31,7 +32,7 @@ function CartSummary(cartSummaryProp: CartSummaryProps) {
 
   return (
     <div className="p-5">
-      {cartSummaryProp.carts.length === 0 && (
+      {carts.length === 0 && (
         <p className="text-center text-muted-foreground mt-8">
           Votre panier est vide.
         </p>
@@ -39,7 +40,7 @@ function CartSummary(cartSummaryProp: CartSummaryProps) {
 
       <ul className="divide-y divide-muted rounded-md border border-muted bg-background p-0">
         <AnimatePresence>
-          {cartSummaryProp.carts.map((item: CartItem) => (
+          {carts.map((item: CartItem) => (
             <motion.li
               key={item.item.id}
               className="flex items-center gap-4 py-4 px-2"
@@ -56,8 +57,8 @@ function CartSummary(cartSummaryProp: CartSummaryProps) {
               />
 
               <div className="flex-1">
-                <div className="font-semibold">{item.item.name}</div>
-                <div className="text-muted-foreground text-sm">
+                <div className="text-black font-semibold">{item.item.name}</div>
+                <div className="text-black text-muted-foreground text-sm">
                   {item.item.price.toFixed(2)} €
                 </div>
               </div>
@@ -65,30 +66,26 @@ function CartSummary(cartSummaryProp: CartSummaryProps) {
               <div className="flex items-center gap-2">
                 <Button
                   size="icon"
-                  onClick={() =>
-                    cartSummaryProp.onUpdateQuantity(item.item.id, -1)
-                  }
+                  onClick={() => updateQuantity(item.item.id, -1)}
                 >
                   <CircleMinus />
                 </Button>
-                <span className="mx-2">{item.quantity}</span>
+                <span className="text-black mx-2">{item.quantity}</span>
                 <Button
                   size="icon"
-                  onClick={() =>
-                    cartSummaryProp.onUpdateQuantity(item.item.id, 1)
-                  }
+                  onClick={() => updateQuantity(item.item.id, 1)}
                 >
                   <CirclePlus />
                 </Button>
               </div>
 
-              <div className="w-20 text-right ml-4 font-medium">
+              <div className="w-20 text-right ml-4 font-medium text-black">
                 {(item.item.price * item.quantity).toFixed(2)} €
               </div>
 
               <Button
                 size="icon"
-                onClick={() => cartSummaryProp.onRemove(item.item.id)}
+                onClick={() => removeFromCart(item.item.id)}
                 title="Supprimer"
               >
                 <Trash2 />

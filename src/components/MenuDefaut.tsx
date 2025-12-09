@@ -14,11 +14,7 @@ function MenuDefaut(menuDefautProp: MenuDefautProps) {
             {menuDefautProp.menuData
               .filter((item: MenuItem) => item.category === cat.key)
               .map((item: MenuItem) => (
-                <MenuCard
-                  key={item.id}
-                  item={item}
-                  onAddToCart={menuDefautProp.onAddToCart}
-                />
+                <MenuCard key={item.id} item={item} />
               ))}
           </div>
         </div>

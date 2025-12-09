@@ -9,19 +9,19 @@ export type Category = {
 
 export type MenuFilterProps = {
   menuFiltrer: MenuItem[];
-  onAddToCart: (item: MenuItem) => void;
+  onAddToCart?: (item: MenuItem) => void;
 };
 
 export type MenuDefautProps = {
   categories: Category[];
   menuData: MenuItem[];
-  onAddToCart: (item: MenuItem) => void;
+  onAddToCart?: (item: MenuItem) => void;
 };
 
 export type CartSummaryProps = {
-  carts: CartItem[];
-  onUpdateQuantity: (itemId: number, quantity: number) => void;
-  onRemove: (itemId: number) => void;
+  carts?: CartItem[];
+  onUpdateQuantity?: (itemId: number, quantity: number) => void;
+  onRemove?: (itemId: number) => void;
 };
 
 export type MenuProps = {
@@ -30,7 +30,7 @@ export type MenuProps = {
 
 export type MenuCardProps = {
   item: MenuItem;
-  onAddToCart: (item: MenuItem) => void;
+  onAddToCart?: (item: MenuItem) => void;
 };
 
 export type NavigationMenu = {
@@ -45,4 +45,12 @@ export type RouteApp = {
   chemin: string;
   element: React.ReactNode;
   ind?: boolean;
+};
+
+export type CartContextType = {
+  carts: CartItem[];
+  addToCart: (item: MenuItem) => void;
+  removeFromCart: (itemId: number) => void;
+  updateQuantity: (itemId: number, quantity: number) => void;
+  cartItemCount: number;
 };

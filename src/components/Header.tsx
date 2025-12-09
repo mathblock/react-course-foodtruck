@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ShoppingBasket } from "lucide-react";
 import type { NavigationMenu } from "@/types/utils";
+import { useCart } from "./CardContext";
 
 const navigations: NavigationMenu[] = [
   {
@@ -29,7 +30,8 @@ const navigations: NavigationMenu[] = [
   },
 ];
 
-function Header({ cartItemCount }: { cartItemCount: number }) {
+function Header() {
+  const { cartItemCount } = useCart();
   return (
     <header className="bg-yellow-50 shadow-md py-4 px-6 flex flex-col items-center">
       <div className="flex items-center gap-3 mb-2">
