@@ -1,9 +1,12 @@
 import { useState } from 'react'
+import { Routes, Route } from 'react-router-dom'
 import './App.css'
 import Header from './components/Header'
 import Menu from './components/Menu'
 import Footer from './components/Footer'
 import CartSummary from './components/CartSummary'
+import About from './pages/About'
+import Contact from './pages/Contact'
 import type { CartItem } from './types/cart'
 import type { MenuItem } from './types/menu'
 
@@ -48,14 +51,21 @@ function App() {
     <div className="app">
       <Header cartItemsCount={cartItemsCount} />
       <main>
-        <Menu onAddToCart={addToCart} />
-        {cart.length > 0 && (
-          <CartSummary 
-            cart={cart} 
-            onUpdateQuantity={updateQuantity} 
-            onRemove={removeFromCart} 
+        <Routes>
+          <Route path="/" element={<Menu onAddToCart={addToCart} />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route 
+            path="/cart" 
+            element={
+              <CartSummary 
+                cart={cart} 
+                onUpdateQuantity={updateQuantity} 
+                onRemove={removeFromCart} 
+              />
+            } 
           />
-        )}
+        </Routes>
       </main>
       <Footer />
     </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 interface HeaderProps {
     cartItemsCount: number;
@@ -8,20 +9,22 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount }) => {
     return (
         <header className="header">
             <div className="container">
-                <div className="logo">
-                    🌮 Foodtruck Paradise
-                </div>
+                <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
+                    <div className="logo">
+                        🌮 Foodtruck Paradise
+                    </div>
+                </Link>
                 <div className="tagline">
                     Le meilleur food truck en ville
                 </div>
                 <nav className="nav">
-                    <a href="#menu" className="nav-link">Menu</a>
-                    <a href="#about" className="nav-link">À propos</a>
-                    <a href="#contact" className="nav-link">Contact</a>
-                    <button className="cart-button">
+                    <Link to="/" className="nav-link">Menu</Link>
+                    <Link to="/about" className="nav-link">À propos</Link>
+                    <Link to="/contact" className="nav-link">Contact</Link>
+                    <Link to="/cart" className="cart-button" style={{ textDecoration: 'none', display: 'inline-flex' }}>
                         Panier
                         {cartItemsCount > 0 && <span className="cart-badge">{cartItemsCount}</span>}
-                    </button>
+                    </Link>
                 </nav>
             </div>
         </header>
