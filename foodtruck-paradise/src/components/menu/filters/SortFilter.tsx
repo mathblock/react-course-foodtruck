@@ -5,6 +5,7 @@ import '../../../styles/sortFilter.css'
 interface SortFilterProps {
   value: SortBy;
   onChange: (sortBy: SortBy) => void;
+  toggleFilters:()=>void
 }
 
 const sortOptions: { value: SortBy; label: string; icon: string }[] = [
@@ -13,7 +14,7 @@ const sortOptions: { value: SortBy; label: string; icon: string }[] = [
   { value: 'price-desc', label: 'Prix décroissant', icon: '€↓' },
   { value: 'rating', label: 'Meilleures notes', icon: '⭐' }];
 
-export default function SortFilter({ value, onChange }: SortFilterProps) {
+export default function SortFilter({ value, onChange,toggleFilters }: SortFilterProps) {
   const [isOpen, setIsOpen] = useState(false);
   
   const selectedOption = sortOptions.find(opt => opt.value === value) || sortOptions[0];
@@ -25,8 +26,8 @@ export default function SortFilter({ value, onChange }: SortFilterProps) {
 
   return (
     <div className="sort-filter">
-      <label className="sort-label">
-        <svg className="sort-label-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <label className="sort-label" onClick={toggleFilters} >
+        <svg className="sort-label-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"  strokeWidth="2">
           <path d="M3 6h18M7 12h10M11 18h2" strokeLinecap="round"/>
         </svg>
       </label>

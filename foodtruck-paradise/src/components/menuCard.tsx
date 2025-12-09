@@ -2,6 +2,7 @@ import { useFavorites } from "../hooks/useFavorites";
 import type { MenuItem } from "../types/menu";
 import '../styles/menuCard.css'
 import { useCart } from "../context/CartContext";
+import { ShoppingCart } from "lucide-react";
 
 interface MenuCardProps {
     item: MenuItem;
@@ -10,7 +11,8 @@ export function MenuCard({ item }: MenuCardProps) {
   const { isFavorite, toggleFavorite } = useFavorites();
   const isItemFavorite = isFavorite(item.id);
 
-  const {addToCart} = useCart();
+  const {addToCart,items} = useCart();
+  const cartItem= items.find(cartItem=> cartItem.item.id===item.id);
   
   return (
     <div className="menu-card">
@@ -29,8 +31,13 @@ export function MenuCard({ item }: MenuCardProps) {
         <p className="menu-card-description">{item.description}</p>
         <div className="menu-card-footer">
           <p className="menu-card-price">{item.price.toFixed(2)}</p>
-          <button className="add-to-cart-button" onClick={() => addToCart(item)}>🛒</button>
-            </div>
+          <button className="add-to-cart-button" onClick={() => addToCart(item)}>
+            <ShoppingCart size={18} />
+            {
+              cartItem?.quantity||''
+            }
+          </button>
+        </div>
       </div>
     </div>
       

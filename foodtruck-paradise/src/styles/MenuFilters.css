@@ -32,9 +32,11 @@
   border-radius: 2rem;          /* rounded-md */
   font-size: 1rem;             /* text-sm */
   color: white;                   /* text-blue-600 */
-  background-color: #2563eb;
+  background-color: var(--primary) ;
   cursor: pointer;
 }
+
+
 
 .filter-section{
   display: flex;

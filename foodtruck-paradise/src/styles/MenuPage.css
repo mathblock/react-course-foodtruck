@@ -32,15 +32,21 @@
 
 /* Contenu principal */
 .menu-page main {
-  width: 100%;           /* Pleine largeur */
+  width: 100%;  
+  padding: 0 3.5rem;  
+  justify-content: center;       /* Pleine largeur */
 }
 
 /* Grille des plats */
 .menu-page .grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1rem;              /* gap-4 */
+  gap: 1rem;  
+  justify-content: center;
+  align-items: center;            /* gap-4 */
 }
+
+
 
 /* Responsive grid */
 @media (min-width: 640px) {

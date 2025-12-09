@@ -16,9 +16,14 @@ interface MenuFiltersProps {
 export default function MenuFilters({ resultCount }: MenuFiltersProps) {
   const { filters, updateFilters, resetFilters } = useMenuFilters();
   const [searchInput, setSearchInput] = useState<string>("");
+  const [isVisible, setVisible] = useState(false);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(e.target.value);
+  }
+
+  const toggleFilters = () => {
+    setVisible(!isVisible);
   }
 
   return (
@@ -28,6 +33,7 @@ export default function MenuFilters({ resultCount }: MenuFiltersProps) {
         <SortFilter 
           value={filters.sortBy} 
           onChange={(s) => updateFilters({ sortBy: s })} 
+          toggleFilters={toggleFilters}
         />
         <ResetFilters className='reset-filters' onReset={resetFilters} />
       </div>
@@ -41,7 +47,9 @@ export default function MenuFilters({ resultCount }: MenuFiltersProps) {
         
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {
+        isVisible &&
+        <div className="grid">
         <PriceRangeFilter
           min={filters.minPrice}
           max={filters.maxPrice}
@@ -56,7 +64,9 @@ export default function MenuFilters({ resultCount }: MenuFiltersProps) {
           onChange={(a:string[]) => updateFilters({ allergens: a })} 
         />
         
+     
       </div>
+      }
       
     </div>
   );

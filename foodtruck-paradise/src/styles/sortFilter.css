@@ -4,6 +4,7 @@
   width: fit-content;
   position: relative;
   display: flex;
+  gap: 2rem;
 }
 
 /* Label avec icône */
@@ -22,6 +23,8 @@
 .sort-label-icon {
   color: #6b7280;
   vertical-align: middle;
+  width: 18px;
+  height: 18px;
 }
 
 /* Wrapper du select custom */
