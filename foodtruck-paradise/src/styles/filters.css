@@ -1,0 +1,28 @@
+/* Container avec espacement vertical */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* équivalent à space-y-2 */
+}
+
+/* Label stylisé */
+.form-label {
+  font-weight: 600; /* semi-bold */
+  font-size: 0.875rem; /* text-sm */
+  color: #374151; /* gray-700 */
+}
+
+/* Select stylisé */
+.form-select {
+  width: 100%;
+  padding: 0.5rem 1rem; /* py-2 px-4 */
+  border: 1px solid #d1d5db; /* gray-300 */
+  border-radius: 0.5rem; /* rounded-lg */
+  outline: none;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.form-select:focus {
+  border-color: transparent;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5); /* focus:ring-2 focus:ring-blue-500 */
+}

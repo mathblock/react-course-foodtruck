@@ -1,18 +1,18 @@
-import "./App.css";
-import { MenuCard } from "./components/menuCard";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import { menuItems } from "./data/menuData";
+import "./App.css"
 import HomePage from "./pages/HomePage";
+import { Layout } from "./pages/layout";
+import MenuPage from "./pages/MenuPage";
+import {  Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      {/* <Header />
-      <HomePage />
-      <Footer /> */}
-      <MenuCard item={menuItems[0]} />
-    </div>
+      
+        <Routes >
+          <Route path="/" element={<Layout/>}>
+            <Route index element={<HomePage />} />
+            <Route path="/menu" element={<MenuPage />} />
+          </Route>
+        </Routes>
   );
 }
 

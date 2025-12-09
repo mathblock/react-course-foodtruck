@@ -1,7 +1,6 @@
 import { useFavorites } from "../hooks/useFavorites";
 import type { MenuItem } from "../types/menu";
 import '../styles/menuCard.css'
-import { useState } from "react";
 import { useCart } from "../context/CartContext";
 
 interface MenuCardProps {
@@ -11,15 +10,7 @@ export function MenuCard({ item }: MenuCardProps) {
   const { isFavorite, toggleFavorite } = useFavorites();
   const isItemFavorite = isFavorite(item.id);
 
-  const cart = useCart();
-  const [qty, setQty] = useState<number>(1);
-
-  if (!cart) {
-    // Le provider n'est pas monté — éviter crash
-    return <div className="menu-item">Erreur: CartProvider non trouvé</div>;
-  }
-
-  const { addToCart } = cart;
+  const {addToCart} = useCart();
   
   return (
     <div className="menu-card">
