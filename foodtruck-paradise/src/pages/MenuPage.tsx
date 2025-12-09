@@ -4,6 +4,7 @@ import MenuFilters from '../components/menu/MenuFilters';
 import { menuItems } from '../data/menuData';
 import type { FilterState, MenuItem } from '../types/menu';
 import { MenuCard } from '../components/menuCard';
+import '../styles/MenuPage.css';
 
 function applyFilters(items: MenuItem[], f: FilterState) {
     return items
@@ -24,7 +25,8 @@ function applyFilters(items: MenuItem[], f: FilterState) {
                     if (i.allergens.includes(allergen)) return false;
                 }
             }
-            
+
+
             return true;
         })
         .sort((a, b) => {
@@ -50,7 +52,6 @@ function MenuPage() {
 
     return (
         <div className="menu-page p-6">
-            <h2 className="text-3xl font-bold mb-6">Menu</h2>
             
             <div className="flex gap-6 items-start">
                 <aside className="w-80 flex-shrink-0">

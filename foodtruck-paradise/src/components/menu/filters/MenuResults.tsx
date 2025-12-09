@@ -8,8 +8,8 @@ export default function MenuResultsCounter({ count }: MenuResultsCounterProps) {
   }
 
   return (
-    <div className="text-sm text-gray-600 font-medium">
+    <p className="text-sm text-gray-600 font-medium">
       {count} {count === 1 ? 'produit trouvé' : 'produits trouvés'}
-    </div>
+    </p>
   );
 }

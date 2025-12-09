@@ -1,11 +1,13 @@
 import { useMenuFilters } from '../../hooks/useMenuFilters';
-import CategoryFilter from '../filters/CategoryFilter';
-import PriceRangeFilter from '../filters/PriceRangeFilter';
-import VegetarianFilter from '../filters/VegetarianFilter';
-import AllergensFilter from '../filters/AllergensFilter';
-import SortFilter from '../filters/SortFilter';
-import ResetFilters from '../filters/ResetFilters';
-import MenuResultsCounter from '../filters/MenuResults';
+import CategoryFilter from './filters/CategoryFilter';
+import PriceRangeFilter from './filters/PriceRangeFilter';
+import VegetarianFilter from './filters/VegetarianFilter';
+import SortFilter from './filters/SortFilter';
+import ResetFilters from './filters/ResetFilters';
+import MenuResultsCounter from './filters/MenuResults';
+import "../../styles/MenuFilters.css"
+import { useState } from 'react';
+import AllergensFilter from './filters/AllergensFilter';
 
 interface MenuFiltersProps {
   resultCount?: number;
@@ -13,21 +15,33 @@ interface MenuFiltersProps {
 
 export default function MenuFilters({ resultCount }: MenuFiltersProps) {
   const { filters, updateFilters, resetFilters } = useMenuFilters();
+  const [searchInput, setSearchInput] = useState<string>("");
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(e.target.value);
+  }
 
   return (
     <div className="menu-filters bg-white p-6 rounded-lg shadow-md space-y-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold">Filtres</h2>
-        <ResetFilters onReset={resetFilters} />
+        <input type="text" className="search-input" placeholder="Rechercher un plat..." value={searchInput} onChange={handleSearchChange} />
+        <SortFilter 
+          value={filters.sortBy} 
+          onChange={(s) => updateFilters({ sortBy: s })} 
+        />
+        <ResetFilters className='reset-filters' onReset={resetFilters} />
       </div>
 
-      <MenuResultsCounter count={resultCount} />
+      <div className="filter-section">
+        <MenuResultsCounter count={resultCount} />
+        <CategoryFilter 
+            value={filters.category} 
+            onChange={(c) => updateFilters({ category: c })} 
+        />
+        
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <CategoryFilter 
-          value={filters.category} 
-          onChange={(c) => updateFilters({ category: c })} 
-        />
         <PriceRangeFilter
           min={filters.minPrice}
           max={filters.maxPrice}
@@ -39,13 +53,11 @@ export default function MenuFilters({ resultCount }: MenuFiltersProps) {
         />
         <AllergensFilter 
           selected={filters.allergens} 
-          onChange={(a) => updateFilters({ allergens: a })} 
+          onChange={(a:string[]) => updateFilters({ allergens: a })} 
         />
-        <SortFilter 
-          value={filters.sortBy} 
-          onChange={(s) => updateFilters({ sortBy: s })} 
-        />
+        
       </div>
+      
     </div>
   );
 }
