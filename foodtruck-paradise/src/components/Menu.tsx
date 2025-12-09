@@ -1,15 +1,10 @@
 import MenuCard from './MenuCard';
 import { menuItems } from '../data/menuData';
 import { useState } from 'react';
-import type { MenuItem } from '../types/menu';
+import { useCart } from '../contexts/CartContext.ts';
 
-interface MenuProps {
-  onAddToCart: (item: MenuItem) => void;
-  favorites: string[];
-  toggleFavorite: (id: string) => void;
-}
-
-const Menu = ({ onAddToCart, favorites, toggleFavorite }: MenuProps) => {
+const Menu = () => {
+  const { addToCart, favorites, toggleFavorite } = useCart();
   const categories = [
     { key: 'entrees', label: '🥗 Entrées' },
     { key: 'plats', label: '🍴 Plats Principaux' },
@@ -83,7 +78,7 @@ const Menu = ({ onAddToCart, favorites, toggleFavorite }: MenuProps) => {
             <h2>{category.label}</h2>
             <div className="menu-grid">
               {items.map(item => (
-                <MenuCard key={item.id} item={item} onAddToCart={onAddToCart} favorites={favorites} toggleFavorite={toggleFavorite} />
+                <MenuCard key={item.id} item={item} onAddToCart={addToCart} favorites={favorites} toggleFavorite={toggleFavorite} />
               ))}
             </div>
           </section>

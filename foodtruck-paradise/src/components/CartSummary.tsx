@@ -17,8 +17,17 @@ const CartSummary: React.FC<CartSummaryProps> = ({ cart, isCartOpen, setIsCartOp
         const promo = promoCodes.find(p => p.code.toLowerCase() === code.toLowerCase());
         return promo ? promo.percent : 0;
     };
+
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
     return (
         <>
+            <div className="floating-cart-btn" onClick={() => setIsCartOpen(true)} role="button" aria-label="Ouvrir le panier">
+                🛒
+                {totalItems > 0 && (
+                    <span className="cart-count">{totalItems}</span>
+                )}
+            </div>
             {isCartOpen && (
                 <div className="cart-overlay">
                     <button className="close-btn" onClick={() => setIsCartOpen(false)} aria-label="Fermer le panier">×</button>
