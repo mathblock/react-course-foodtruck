@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { Header, Menu, Footer, About, Contact, CartSummary } from './components';
+import { Header, Menu, Footer, About, Contact, CartSummary, CategoryPage, Accueil } from './components';
 import type { CartItem } from './types/cart';
 import type { MenuItem } from './types/menu';
 import './App.css';
@@ -46,7 +46,9 @@ function App() {
     <div className="app">
       <Header cartItemsCount={cartItemsCount} />
       <Routes>
-        <Route path="/" element={<Menu addToCart={addToCart} />} />
+        <Route path="/" element={<Accueil />} />
+        <Route path="/menu" element={<Menu addToCart={addToCart} />} />
+        <Route path="/menu/category/:categoryName" element={<CategoryPage addToCart={addToCart} />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>

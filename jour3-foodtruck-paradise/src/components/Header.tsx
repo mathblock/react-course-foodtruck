@@ -18,7 +18,8 @@ const Header = ({ cartItemsCount }: HeaderProps) => {
         <div className="logo">🦄 Food Truck Pony Club 🌈</div>
         <p className="tagline">✨ Des saveurs magiques et gourmandes ✨</p>
         <nav className="nav">
-          <Link to="/" className="nav-link">Menu</Link>
+          <Link to="/" className="nav-link">Accueil</Link>
+          <Link to="/menu" className="nav-link">Menu</Link>
           <Link to="/about" className="nav-link">À propos</Link>
           <Link to="/contact" className="nav-link">Contact</Link>
           {cartItemsCount > 0 && (
