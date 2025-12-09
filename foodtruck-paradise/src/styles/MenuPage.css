@@ -1,0 +1,154 @@
+/* MenuPage.css */
+
+/* Conteneur principal */
+.menu-page {
+  padding: 1.5rem; /* p-6 */
+}
+
+/* Titre */
+.menu-page h2 {
+  font-size: 1.875rem;    /* text-3xl */
+  line-height: 2.25rem;
+  font-weight: 700;       /* font-bold */
+  margin-bottom: 2.5rem; /* mb-6 */
+}
+
+/* Layout principal : aside + main */
+.menu-page > div.flex {
+  display: flex;
+  gap: 1.5rem;            /* gap-6 */
+  align-items: flex-start; /* items-start */
+}
+
+/* Barre latérale des filtres */
+.menu-page aside {
+  width: 20rem;           /* w-80 = 320px */
+  flex-shrink: 0;         /* flex-shrink-0 */
+}
+
+/* Contenu principal */
+.menu-page main {
+  flex: 1;                /* flex-1 */
+}
+
+/* Grille des plats */
+.menu-page .grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;              /* gap-4 */
+}
+
+/* Responsive grid */
+@media (min-width: 768px) {
+  .menu-page .grid {
+    grid-template-columns: repeat(2, 1fr); /* md:grid-cols-2 */
+  }
+}
+
+@media (min-width: 1024px) {
+  .menu-page .grid {
+    grid-template-columns: repeat(3, 1fr); /* lg:grid-cols-3 */
+  }
+}
+
+/* Carte d'un plat */
+.menu-page article {
+  background-color: white;
+  border-radius: 0.5rem;           /* rounded-lg */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+  overflow: hidden;
+  transition: box-shadow 200ms ease-in-out; /* transition-shadow duration-200 */
+}
+
+.menu-page article:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* hover:shadow-lg */
+}
+
+/* Image du plat */
+.menu-page article img {
+  width: 100%;
+  height: 10rem;         /* h-40 = 160px */
+  object-fit: cover;
+}
+
+/* Contenu texte de la carte */
+.menu-page article > div {
+  padding: 1rem;         /* p-4 */
+}
+
+/* Nom + prix */
+.menu-page article .flex.justify-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem; /* mb-2 */
+}
+
+.menu-page article h4 {
+  font-weight: 700;
+  font-size: 1.125rem;   /* text-lg */
+  margin: 0;
+}
+
+.menu-page article span.text-blue-600 {
+  color: #2563eb;        /* text-blue-600 */
+  font-weight: 600;      /* font-semibold */
+}
+
+/* Description */
+.menu-page article p.text-sm {
+  font-size: 0.875rem;
+  color: #4b5563;        /* text-gray-600 */
+  margin-bottom: 0.75rem; /* mb-3 */
+}
+
+/* Ligne du bas : note + badges */
+.menu-page article div.text-xs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #6b7280;        /* text-gray-500 */
+}
+
+.menu-page article div.text-xs > div {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;          /* gap-1 */
+}
+
+/* Badges */
+.menu-page .bg-green-100 {
+  background-color: #ecfdf5;
+  color: #166534;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.675rem;
+}
+
+.menu-page .bg-blue-100 {
+  background-color: #eff6ff;
+  color: #1e40af;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.675rem;
+}
+
+/* Message "aucun résultat" */
+.menu-page .text-center.py-12 {
+  text-align: center;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.menu-page .text-center p.text-gray-500 {
+  color: #6b7280;
+  font-size: 1.125rem;
+  margin: 0;
+}
+
+.menu-page .text-center p.text-gray-400 {
+  color: #9ca3af;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}

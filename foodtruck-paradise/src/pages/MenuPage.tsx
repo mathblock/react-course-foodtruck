@@ -3,6 +3,7 @@ import { useMenuFilters } from '../hooks/useMenuFilters';
 import MenuFilters from '../components/menu/MenuFilters';
 import { menuItems } from '../data/menuData';
 import type { FilterState, MenuItem } from '../types/menu';
+import '../styles/MenuPage.css';
 
 function applyFilters(items: MenuItem[], f: FilterState) {
     return items

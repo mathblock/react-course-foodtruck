@@ -6,6 +6,7 @@ import AllergensFilter from '../filters/AllergensFilter';
 import SortFilter from '../filters/SortFilter';
 import ResetFilters from '../filters/ResetFilters';
 import MenuResultsCounter from '../filters/MenuResults';
+import "../../styles/MenuFilters.css"
 
 interface MenuFiltersProps {
   resultCount?: number;
