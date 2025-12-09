@@ -1,0 +1,27 @@
+.page {
+  padding: 1.5rem;
+}
+.home-page h1 {
+  margin-bottom: 0.5rem;
+}
+.category-links {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 1rem 0 1.5rem;
+}
+.category-link {
+  display: inline-block;
+  padding: 0.5rem 0.75rem;
+  background: var(--accent, #ef6c00);
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+}
+.category-link:hover {
+  opacity: 0.95;
+}
+.category-page h2 {
+  text-transform: capitalize;
+  margin-bottom: 0.75rem;
+}

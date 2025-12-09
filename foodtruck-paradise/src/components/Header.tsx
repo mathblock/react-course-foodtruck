@@ -1,4 +1,4 @@
-
+import { Link } from 'react-router-dom';
 interface HeaderProps {
   cartItemsCount?: number;
 }
@@ -14,9 +14,9 @@ function Header({ cartItemsCount = 0 }: HeaderProps) {
           Le meilleur de la street food à votre portée !
         </div>
         <nav className="nav">
-          <a href="#menu" className="nav-link">Menu</a>
-          <a href="#about" className="nav-link">À propos</a>
-          <a href="#contact" className="nav-link">Contact</a>
+          <Link to ="/menu" className="nav-link">Menu</Link>
+          <Link to="/about" className="nav-link">À propos</Link>
+          <Link to="/contact" className="nav-link">Contact</Link>
         </nav>
         {cartItemsCount > 0 && (
           <div className="cart-icon">

@@ -1,12 +1,15 @@
 
-import Header from './components/Header';
-import Cart from './components/CartSummary';
+import Layout from './components/Layout';
 import Menu from './components/Menu';
-import Footer from './components/Footer';
 import './App.css'
 import { useState, useCallback } from 'react';
 import type { CartItem } from './types/cart';
 import type { MenuItem } from './types/menu';
+import { Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import CategoryPage from './pages/CategoryPage';
+import AboutPage from './pages/AboutPage';
+import Contact from './pages/Contact';
 
 function App() {
         const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -32,18 +35,19 @@ function App() {
           });
         }, []);
 
-        const totalCount = cartItems.reduce((sum, cartItem) => sum + cartItem.quantity, 0);
 
         return (
-          <div className="App">
-            <Header cartItemsCount={totalCount} />
-            <main>
-              <Menu onAddToCart={addToCart} />
-            </main>
-            <Cart cartItems={cartItems} updateQuantity={updateQuantity} removeFromCart={removeFromCart} />
-            <Footer />
-          </div>
-      );  
-}
+          <Layout cartItems={cartItems} updateQuantity={updateQuantity} removeFromCart={removeFromCart}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/menu" element={<Menu onAddToCart={addToCart} />} />
+              <Route path="/menu/category/:categoryName" element={<CategoryPage onAddToCart={addToCart} />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/contact" element={<Contact />} />
+            </Routes>
+          </Layout>
+        );
 
-export default App
+}
+ 
+export default App 
