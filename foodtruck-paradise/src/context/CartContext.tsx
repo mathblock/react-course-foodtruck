@@ -1,21 +1,41 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
 import { type CartItem } from '../types/cart';
 import { type MenuItem } from '../types/menu';
+import { type PromoCode, promoCodes } from '../data/promoCodes';
 
 interface CartContextType {
-  cart: CartItem[];
+  items: CartItem[];
+  subtotal: number;
+  discount: number;
+  total: number;
+  promoCode: PromoCode | null;
   addToCart: (item: MenuItem, quantity: number) => void;
   removeFromCart: (itemId: string) => void;
   updateQuantity: (itemId: string, quantity: number) => void;
   clearCart: () => void;
-  getTotalPrice: () => number;
-  getTotalItems: () => number;
+  applyPromoCode: (code: string) => boolean;
+  removePromoCode: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [appliedPromo, setAppliedPromo] = useState<PromoCode | null>(null);
+
+  const subtotal = cart.reduce((total, cartItem) => total + cartItem.item.price * cartItem.quantity, 0);
+  
+  let discount = 0;
+  if (appliedPromo) {
+    if (appliedPromo.minAmount && subtotal >= appliedPromo.minAmount) {
+      discount = subtotal * appliedPromo.discount;
+    } else if (!appliedPromo.minAmount) {
+      discount = subtotal * appliedPromo.discount;
+    }
+    discount = Math.round(discount * 100) / 100;
+  }
+
+  const total = subtotal - discount;
 
   const addToCart = (item: MenuItem, quantity: number) => {
     setCart((prevCart) => {
@@ -53,16 +73,40 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setCart([]);
   };
 
-  const getTotalPrice = () => {
-    return cart.reduce((total, cartItem) => total + cartItem.item.price * cartItem.quantity, 0);
+  const applyPromoCode = (code: string): boolean => {
+    const upperCode = code.toUpperCase();
+    const promo = promoCodes[upperCode];
+    
+    if (!promo) {
+      return false;
+    }
+    
+    if (promo.minAmount && subtotal < promo.minAmount) {
+      return false;
+    }
+    
+    setAppliedPromo(promo);
+    return true;
   };
 
-  const getTotalItems = () => {
-    return cart.reduce((total, cartItem) => total + cartItem.quantity, 0);
+  const removePromoCode = () => {
+    setAppliedPromo(null);
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity, clearCart, getTotalPrice, getTotalItems }}>
+    <CartContext.Provider value={{ 
+      items: cart,
+      subtotal,
+      discount,
+      total,
+      promoCode: appliedPromo,
+      addToCart, 
+      removeFromCart, 
+      updateQuantity, 
+      clearCart,
+      applyPromoCode,
+      removePromoCode
+    }}>
       {children}
     </CartContext.Provider>
   );
