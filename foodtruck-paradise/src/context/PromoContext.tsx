@@ -61,7 +61,7 @@ export const PromoProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 export const usePromo = () => {
     const context = useContext(PromoContext);
     if (context === undefined) {
-        throw new Error('usePromo must be used within a PromoProvider');
+        throw new Error('usePromo doit être utilisé dans un PromoProvider');
     }
     return context;
 };
