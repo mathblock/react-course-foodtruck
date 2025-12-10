@@ -71,6 +71,28 @@ export class PanierController {
     }
 
 
+    static async removeItemFromCart(req: Request, res: Response): Promise<void> {
+        try {
+            const { id } = req.params;
+            const db = getDatabase();
+
+            // Supprimer l'item du panier directement
+            await db.removeCartItem(id);
+
+            res.json({
+                success: true,
+                message: 'Item removed from cart',
+                data: { id },
+            });
+        } catch (error) {
+            console.error('Error removing item from cart:', error);
+            res.status(500).json({
+                success: false,
+                error: 'Failed to remove item from cart',
+            });
+        }
+    }
+
     static async clearCart(req: Request, res: Response): Promise<void> {
         try {
             const db = getDatabase();

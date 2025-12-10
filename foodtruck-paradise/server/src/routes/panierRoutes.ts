@@ -9,5 +9,7 @@ router.get('/', PanierController.getCartItems);
 
 router.put('/update', PanierController.updateCartItemQuantity);
 
+router.delete('/item/:id', PanierController.removeItemFromCart);
+
 router.delete('/clear', PanierController.clearCart);
 export default router;

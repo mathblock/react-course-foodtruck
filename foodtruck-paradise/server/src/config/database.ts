@@ -259,8 +259,15 @@ export class Database {
     return cartItems;
   }
 
-
-
+  async removeCartItem(cartItemId: string): Promise<boolean> {
+    try {
+      await this.run('DELETE FROM cart_items WHERE id = ?', [cartItemId]);
+      return true;
+    } catch (error) {
+      console.error('Error removing cart item:', error);
+      return false;
+    }
+  }
 
   close(): void {
     this.db.close((err) => {
