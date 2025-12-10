@@ -1,0 +1,91 @@
+/* MenuFilters.css */
+
+.menu-filters {
+  background-color: white;
+  padding: 1.5rem;                  /* p-6 */
+  border-radius: 0.5rem;            /* rounded-lg */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;                      /* space-y-6 */
+}
+
+/* En-tête : titre + bouton reset */
+.menu-filters > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-input {
+  padding: 0.5rem 1rem;
+  border: 1px solid #d1d5db;       /* border-gray-300 */
+  border-radius: 2rem;          /* rounded-md */
+  font-size: 1rem;                  /* text-base */
+  width: 100%;
+  max-width: 50%;
+}
+
+.reset-filters {
+  padding: 0.5rem 1rem;
+  border: 1px solid #d1d5db;       /* border-gray-300 */
+  border-radius: 2rem;          /* rounded-md */
+  font-size: 1rem;             /* text-sm */
+  color: white;                   /* text-blue-600 */
+  background-color: var(--primary) ;
+  cursor: pointer;
+}
+
+
+
+.filter-section{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.menu-filters h2 {
+  font-size: 1.5rem;                /* text-2xl */
+  line-height: 2rem;
+  font-weight: 700;                 /* font-bold */
+  margin: 0;
+}
+
+/* Grille des filtres individuels */
+.menu-filters > div.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;                      /* gap-6 */
+}
+
+/* Responsive : 2 colonnes à partir de md (768px) */
+@media (min-width: 768px) {
+  .menu-filters > div.grid {
+    grid-template-columns: repeat(2, 1fr); /* md:grid-cols-2 */
+  }
+}
+
+/* 3 colonnes à partir de lg (1024px) */
+@media (min-width: 1024px) {
+  .menu-filters > div.grid {
+    grid-template-columns: repeat(3, 1fr); /* lg:grid-cols-3 */
+  }
+}
+
+/* Optionnel : si tu veux un peu plus d'espace interne pour chaque filtre */
+.menu-filters > div.grid > * {
+  width: 100%;
+}
+
+/* Petite amélioration visuelle : bordure subtile autour de chaque filtre (facultatif) */
+.menu-filters > div.grid > div,
+.menu-filters > div.grid > section {
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  background-color: #f9fafb;
+}
+
+/* Si tu veux garder les filtres "propres" sans bordure supplémentaire, commente les lignes ci-dessus */

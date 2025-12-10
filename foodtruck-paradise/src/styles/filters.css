@@ -1,0 +1,184 @@
+/* VegetarianFilter.css */
+
+.vegetarian-filter {
+  width: 100%;
+}
+
+/* Label */
+.vegetarian-label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+}
+
+/* Carte cliquable */
+.vegetarian-card {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.625rem;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  overflow: hidden;
+}
+
+.vegetarian-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background-color: transparent;
+  transition: background-color 0.2s ease;
+}
+
+.vegetarian-card:hover {
+  border-color: #d1d5db;
+  background-color: #f9fafb;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.vegetarian-card:active {
+  transform: translateY(0);
+}
+
+/* État actif */
+.vegetarian-card-active {
+  border-color: #10b981;
+  background-color: #ecfdf5;
+}
+
+.vegetarian-card-active::before {
+  background-color: #10b981;
+}
+
+.vegetarian-card-active:hover {
+  border-color: #059669;
+  background-color: #d1fae5;
+}
+
+/* Contenu */
+.vegetarian-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.vegetarian-icon {
+  font-size: 2rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.vegetarian-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.vegetarian-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.2;
+}
+
+.vegetarian-card-active .vegetarian-title {
+  color: #065f46;
+}
+
+.vegetarian-description {
+  font-size: 0.8125rem;
+  color: #6b7280;
+  line-height: 1.3;
+}
+
+.vegetarian-card-active .vegetarian-description {
+  color: #10b981;
+}
+
+/* Icône de validation */
+.vegetarian-check {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #10b981;
+  color: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
+  animation: checkPop 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes checkPop {
+  0% {
+    transform: scale(0) rotate(-45deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.15) rotate(5deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+/* Accessibilité */
+.vegetarian-card:focus-visible {
+  outline: 2px solid #10b981;
+  outline-offset: 2px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .vegetarian-icon {
+    font-size: 1.5rem;
+  }
+
+  .vegetarian-title {
+    font-size: 0.875rem;
+  }
+
+  .vegetarian-description {
+    font-size: 0.75rem;
+  }
+
+  .vegetarian-check {
+    width: 24px;
+    height: 24px;
+  }
+
+  .vegetarian-check svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.vegetarian-card {
+  padding: 0.75rem; /* au lieu de 1rem */
+}
+
+.vegetarian-description {
+  display: none; /* Masquer la description pour gagner de l'espace */
+}
+
+/* Ou garder la description mais plus petite */
+.vegetarian-description {
+  font-size: 0.75rem;
+}

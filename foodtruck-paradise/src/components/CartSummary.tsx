@@ -12,26 +12,26 @@ function CartSummary() {
     );
   }
 
-  const { cart, removeFromCart, updateQuantity, clearCart, getTotalPrice, getTotalItems } = context;
+  // // const { items, removeFromCart, updateQuantity, clearCart, getTotalPrice, getTotalItems } = context;
 
-  if (cart.length === 0) {
-    return (
-      <div className="cart-summary empty-cart">
-        <h2>🛒 Panier vide</h2>
-        <p>Ajoutez des articles pour commencer votre commande</p>
-      </div>
-    );
-  }
+  // if (items.length === 0) {
+  //   return (
+  //     <div className="cart-summary empty-cart">
+  //       <h2>🛒 Panier vide</h2>
+  //       <p>Ajoutez des articles pour commencer votre commande</p>
+  //     </div>
+  //   );
+  // }
 
-  const totalPrice = getTotalPrice();
-  const totalItems = getTotalItems();
+  // const totalPrice = getTotalPrice();
+  // const totalItems = getTotalItems();
 
   return (
     <div className="cart-summary">
-      <h2>🛒 Résumé du panier ({totalItems})</h2>
+      {/* <h2>🛒 Résumé du panier ({totalItems})</h2>
       
       <div className="cart-items">
-        {cart.map((cartItem) => (
+        {items.map((cartItem) => (
           <div key={cartItem.item.id} className="cart-item">
             <img src={cartItem.item.imageUrl} alt={cartItem.item.name} className="cart-item-image" />
             
@@ -102,7 +102,7 @@ function CartSummary() {
         >
           Vider le panier
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }
