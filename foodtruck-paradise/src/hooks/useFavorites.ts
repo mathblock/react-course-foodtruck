@@ -2,7 +2,7 @@ import { useLocalStorage } from "./useLocalStorage";
 
 // src/hooks/useFavorites.ts
 export function useFavorites() {
-  const [favorites, setFavorites] = useLocalStorage<string[]>('favorites', []);
+  const [favorites, setFavorites] = useLocalStorage<string[]>('favorites', ["1","5"]);
   
   const addFavorite = (itemId: string) => {
     if (!favorites.includes(itemId)) {

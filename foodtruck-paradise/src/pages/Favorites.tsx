@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { menuItems } from "../data/menuData";
+import { MenuCard } from "../components/menuCard";
+import { useFavorites } from "../hooks/useFavorites";
 
 
 function FavoritesPage() {
-  const { favorites } = useFavorites();
+  const { favorites, } = useFavorites();
 
   const favoriteItems = menuItems.filter(item =>
     favorites.includes(item.id)
@@ -28,7 +30,7 @@ function FavoritesPage() {
 
       <div className="menu-grid">
         {favoriteItems.map(item => (
-          <MenuCard key={item.id} item={item} onAddToCart={() => {}} />
+          <MenuCard key={item.id} item={item} />
         ))}
       </div>
     </div>
