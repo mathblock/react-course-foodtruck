@@ -70,6 +70,21 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
     const addToCart = (item: MenuItem, quantity: number = 1) => {
         dispatch({ type: 'ADD_ITEM', payload: { item, quantity } });
+    let discount = 0;
+    if (state.promoCode) {
+        if (state.promoCode.minAmount && subtotal < state.promoCode.minAmount) {
+            discount = 0;
+        } else {
+            discount = subtotal * state.promoCode.discount;
+            discount = Math.round(discount * 100) / 100;
+        }
+    }
+
+    const total = subtotal - discount;
+
+    const addToCart = (item: MenuItem) => {
+        console.log(`le produit ${item.name} a ete ajouter au panier`)
+        dispatch({ type: 'ADD_ITEM', payload: item });
     };
 
     const removeFromCart = (itemId: string) => {

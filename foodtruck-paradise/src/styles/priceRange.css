@@ -1,0 +1,211 @@
+/* PriceRangeFilter.css */
+
+.price-range-filter {
+  width: 100%;
+}
+
+/* En-tête avec label et valeurs */
+.price-range-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center   ;
+}
+
+.price-range-label {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.price-range-values {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: #2563eb;
+  font-size: 1rem;
+}
+
+.price-value {
+  font-weight: 700;
+}
+
+.price-separator {
+  color: #9ca3af;
+  font-weight: 400;
+}
+
+/* Conteneur du slider double */
+.price-range-slider {
+  position: relative;
+  height: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Track de fond */
+.slider-track {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 4px;
+  background-color: #e5e7eb;
+  border-radius: 2px;
+}
+
+/* Range actif coloré */
+.slider-range {
+  position: absolute;
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%);
+  border-radius: 2px;
+  transition: left 0.1s ease, width 0.1s ease;
+}
+
+/* Inputs range superposés */
+.slider-input {
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  pointer-events: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.slider-input::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  border: 3px solid #2563eb;
+  cursor: pointer;
+  pointer-events: auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.slider-input::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+}
+
+.slider-input::-webkit-slider-thumb:active {
+  transform: scale(1.15);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+.slider-input::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  border: 3px solid #2563eb;
+  cursor: pointer;
+  pointer-events: auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.slider-input::-moz-range-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+}
+
+.slider-input::-moz-range-thumb:active {
+  transform: scale(1.15);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+/* Min slider doit être au-dessus du max */
+.slider-input-min {
+  z-index: 3;
+}
+
+.slider-input-max {
+  z-index: 2;
+}
+
+/* Inputs numériques en bas */
+.price-range-inputs {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.price-input-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.price-input-group label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.price-input-group {
+  position: relative;
+}
+
+.price-input {
+  width: 100%;
+  padding: 0.625rem 2rem 0.625rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #111827;
+  background-color: white;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.price-input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.price-input::-webkit-inner-spin-button,
+.price-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.currency {
+  position: absolute;
+  right: 0.75rem;
+  top: 2.125rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6b7280;
+  pointer-events: none;
+}
+
+.price-input-divider {
+  color: #9ca3af;
+  font-weight: 600;
+  margin-top: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .price-range-inputs {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .price-input-divider {
+    display: none;
+  }
+}

@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom";
 
 function HomePage() {
 
@@ -7,9 +7,9 @@ function HomePage() {
       <section className="hero">
         <h1>🌮 Bienvenue chez Foodtruck Paradise</h1>
         <p className="subtitle">Les meilleurs plats de rue, directement dans votre assiette</p>
-        <a href="/menu" className="btn btn-primary">
+        <Link  to="/menu" className="btn btn-primary">
           Découvrir le menu
-        </a>
+        </Link  > 
       </section>
       
       <section className="features">

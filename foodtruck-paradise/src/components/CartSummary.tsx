@@ -101,7 +101,7 @@ function CartSummary() {
         >
           Vider le panier
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }
