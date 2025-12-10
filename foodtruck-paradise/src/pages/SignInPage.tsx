@@ -13,7 +13,7 @@ function SignInPage() {
     setError('');
     try {
       await login(email, password);
-      window.location.href = '/';
+      window.location.href = '/account';
     } catch (err: any) {
       setError(err.errors?.[0]?.message || 'Erreur lors de la connexion');
     }

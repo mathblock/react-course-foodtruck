@@ -4,7 +4,7 @@ import { SignOutButton } from '@clerk/clerk-react';
 import type { User } from '../types/user';
 
 function MyAccountPage() {
-  const { user, isAuthenticated, loading, updateProfile, updateAvatar } = useAuth();
+  const { user, isAuthenticated, loading, updateProfile, updateAvatar, logout } = useAuth();
   const [editMode, setEditMode] = useState(false);
   const [editedUser, setEditedUser] = useState<Partial<User>>({});
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
@@ -103,7 +103,7 @@ function MyAccountPage() {
             <p><strong>Created At:</strong> {user.createdAt.toLocaleDateString()}</p>
             <div className= "cta-section">
               <button className="sign-out-btn" onClick={handleEdit}>✎ Edit</button>
-              <SignOutButton className="sign-out-btn">➜] Log out</SignOutButton>
+              <button className="sign-out-btn" onClick={logout}>➜ Log out</button>
             </div>
           </>
         )}
