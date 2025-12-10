@@ -132,6 +132,143 @@ export class Database {
     return items;
   }
 
+  async createMenuItem(item: {
+    id: string;
+    name: string;
+    description?: string;
+    price: number;
+    category: string;
+    imageUrl?: string;
+    isVegetarian: boolean;
+    isNew: boolean;
+    rating?: number;
+    reviewCount?: number;
+    allergens?: string[];
+  }): Promise<void> {
+    // Get category id from slug
+    const category = await this.get<{ id: string }>(
+      "SELECT id FROM categories WHERE slug = ?",
+      [item.category]
+    );
+    if (!category) throw new Error("Category not found");
+
+    await this.run(`
+      INSERT INTO menu_items (id, name, description, price, category_id, image_url, is_vegetarian, is_new, rating, review_count)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `, [
+      item.id,
+      item.name,
+      item.description || null,
+      item.price,
+      category.id,
+      item.imageUrl || null,
+      item.isVegetarian ? 1 : 0,
+      item.isNew ? 1 : 0,
+      item.rating || 0,
+      item.reviewCount || 0
+    ]);
+
+    // Add allergens
+    if (item.allergens && item.allergens.length > 0) {
+      for (const allergenName of item.allergens) {
+        // Get or create allergen
+        let allergen = await this.get<{ id: string }>(
+          "SELECT id FROM allergens WHERE name = ?",
+          [allergenName]
+        );
+        if (!allergen) {
+          const allergenId = `allergen_${allergenName.toLowerCase().replace(/\s+/g, '_')}`;
+          await this.run("INSERT INTO allergens (id, name) VALUES (?, ?)", [allergenId, allergenName]);
+          allergen = { id: allergenId };
+        }
+        await this.run(
+          "INSERT INTO menu_item_allergens (menu_item_id, allergen_id) VALUES (?, ?)",
+          [item.id, allergen.id]
+        );
+      }
+    }
+  }
+
+  async updateMenuItem(id: string, item: {
+    name?: string;
+    description?: string;
+    price?: number;
+    category?: string;
+    imageUrl?: string;
+    isVegetarian?: boolean;
+    isNew?: boolean;
+    allergens?: string[];
+  }): Promise<void> {
+    const updates: string[] = [];
+    const params: any[] = [];
+
+    if (item.name !== undefined) {
+      updates.push("name = ?");
+      params.push(item.name);
+    }
+    if (item.description !== undefined) {
+      updates.push("description = ?");
+      params.push(item.description);
+    }
+    if (item.price !== undefined) {
+      updates.push("price = ?");
+      params.push(item.price);
+    }
+    if (item.category !== undefined) {
+      const category = await this.get<{ id: string }>(
+        "SELECT id FROM categories WHERE slug = ?",
+        [item.category]
+      );
+      if (!category) throw new Error("Category not found");
+      updates.push("category_id = ?");
+      params.push(category.id);
+    }
+    if (item.imageUrl !== undefined) {
+      updates.push("image_url = ?");
+      params.push(item.imageUrl);
+    }
+    if (item.isVegetarian !== undefined) {
+      updates.push("is_vegetarian = ?");
+      params.push(item.isVegetarian ? 1 : 0);
+    }
+    if (item.isNew !== undefined) {
+      updates.push("is_new = ?");
+      params.push(item.isNew ? 1 : 0);
+    }
+
+    if (updates.length > 0) {
+      params.push(id);
+      await this.run(`UPDATE menu_items SET ${updates.join(", ")} WHERE id = ?`, params);
+    }
+
+    // Update allergens if provided
+    if (item.allergens !== undefined) {
+      // Remove existing allergens
+      await this.run("DELETE FROM menu_item_allergens WHERE menu_item_id = ?", [id]);
+
+      // Add new allergens
+      for (const allergenName of item.allergens) {
+        let allergen = await this.get<{ id: string }>(
+          "SELECT id FROM allergens WHERE name = ?",
+          [allergenName]
+        );
+        if (!allergen) {
+          const allergenId = `allergen_${allergenName.toLowerCase().replace(/\s+/g, '_')}`;
+          await this.run("INSERT INTO allergens (id, name) VALUES (?, ?)", [allergenId, allergenName]);
+          allergen = { id: allergenId };
+        }
+        await this.run(
+          "INSERT INTO menu_item_allergens (menu_item_id, allergen_id) VALUES (?, ?)",
+          [id, allergen.id]
+        );
+      }
+    }
+  }
+
+  async deleteMenuItem(id: string): Promise<void> {
+    await this.run("DELETE FROM menu_items WHERE id = ?", [id]);
+  }
+
   async getMenuItemById(id: string): Promise<any | undefined> {
     const item = await this.get<any>(
       `
@@ -213,6 +350,126 @@ export class Database {
     }
 
     return items;
+  }
+
+  // User queries
+  async getAllUsers(): Promise<any[]> {
+    const users = await this.all<any>(`
+      SELECT id, email, first_name, last_name, phone, avatar, role, created_at
+      FROM users
+      ORDER BY created_at DESC
+    `);
+
+    return users.map(user => ({
+      id: user.id,
+      email: user.email,
+      firstName: user.first_name,
+      lastName: user.last_name,
+      phone: user.phone,
+      avatar: user.avatar,
+      role: user.role,
+      createdAt: user.created_at,
+    }));
+  }
+
+  async upsertUser(user: {
+    id: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    avatar?: string;
+    role?: string;
+  }): Promise<void> {
+    await this.run(`
+      INSERT INTO users (id, email, first_name, last_name, avatar, role, created_at)
+      VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+      ON CONFLICT(id) DO UPDATE SET
+        email = excluded.email,
+        first_name = excluded.first_name,
+        last_name = excluded.last_name,
+        avatar = excluded.avatar,
+        role = excluded.role
+    `, [user.id, user.email, user.firstName, user.lastName, user.avatar || null, user.role || 'customer']);
+  }
+
+  // Promo code queries
+  async getAllPromoCodes(): Promise<any[]> {
+    const codes = await this.all<any>(`
+      SELECT id, code, discount_percent, description, min_amount, expires_at
+      FROM promo_codes
+      ORDER BY code
+    `);
+
+    return codes.map(code => ({
+      id: code.id,
+      code: code.code,
+      discount: code.discount_percent,
+      description: code.description,
+      minAmount: code.min_amount,
+      expiresAt: code.expires_at,
+    }));
+  }
+
+  async createPromoCode(code: {
+    id: string;
+    code: string;
+    discount: number;
+    description: string;
+    minAmount?: number;
+    expiresAt?: string;
+  }): Promise<void> {
+    await this.run(`
+      INSERT INTO promo_codes (id, code, discount_percent, description, min_amount, expires_at)
+      VALUES (?, ?, ?, ?, ?, ?)
+    `, [
+      code.id,
+      code.code,
+      code.discount,
+      code.description,
+      code.minAmount || null,
+      code.expiresAt || null
+    ]);
+  }
+
+  async updatePromoCode(id: string, code: {
+    code?: string;
+    discount?: number;
+    description?: string;
+    minAmount?: number;
+    expiresAt?: string;
+  }): Promise<void> {
+    const updates: string[] = [];
+    const params: any[] = [];
+
+    if (code.code !== undefined) {
+      updates.push("code = ?");
+      params.push(code.code);
+    }
+    if (code.discount !== undefined) {
+      updates.push("discount_percent = ?");
+      params.push(code.discount);
+    }
+    if (code.description !== undefined) {
+      updates.push("description = ?");
+      params.push(code.description);
+    }
+    if (code.minAmount !== undefined) {
+      updates.push("min_amount = ?");
+      params.push(code.minAmount);
+    }
+    if (code.expiresAt !== undefined) {
+      updates.push("expires_at = ?");
+      params.push(code.expiresAt);
+    }
+
+    if (updates.length > 0) {
+      params.push(id);
+      await this.run(`UPDATE promo_codes SET ${updates.join(", ")} WHERE id = ?`, params);
+    }
+  }
+
+  async deletePromoCode(id: string): Promise<void> {
+    await this.run("DELETE FROM promo_codes WHERE id = ?", [id]);
   }
 
   close(): void {

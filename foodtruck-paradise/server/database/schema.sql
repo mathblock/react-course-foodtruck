@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS menu_item_allergens (
 CREATE TABLE IF NOT EXISTS users (
   id TEXT PRIMARY KEY,
   email TEXT UNIQUE NOT NULL,
-  password_hash TEXT NOT NULL,
+  password_hash TEXT,
   first_name TEXT NOT NULL,
   last_name TEXT NOT NULL,
   phone TEXT,
@@ -104,6 +104,9 @@ CREATE TABLE IF NOT EXISTS promo_codes (
   code TEXT UNIQUE NOT NULL,
   discount_percent REAL,
   discount_amount REAL,
+  description TEXT,
+  min_amount REAL,
+  expires_at DATETIME,
   valid_from DATETIME,
   valid_until DATETIME,
   max_uses INTEGER,

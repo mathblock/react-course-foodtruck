@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
-import { SignedIn, SignedOut, SignInButton, UserButton, SignIn } from '@clerk/clerk-react';
 import { useAuth } from '../context/AuthContext';
 
-const links : {path:string; label:string; auth:boolean}[]=[
+const links : {path:string; label:string; auth:string}[]=[
     { path: '/', label: 'Accueil', auth: 'both' },
     { path: '/menu', label: 'Menu', auth: 'both' },
     { path: '/cart', label: 'Panier', auth: 'both' },

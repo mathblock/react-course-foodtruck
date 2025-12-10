@@ -3,6 +3,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { getDatabase } from "./config/database";
 import menuRoutes from "./routes/menuRoutes";
+import userRoutes from "./routes/userRoutes";
+import promoRoutes from "./routes/promoRoutes";
 
 // Load environment variables
 dotenv.config();
@@ -28,6 +30,8 @@ app.use((req: Request, res: Response, next) => {
 
 // API Routes
 app.use("/api/menu", menuRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/promo", promoRoutes);
 
 // Health check endpoint
 app.get("/health", (req: Request, res: Response) => {
@@ -47,6 +51,7 @@ app.get("/", (req: Request, res: Response) => {
       health: "/health",
       menu: "/api/menu",
       menuById: "/api/menu/:id",
+      users: "/api/users",
     },
   });
 });
