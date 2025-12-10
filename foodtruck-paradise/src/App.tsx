@@ -7,6 +7,8 @@ import CartPage from "./pages/CartPage";
 import { CartProvider } from "./context/CartContext";
 
 function App() {
+  const [currentPage, setCurrentPage] = useState<"home" | "menu">("home");
+
   return (
     <CartProvider>
       <div className="App">
