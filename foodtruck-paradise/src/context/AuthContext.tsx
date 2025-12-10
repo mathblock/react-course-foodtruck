@@ -37,7 +37,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }
 
- async function signup(firstName:string, lastName:string, email: string, password: string, confirmPassword:string) {
+ async function signup(firstName:string, lastName:string, email: string, password: string) {
     try {
       const signUpAttempt = await signUp.create({
         emailAddress: email,

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { SignOutButton } from '@clerk/clerk-react';
 import type { User } from '../types/user';
 
 function MyAccountPage() {

@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
 import { SignIn } from '@clerk/clerk-react';
 
 function SignInPage() {

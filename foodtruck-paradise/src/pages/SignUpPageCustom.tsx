@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useSignUp } from '@clerk/clerk-react';
+import { Link } from 'react-router-dom';
 
-function SignUpPage() {
+function SignUpPageCustom() {
   const { signup } = useAuth();
   const { signUp } = useSignUp();
   const [firstName, setFirstName] = useState('');
@@ -14,10 +15,9 @@ function SignUpPage() {
   const [success, setSuccess] = useState('');
   const [pendingVerification, setPendingVerification] = useState(false);
   const [code, setCode] = useState('');
+  const [showPopup, setShowPopup] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
-
-  const [showPopup, setShowPopup] = useState(false);
 
   e.preventDefault();
   setError('');
@@ -59,8 +59,7 @@ function SignUpPage() {
         firstName,
         lastName,
         email,
-        password,
-        confirmPassword
+        password
     );
     setPendingVerification(true);
     setSuccess('Un code de vérification a été envoyé à votre email.');
@@ -72,7 +71,7 @@ function SignUpPage() {
 const handleVerify = async (e: React.FormEvent) => {
   e.preventDefault();
   setError('');
-  
+
   if (!signUp) {
     setError("Erreur: Session d'inscription non trouvée");
     return;
@@ -87,7 +86,7 @@ const handleVerify = async (e: React.FormEvent) => {
       await completeSignUp.createdSessionId;
       setSuccess('Inscription réussie ! Redirection...');
       setTimeout(() => {
-        window.location.href = '/';
+        window.location.href = '/account';
       }, 1000);
     }
   } catch (err: any) {
@@ -100,12 +99,14 @@ const handleVerify = async (e: React.FormEvent) => {
       {!pendingVerification ? (
       <form onSubmit={handleSubmit}>
         <h2>Créer un compte</h2>
+        <div>
         <input
           type="text"
           placeholder="Prénom"
           value={firstName}
           onChange={e => setFirstName(e.target.value)}
           required
+          className="espacement"
         />
         <input
           type="text"
@@ -113,20 +114,25 @@ const handleVerify = async (e: React.FormEvent) => {
           value={lastName}
           onChange={e => setLastName(e.target.value)}
           required
+          className="espacement"
         />
+        </div>
         <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={e => setEmail(e.target.value)}
           required
+          className="email"
         />
+        <div>
         <input
           type="password"
           placeholder="Mot de passe"
           value={password}
           onChange={e => setPassword(e.target.value)}
           required
+          className="espacement"
         />
         <input
           type="password"
@@ -134,9 +140,12 @@ const handleVerify = async (e: React.FormEvent) => {
           value={confirmPassword}
           onChange={e => setConfirmPassword(e.target.value)}
           required
+          className="espacement"
         />
+        </div>
         <div id="clerk-captcha"></div>
-        <button type="submit">S'inscrire</button>
+        <button type="submit" className='email'>S'inscrire</button>
+        <p>J'ai un compte <span className = "inscrire"><Link to="/signin">se connecter</Link></span> !</p>
         {error && <div className="error-message">{error}</div>}
         {success && <div style={{ color: 'green', textAlign: 'center' }}>{success}</div>}
       </form>
@@ -146,14 +155,17 @@ const handleVerify = async (e: React.FormEvent) => {
         <p style={{ marginBottom: '1rem', textAlign: 'center' }}>
           Un code de vérification a été envoyé à {email}
         </p>
-        <input
-          type="text"
-          placeholder="Code de vérification"
-          value={code}
-          onChange={e => setCode(e.target.value)}
-          required
-        />
-        <button type="submit">Vérifier</button>
+        <div>
+          <input
+            type="text"
+            placeholder="Code de vérification"
+            value={code}
+            onChange={e => setCode(e.target.value)}
+            required
+            className='email'
+          />
+          <button type="submit" className='email'>Vérifier</button>
+        </div>
         {error && <div className="error-message">{error}</div>}
         {success && <div style={{ color: 'green', textAlign: 'center' }}>{success}</div>}
       </form>
@@ -161,4 +173,4 @@ const handleVerify = async (e: React.FormEvent) => {
     </div>
   );
 }
-export default SignUpPage;
+export default SignUpPageCustom;

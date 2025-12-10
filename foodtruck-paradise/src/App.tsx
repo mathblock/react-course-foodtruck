@@ -4,11 +4,11 @@ import Layout from "./components/Layout";
 import HomePage from "./pages/HomePage";
 import MyAccountPage from "./pages/MyAccountPage";
 import SignInPageCustom from "./pages/SignInPageCustom";
-import SignUpPage from "./pages/SignUpPage";
 import { AuthProvider } from "./context/AuthContext";
 import NotFound from "./pages/NotFound";
 import CartPage from "./pages/CartPage";
 import { CartProvider } from "./context/CartContext";
+import SignUpPageCustom from "./pages/SignUpPageCustom";
 
 function App() {  
   return (
@@ -20,7 +20,7 @@ function App() {
               <Route index element={<HomePage />} />
               <Route path="account" element={<MyAccountPage />} />
               <Route path="signin" element={<SignInPageCustom />} />
-              <Route path="signup" element={<SignUpPage />} />
+              <Route path="signup" element={<SignUpPageCustom />} />
               <Route path="/cart" element={<CartPage />} />
               <Route path="*" element={<NotFound />} />
             </Route>
