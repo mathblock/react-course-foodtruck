@@ -5,7 +5,6 @@ export interface PromoCode {
     minAmount?: number; 
     expiresAt?: Date; 
 }
-
 export const promoCodes: Record<string, PromoCode> = {
     'BIENVENUE10': {
         code: 'BIENVENUE10',
@@ -25,3 +24,4 @@ export const promoCodes: Record<string, PromoCode> = {
         minAmount: 30
     }
 };
+

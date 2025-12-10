@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { getDatabase } from "./config/database";
 import menuRoutes from "./routes/menuRoutes";
+import panierRoutes from "./routes/panierRoutes";
 
 // Load environment variables
 dotenv.config();
@@ -28,6 +29,7 @@ app.use((req: Request, res: Response, next) => {
 
 // API Routes
 app.use("/api/menu", menuRoutes);
+app.use("/api/panier", panierRoutes);
 
 // Health check endpoint
 app.get("/health", (req: Request, res: Response) => {
@@ -47,6 +49,7 @@ app.get("/", (req: Request, res: Response) => {
       health: "/health",
       menu: "/api/menu",
       menuById: "/api/menu/:id",
+      panier: "/api/panier",
     },
   });
 });
@@ -83,6 +86,7 @@ async function startServer() {
       console.log(`📊 API Documentation: http://localhost:${PORT}`);
       console.log(`🏥 Health check: http://localhost:${PORT}/health`);
       console.log(`🍔 Menu API: http://localhost:${PORT}/api/menu\n`);
+      console.log(`🛒 Panier API: http://localhost:${PORT}/api/panier\n`);
     });
   } catch (error) {
     console.error("❌ Failed to start server:", error);

@@ -215,6 +215,44 @@ export class Database {
     return items;
   }
 
+  async getCartItems(): Promise<any[]> {
+
+    const items = await this.all<any>(`
+      SELECT 
+        m.*,
+        c.slug as category
+      FROM menu_items m
+      JOIN categories c ON m.category_id = c.id
+      ORDER BY m.created_at DESC
+    `);
+    // Get allergens for each item
+    for (const item of items) {
+      const allergens = await this.all<{ name: string }>(
+        `
+        SELECT a.name
+        FROM allergens a
+        JOIN menu_item_allergens mia ON a.id = mia.allergen_id
+        WHERE mia.menu_item_id = ?
+      `,
+        [item.id]
+      );
+      item.allergens = allergens.map((a) => a.name);
+      item.isVegetarian = Boolean(item.is_vegetarian);
+      item.isNew = Boolean(item.is_new);
+      item.imageUrl = item.image_url;
+      // Remove snake_case properties
+      delete item.is_vegetarian;
+      delete item.is_new;
+      delete item.image_url;
+      delete item.category_id;
+      delete item.created_at;
+    }
+    return items;
+  }
+
+
+
+
   close(): void {
     this.db.close((err) => {
       if (err) {

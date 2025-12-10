@@ -14,9 +14,10 @@ function CartPage() {
 
     const {
         discount,
-        total,
         promoCode
     } = usePromo();
+
+    const total = subtotal - discount;
 
     const [showPayment, setShowPayment] = useState(false);
     const [isProcessing, setIsProcessing] = useState(false);
