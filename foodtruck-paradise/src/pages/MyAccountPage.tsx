@@ -1,20 +1,30 @@
-import { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
-import type { User } from '../types/user';
-import { Navigate } from 'react-router-dom';
+import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
+import type { User } from "../types/user";
+import { Navigate } from "react-router-dom";
 
 function MyAccountPage() {
-  const { user, isAuthenticated, loading, updateProfile, updateAvatar, logout } = useAuth();
+  const {
+    user,
+    isAuthenticated,
+    loading,
+    updateProfile,
+    updateAvatar,
+    logout,
+  } = useAuth();
   const [editMode, setEditMode] = useState(false);
   const [editedUser, setEditedUser] = useState<Partial<User>>({});
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showToast, setShowToast] = useState(false);
-  const [toastMessage, setToastMessage] = useState('');
+  const [toastMessage, setToastMessage] = useState("");
 
   if (loading) {
-    return <div>Loading...</div>;
+    return<div className="callback-container">
+      <img src="/spinner-8565_256.gif" className="callback-logo" />
+      <p className="callback-text">Connexion sécurisée...</p>
+    </div>;
   }
 
   if (!isAuthenticated || !user) {
@@ -56,12 +66,12 @@ function MyAccountPage() {
         URL.revokeObjectURL(previewUrl);
         setPreviewUrl(null);
       }
-      setToastMessage('Votre compte a été mis à jour avec succès!');
+      setToastMessage("Votre compte a été mis à jour avec succès!");
       setShowToast(true);
       setTimeout(() => setShowToast(false), 3000);
     } catch (error) {
-      console.error('Failed to update profile:', error);
-      setToastMessage('Échec de la mise à jour du compte. Veuillez réessayer.');
+      console.error("Failed to update profile:", error);
+      setToastMessage("Échec de la mise à jour du compte. Veuillez réessayer.");
       setShowToast(true);
       setTimeout(() => setShowToast(false), 3000);
     }
@@ -78,39 +88,65 @@ function MyAccountPage() {
   return (
     <div className="my-account">
       <h1>My Account</h1>
-      <div className={`user-info ${editMode ? 'edit-mode' : ''}`}>
+      <div className={`user-info ${editMode ? "edit-mode" : ""}`}>
         {editMode ? (
           <>
-            <img className="avatar-preview" src={previewUrl || user.avatar || ''} alt="Avatar" />
+            <img
+              className="avatar-preview"
+              src={previewUrl || user.avatar || ""}
+              alt="Avatar"
+            />
             <input type="file" accept="image/*" onChange={handleAvatarChange} />
             <input
               type="text"
-              value={editedUser.firstName || ''}
-              onChange={(e) => setEditedUser({ ...editedUser, firstName: e.target.value })}
+              value={editedUser.firstName || ""}
+              onChange={(e) =>
+                setEditedUser({ ...editedUser, firstName: e.target.value })
+              }
               placeholder="First Name"
             />
             <input
               type="text"
-              value={editedUser.lastName || ''}
-              onChange={(e) => setEditedUser({ ...editedUser, lastName: e.target.value })}
+              value={editedUser.lastName || ""}
+              onChange={(e) =>
+                setEditedUser({ ...editedUser, lastName: e.target.value })
+              }
               placeholder="Last Name"
             />
             <div className="edit-actions">
-              <button className="edit-save-btn" onClick={handleSave}>Save</button>
-              <button className="edit-cancel-btn" onClick={handleCancel}>Cancel</button>
+              <button className="edit-save-btn" onClick={handleSave}>
+                Save
+              </button>
+              <button className="edit-cancel-btn" onClick={handleCancel}>
+                Cancel
+              </button>
             </div>
           </>
         ) : (
           <>
             {user.avatar && <img src={user.avatar} alt="Avatar" />}
-            <h2>{user.firstName} {user.lastName}</h2>
-            <p><strong>Email:</strong> {user.email}</p>
-            <p><strong>First Name:</strong> {user.firstName}</p>
-            <p><strong>Last Name:</strong> {user.lastName}</p>
-            <p><strong>Created At:</strong> {user.createdAt.toLocaleDateString()}</p>
-            <div className= "cta-section">
-              <button className="sign-out-btn" onClick={handleEdit}>✎ Edit</button>
-              <button className="sign-out-btn" onClick={logout}>➜ Log out</button>
+            <h2>
+              {user.firstName} {user.lastName}
+            </h2>
+            <p>
+              <strong>Email:</strong> {user.email}
+            </p>
+            <p>
+              <strong>First Name:</strong> {user.firstName}
+            </p>
+            <p>
+              <strong>Last Name:</strong> {user.lastName}
+            </p>
+            <p>
+              <strong>Created At:</strong> {user.createdAt.toLocaleDateString()}
+            </p>
+            <div className="cta-section">
+              <button className="sign-out-btn" onClick={handleEdit}>
+                ✎ Edit
+              </button>
+              <button className="sign-out-btn" onClick={logout}>
+                ➜ Log out
+              </button>
             </div>
           </>
         )}
@@ -119,19 +155,25 @@ function MyAccountPage() {
         <div className="popup-overlay">
           <div className="popup">
             <div className="popup-icon">⚠️</div>
-            <p>Voulez-vous vraiment enregistrer les modifications apportées à votre compte ?</p>
+            <p>
+              Voulez-vous vraiment enregistrer les modifications apportées à
+              votre compte ?
+            </p>
             <div>
-              <button className="confirm-btn" onClick={handleConfirmSave}>Confirm</button>
-              <button className="cancel-btn" onClick={() => setShowConfirmModal(false)}>Cancel</button>
+              <button className="confirm-btn" onClick={handleConfirmSave}>
+                Confirm
+              </button>
+              <button
+                className="cancel-btn"
+                onClick={() => setShowConfirmModal(false)}
+              >
+                Cancel
+              </button>
             </div>
           </div>
         </div>
       )}
-      {showToast && (
-        <div className="toast">
-          {toastMessage}
-        </div>
-      )}
+      {showToast && <div className="toast">{toastMessage}</div>}
     </div>
   );
 }

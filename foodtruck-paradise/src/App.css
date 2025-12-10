@@ -6,6 +6,32 @@
   gap: 8px;
 }
 
+.callback-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 1rem;
+  background: #f8fafc;
+}
+
+.callback-logo {
+  width: 4rem;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+.callback-text {
+  color: #64748b;
+  font-size: 1.1rem;
+}
+
 .email{
   width: 100%;
   margin-bottom: 1rem;
