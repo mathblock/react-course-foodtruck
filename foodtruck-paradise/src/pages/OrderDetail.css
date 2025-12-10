@@ -1,0 +1,128 @@
+/* ======================================= */
+/* 1. Conteneur Global */
+/* ======================================= */
+.order-detail-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* ======================================= */
+/* 2. Header et Titre */
+/* ======================================= */
+.detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.detail-header h1 {
+    font-size: 1.8em;
+    color: #333;
+    margin: 0;
+}
+
+.back-link {
+    font-size: 0.9em;
+    color: #007bff;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.status-badge {
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    color: white;
+    font-size: 0.85em;
+}
+
+/* Couleurs des statuts (les mêmes que dans OrderHistory.css) */
+.status-delivered { background-color: #28a745; }
+.status-delivering, .status-preparing { background-color: #ffc107; color: #333; }
+.status-cancelled { background-color: #dc3545; }
+.status-pending, .status-confirmed { background-color: #6c757d; }
+
+/* ======================================= */
+/* 3. Sections d'Information */
+/* ======================================= */
+.detail-summary, .tracking-map-placeholder {
+    margin-bottom: 30px;
+    padding: 15px 0;
+}
+
+.detail-summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.info-box {
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.info-box h3, .detail-items h3, .tracking-map-placeholder h3 {
+    color: #FF5733; /* Couleur d'accentuation */
+    border-bottom: 1px dashed #FF5733;
+    padding-bottom: 5px;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+/* ======================================= */
+/* 4. Liste des Articles */
+/* ======================================= */
+.items-list {
+    list-style: none;
+    padding: 0;
+}
+
+.item-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px dotted #ccc;
+    font-size: 1em;
+}
+
+.item-row:last-child {
+    border-bottom: none;
+}
+
+/* ======================================= */
+/* 5. Totaux */
+/* ======================================= */
+.detail-total {
+    padding-top: 20px;
+    border-top: 2px solid #333;
+    text-align: right;
+}
+
+.detail-total p {
+    margin: 5px 0;
+}
+
+.discount {
+    color: #28a745;
+    font-weight: 500;
+}
+
+.total-line {
+    font-size: 1.6em;
+    font-weight: bold;
+    color: #000;
+}

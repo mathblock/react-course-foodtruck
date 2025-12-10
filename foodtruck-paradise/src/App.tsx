@@ -6,12 +6,15 @@ import { Routes, Route } from "react-router-dom"; // 👈 1. Import des outils d
 import { CartProvider } from "./context/CartContext";
 import { OrderProvider } from "./context/OrderContext";
 
+
 // Importez vos composants/pages
 import Layout from "./components/Layout";        // 👈 Le composant de structure
 import OrderHistory from "./pages/OrderHistory"; // Page /orders
 
 import "./App.css"; // Styles généraux
+
 import HomePage from "./pages/HomePage";
+import OrderDetail from "./pages/OrderDetail";
 
 function App() {
   return (
@@ -31,6 +34,9 @@ function App() {
               {/* L'attribut 'index' rend Menu sur le chemin du parent : "/" */}
 
               {/* Pages Statiques */}
+
+              {/* pages de details des commandes */}
+              <Route path="orders/:orderId" element={<OrderDetail/>} />
               
               {/* Pages Team 4 (Commandes) */}
               <Route path="/orders" element={<OrderHistory />} />
