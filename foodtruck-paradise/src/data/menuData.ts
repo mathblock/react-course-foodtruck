@@ -9,10 +9,10 @@ export const menuItems: MenuItem[] = [
     category: 'plats',
     imageUrl: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500',
     isVegetarian: false,
+    isNew: true,
     allergens: ['gluten'],
     rating: 4.5,
     reviewCount: 28,
-    isNew: true
   },
   {
     id: '2',
@@ -22,9 +22,10 @@ export const menuItems: MenuItem[] = [
     category: 'plats',
     imageUrl: 'https://images.unsplash.com/photo-1520072959219-c595dc870360?w=500',
     isVegetarian: true,
+    isNew: false,
     allergens: ['gluten', 'soja'],
     rating: 4.7,
-    reviewCount: 42
+    reviewCount: 42,
   },
   {
     id: '3',
@@ -34,9 +35,10 @@ export const menuItems: MenuItem[] = [
     category: 'plats',
     imageUrl: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=500',
     isVegetarian: true,
+    isNew: false,
     allergens: ['gluten', 'lactose'],
     rating: 4.8,
-    reviewCount: 56
+    reviewCount: 56,
   },
   {
     id: '4',
@@ -46,9 +48,10 @@ export const menuItems: MenuItem[] = [
     category: 'entrees',
     imageUrl: 'https://images.unsplash.com/photo-1546793665-c74683f339c1?w=500',
     isVegetarian: false,
+    isNew: false,
     allergens: ['lactose', 'gluten'],
     rating: 4.3,
-    reviewCount: 34
+    reviewCount: 34,
   },
   {
     id: '5',
@@ -58,9 +61,10 @@ export const menuItems: MenuItem[] = [
     category: 'entrees',
     imageUrl: 'https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?w=500',
     isVegetarian: true,
+    isNew: false,
     allergens: ['lactose'],
     rating: 4.6,
-    reviewCount: 45
+    reviewCount: 45,
   },
   {
     id: '6',
@@ -70,9 +74,10 @@ export const menuItems: MenuItem[] = [
     category: 'desserts',
     imageUrl: 'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=500',
     isVegetarian: true,
+    isNew: false,
     allergens: ['gluten', 'lactose', 'œufs'],
     rating: 4.9,
-    reviewCount: 67
+    reviewCount: 67,
   },
   {
     id: '7',
@@ -82,9 +87,10 @@ export const menuItems: MenuItem[] = [
     category: 'desserts',
     imageUrl: 'https://images.unsplash.com/photo-1607920591413-4ec007e70023?w=500',
     isVegetarian: true,
+    isNew: false,
     allergens: ['gluten', 'lactose', 'fruits à coque'],
     rating: 4.7,
-    reviewCount: 53
+    reviewCount: 53,
   },
   {
     id: '8',
@@ -94,21 +100,23 @@ export const menuItems: MenuItem[] = [
     category: 'boissons',
     imageUrl: 'https://images.unsplash.com/photo-1554866585-cd94860890b7?w=500',
     isVegetarian: true,
+    isNew: false,
     allergens: [],
     rating: 4.2,
-    reviewCount: 89
+    reviewCount: 89,
   },
   {
     id: '9',
-    name: 'Jus d\'Orange Pressé',
-    description: '100% pur jus d\'orange fraîchement pressé - 25cl',
+    name: "Jus d'Orange Pressé",
+    description: "100% pur jus d'orange fraîchement pressé - 25cl",
     price: 3.50,
     category: 'boissons',
     imageUrl: 'https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=500',
     isVegetarian: true,
+    isNew: false,
     allergens: [],
     rating: 4.8,
-    reviewCount: 71
+    reviewCount: 71,
   },
   {
     id: '10',
@@ -118,8 +126,9 @@ export const menuItems: MenuItem[] = [
     category: 'boissons',
     imageUrl: 'https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=500',
     isVegetarian: true,
+    isNew: false,
     allergens: [],
     rating: 4.5,
-    reviewCount: 92
-  }
+    reviewCount: 92,
+  },
 ];
