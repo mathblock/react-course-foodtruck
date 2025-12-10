@@ -1,4 +1,3 @@
-import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from "./components/Layout";
@@ -8,7 +7,6 @@ import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import { AuthProvider } from "./context/AuthContext";
 import NotFound from "./pages/NotFound";
-import ProtectedRoute from "./components/ProtectedRoute";
 import CartPage from "./pages/CartPage";
 import { CartProvider } from "./context/CartContext";
 
