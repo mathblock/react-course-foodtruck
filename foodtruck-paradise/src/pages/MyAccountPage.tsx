@@ -23,7 +23,6 @@ function MyAccountPage() {
     setEditedUser({
       firstName: user.firstName,
       lastName: user.lastName,
-      phone: user.phone,
     });
     setAvatarFile(null);
     setPreviewUrl(null);
@@ -81,12 +80,6 @@ function MyAccountPage() {
               onChange={(e) => setEditedUser({ ...editedUser, lastName: e.target.value })}
               placeholder="Last Name"
             />
-            <input
-              type="text"
-              value={editedUser.phone || ''}
-              onChange={(e) => setEditedUser({ ...editedUser, phone: e.target.value })}
-              placeholder="Phone"
-            />
             <div className="edit-actions">
               <button className="edit-save-btn" onClick={handleSave}>Save</button>
               <button className="edit-cancel-btn" onClick={handleCancel}>Cancel</button>
@@ -99,7 +92,6 @@ function MyAccountPage() {
             <p><strong>Email:</strong> {user.email}</p>
             <p><strong>First Name:</strong> {user.firstName}</p>
             <p><strong>Last Name:</strong> {user.lastName}</p>
-            <p><strong>Phone:</strong> {user.phone}</p>
             <p><strong>Created At:</strong> {user.createdAt.toLocaleDateString()}</p>
             <div className= "cta-section">
               <button className="sign-out-btn" onClick={handleEdit}>✎ Edit</button>

@@ -18,7 +18,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     email: clerkUser.primaryEmailAddress?.emailAddress || '',
     firstName: clerkUser.firstName || '',
     lastName: clerkUser.lastName || '',
-    phone: clerkUser.phoneNumbers[0]?.phoneNumber || '',
     role: 'customer', // Default role, adjust as needed
     createdAt: new Date(clerkUser.createdAt),
     avatar: clerkUser.imageUrl,
@@ -65,7 +64,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       await clerkUser.update({
         firstName: data.firstName,
         lastName: data.lastName,
-        // Note: Email updates might require additional handling
       });
     }
   }
