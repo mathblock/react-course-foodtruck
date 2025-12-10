@@ -51,3 +51,9 @@ INSERT INTO menu_item_allergens (menu_item_id, allergen_id) VALUES
   ('7', 'allergen_gluten'),
   ('7', 'allergen_lactose'),
   ('7', 'allergen_fruits_coque');
+
+-- Insert promo codes
+INSERT INTO promo_codes (id, code, discount_percent, description, min_amount, expires_at) VALUES
+  ('promo_bienvenue10', 'BIENVENUE10', 0.10, 'Bienvenue - 10% de réduction', 15, NULL),
+  ('promo_ete2024', 'ETE2024', 0.15, 'Été 2024 - 15% de réduction', NULL, NULL),
+  ('promo_fidelite20', 'FIDELITE20', 0.20, 'Client fidèle - 20% de réduction', 30, NULL);

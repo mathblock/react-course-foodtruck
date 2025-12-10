@@ -1,9 +1,10 @@
 export interface PromoCode {
+    id?: string;
     code: string;
     discount: number;
     description: string;
-    minAmount?: number; 
-    expiresAt?: Date; 
+    minAmount?: number;
+    expiresAt?: Date | string;
 }
 
 export const promoCodes: Record<string, PromoCode> = {

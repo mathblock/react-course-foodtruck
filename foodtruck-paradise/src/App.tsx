@@ -1,10 +1,12 @@
-import "./App.css"
+import "./App.css";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Layout from "./components/Layout";
+import AdminLayout from "./components/AdminLayout";
 import CartPage from "./pages/CartPage";
 import HomePage from "./pages/HomePage";
 import { Layout } from "./pages/layout";
 import MenuPage from "./pages/MenuPage";
 import FavoritesPage from "./pages/Favorites";
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MyAccountPage from "./pages/MyAccountPage";
 import SignInPageCustom from "./pages/SignInPageCustom";
 import { AuthProvider } from "./context/AuthContext";
@@ -12,6 +14,9 @@ import NotFound from "./pages/NotFound";
 import { CartProvider } from "./context/CartContext";
 import SignUpPageCustom from "./pages/SignUpPageCustom";
 import CallbackScreen from "./pages/CallbackScreen";
+import AdminPage from "./pages/AdminPage";
+import PromoCodesAdminPage from "./pages/PromoCodesAdminPage";
+import MenuAdminPage from "./pages/MenuAdminPage";
 
 function App() {  
   return (
@@ -29,6 +34,11 @@ function App() {
               <Route path="/menu" element={<MenuPage />} />
               <Route path="/favorites" element={<FavoritesPage />} />
               <Route path="*" element={<NotFound />} />
+            </Route>
+            <Route path="/admin" element={<AdminLayout/>}>
+              <Route index element={<AdminPage />} />
+              <Route path="promocodes" element={<PromoCodesAdminPage />} />
+              <Route path="menu" element={<MenuAdminPage />} />
             </Route>
           </Routes>
         </BrowserRouter>
