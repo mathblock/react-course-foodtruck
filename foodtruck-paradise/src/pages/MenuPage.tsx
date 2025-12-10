@@ -45,35 +45,41 @@ function applyFilters(items: MenuItem[], f: FilterState) {
 }
 
 function MenuPage() {
-    const { filters } = useMenuFilters();
-    
-    const filteredItems = useMemo(() => applyFilters(menuItems, filters), [filters]);
-    const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
-    // const [selectedCategory, setSelectedCategory] = useState<string>("all");
+   const { filters } = useMenuFilters();
 
-    useEffect(() => {
-    const fetchMenu = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch("/api/menu");
-        if (!response.ok) {
-          throw new Error("Erreur lors du chargement du menu");
-        }
-        const result = await response.json();
-        setMenuItems(result.data || []);
-        setError(null);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "Erreur inconnue");
-        setMenuItems([]);
-      } finally {
-        setLoading(false);
+const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState<string | null>(null);
+
+// 👉 Pas besoin d’un state séparé + d’un useEffect : useMemo suffit
+const filteredItems = useMemo(
+  () => applyFilters(menuItems, filters),
+  [menuItems, filters]
+);
+
+useEffect(() => {
+  const fetchMenu = async () => {
+    try {
+      setLoading(true);
+
+      const response = await fetch("/api/menu");
+      if (!response.ok) {
+        throw new Error("Erreur lors du chargement du menu");
       }
-    };
 
-    fetchMenu();
-  }, []);
+      const result = await response.json();
+      setMenuItems(result.data || []);
+      setError(null);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Erreur inconnue");
+      setMenuItems([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchMenu();
+}, []);
 
   if (loading) {
     return (

@@ -1,13 +1,16 @@
-import { Link } from "react-router-dom";
+import { useFavorites } from "../hooks/useFavorites";
 
 interface HeaderProps {
-  onNavigate?: (page: "home" | "menu") => void;
+  onNavigate?: (page: "home" | "menu" | "favorites") => void;
 }
 
 function Header({ onNavigate }: HeaderProps) {
+
+  const {count}= useFavorites();
+
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
-    page: "home" | "menu"
+    page: "home" | "menu" | "favorites"
   ) => {
     e.preventDefault();
     onNavigate?.(page);
@@ -23,10 +26,11 @@ function Header({ onNavigate }: HeaderProps) {
           <a href="/" onClick={(e) => handleNavClick(e, "home")}>
             Accueil
           </a>
-          <a href="/menu" onClick={(e) => handleNavClick(e, "menu")}>
+          <a href="/menu">
             Menu
           </a>
           <a href="/cart">Panier</a>
+          <a href="/favorites" >Favoris ({count})</a>
         </nav>
       </div>
     </header>
