@@ -5,19 +5,22 @@ import Header from "./components/Header";
 import HomePage from "./pages/HomePage";
 import CartPage from "./pages/CartPage";
 import { CartProvider } from "./context/CartContext";
+import { PromoProvider } from "./context/PromoContext";
 
 function App() {
 
   return (
     <CartProvider>
-      <div className="App">
-        <Header />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/cart" element={<CartPage />} />
-        </Routes>
-        <Footer />
-      </div>
+      <PromoProvider>
+        <div className="App">
+          <Header />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/cart" element={<CartPage />} />
+          </Routes>
+          <Footer />
+        </div>
+      </PromoProvider>
     </CartProvider>
   );
 }

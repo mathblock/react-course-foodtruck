@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { useCart } from '../context/CartContext';
+import { usePromo } from '../context/PromoContext';
 
 export default function PromoCodeInput() {
     const [inputValue, setInputValue] = useState('');
     const [error, setError] = useState('');
-    const { promoCode, applyPromoCode, removePromoCode, discount } = useCart();
+    const { promoCode, applyPromoCode, removePromoCode, discount } = usePromo();
 
     const handleApply = () => {
         const code = inputValue.trim().toUpperCase();

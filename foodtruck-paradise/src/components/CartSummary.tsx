@@ -12,9 +12,9 @@ function CartSummary() {
     );
   }
 
-  const { cart, removeFromCart, updateQuantity, clearCart, getTotalPrice, getTotalItems } = context;
+  const { items, removeFromCart, updateQuantity, clearCart, subtotal } = context;
 
-  if (cart.length === 0) {
+  if (items.length === 0) {
     return (
       <div className="cart-summary empty-cart">
         <h2>🛒 Panier vide</h2>
@@ -23,18 +23,17 @@ function CartSummary() {
     );
   }
 
-  const totalPrice = getTotalPrice();
-  const totalItems = getTotalItems();
+  const totalItems = items.reduce((total, item) => total + item.quantity, 0);
 
   return (
     <div className="cart-summary">
       <h2>🛒 Résumé du panier ({totalItems})</h2>
-      
+
       <div className="cart-items">
-        {cart.map((cartItem) => (
+        {items.map((cartItem) => (
           <div key={cartItem.item.id} className="cart-item">
             <img src={cartItem.item.imageUrl} alt={cartItem.item.name} className="cart-item-image" />
-            
+
             <div className="cart-item-details">
               <h3>{cartItem.item.name}</h3>
               <p className="price">{cartItem.item.price.toFixed(2)} €</p>
@@ -42,20 +41,20 @@ function CartSummary() {
             </div>
 
             <div className="cart-item-quantity">
-              <button 
+              <button
                 onClick={() => updateQuantity(cartItem.item.id, cartItem.quantity - 1)}
                 className="qty-btn"
               >
                 −
               </button>
-              <input 
-                type="number" 
+              <input
+                type="number"
                 value={cartItem.quantity}
                 onChange={(e) => updateQuantity(cartItem.item.id, Math.max(1, parseInt(e.target.value) || 1))}
                 className="qty-input"
                 min="1"
               />
-              <button 
+              <button
                 onClick={() => updateQuantity(cartItem.item.id, cartItem.quantity + 1)}
                 className="qty-btn"
               >
@@ -67,7 +66,7 @@ function CartSummary() {
               {(cartItem.item.price * cartItem.quantity).toFixed(2)} €
             </div>
 
-            <button 
+            <button
               onClick={() => removeFromCart(cartItem.item.id)}
               className="remove-btn"
               title="Supprimer du panier"
@@ -81,7 +80,7 @@ function CartSummary() {
       <div className="cart-summary-footer">
         <div className="summary-row">
           <span>Sous-total:</span>
-          <span>{totalPrice.toFixed(2)} €</span>
+          <span>{subtotal.toFixed(2)} €</span>
         </div>
         <div className="summary-row">
           <span>Frais de livraison:</span>
@@ -89,14 +88,14 @@ function CartSummary() {
         </div>
         <div className="summary-row total">
           <span>Total:</span>
-          <span>{totalPrice.toFixed(2)} €</span>
+          <span>{subtotal.toFixed(2)} €</span>
         </div>
 
         <button className="btn btn-primary btn-checkout">
           Procéder au paiement
         </button>
-        
-        <button 
+
+        <button
           onClick={clearCart}
           className="btn btn-secondary"
         >
