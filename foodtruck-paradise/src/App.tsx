@@ -10,6 +10,7 @@ import SignInPageCustom from "./pages/SignInPageCustom";
 import { AuthProvider } from "./context/AuthContext";
 import NotFound from "./pages/NotFound";
 import { CartProvider } from "./context/CartContext";
+import { PromoProvider } from "./context/PromoContext";
 import SignUpPageCustom from "./pages/SignUpPageCustom";
 import CallbackScreen from "./pages/CallbackScreen";
 

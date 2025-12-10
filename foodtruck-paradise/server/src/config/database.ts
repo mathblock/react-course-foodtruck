@@ -215,6 +215,60 @@ export class Database {
     return items;
   }
 
+  async getCartItems(): Promise<any[]> {
+    // Pour l'instant, on retourne un panier vide car il n'y a pas de système d'authentification
+    // TODO: Implémenter la gestion des paniers par utilisateur avec sessions/auth
+    
+    // Retourne les items de tous les paniers (temporaire, en attendant l'auth)
+    const cartItems = await this.all<any>(`
+      SELECT 
+        ci.id as cart_item_id,
+        ci.quantity,
+        m.*,
+        c.slug as category
+      FROM cart_items ci
+      JOIN menu_items m ON ci.menu_item_id = m.id
+      JOIN categories c ON m.category_id = c.id
+      ORDER BY ci.id DESC
+    `);
+
+    // Get allergens for each item
+    for (const item of cartItems) {
+      const allergens = await this.all<{ name: string }>(
+        `
+        SELECT a.name
+        FROM allergens a
+        JOIN menu_item_allergens mia ON a.id = mia.allergen_id
+        WHERE mia.menu_item_id = ?
+      `,
+        [item.id]
+      );
+      item.allergens = allergens.map((a) => a.name);
+      item.isVegetarian = Boolean(item.is_vegetarian);
+      item.isNew = Boolean(item.is_new);
+      item.imageUrl = item.image_url;
+      
+      // Remove snake_case properties
+      delete item.is_vegetarian;
+      delete item.is_new;
+      delete item.image_url;
+      delete item.category_id;
+      delete item.created_at;
+    }
+    
+    return cartItems;
+  }
+
+  async removeCartItem(cartItemId: string): Promise<boolean> {
+    try {
+      await this.run('DELETE FROM cart_items WHERE id = ?', [cartItemId]);
+      return true;
+    } catch (error) {
+      console.error('Error removing cart item:', error);
+      return false;
+    }
+  }
+
   close(): void {
     this.db.close((err) => {
       if (err) {
