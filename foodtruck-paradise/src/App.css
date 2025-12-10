@@ -86,3 +86,653 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* Styles spécifiques à l'application */
+/*c'est nul*/
+.info-user {
+  display: flex;
+  justify-items: center;
+  gap: 8px;
+}
+
+.callback-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 1rem;
+  background: #f8fafc;
+}
+
+.callback-logo {
+  width: 4rem;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+.callback-text {
+  color: #64748b;
+  font-size: 1.1rem;
+}
+
+.email{
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.espacement {
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+}
+
+.signin-page {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image:
+    url('https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=1200'),
+    linear-gradient(rgba(220, 0, 0, 0.85), rgba(139, 0, 0, 0.9));
+  background-blend-mode: overlay;
+  background-size: cover;
+  background-position: center;
+}
+
+.signin-page form{
+ background: #fff;
+  padding: 2.5rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
+  display: flex;
+  flex-direction: column;
+  min-width: 600px;
+  gap: 1.2rem;
+}
+
+.signin-page-custom form {
+  background: #fff;
+  padding: 2.5rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
+  display: flex;
+  flex-direction: column;
+  min-width: 600px;
+  gap: 1.2rem;
+}
+
+.signin-page input {
+  padding: 0.8rem 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.signin-page input:focus {
+  border: 1.5px solid #fc575e;
+}
+
+.signin-page button {
+  background: linear-gradient(90deg, #fc575e 0%, #f7b42c 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.9rem 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.signin-page button:hover {
+  background: linear-gradient(90deg, #f7b42c 0%, #fc575e 100%);
+}
+
+.signin-page .google-btn {
+  background: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.9rem 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.signin-page .google-btn:hover {
+  background: #3367d6;
+}
+
+.signin-page .divider {
+  text-align: center;
+  margin: 1rem 0;
+  position: relative;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.signin-page .divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #e0e0e0;
+  z-index: 0;
+}
+
+.signin-page .divider {
+  background: #fff;
+  padding: 0 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.signin-page .error-message {
+  color: #fc575e;
+  background: #fff0f0;
+  border: 1px solid #fc575e33;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 0.98rem;
+  text-align: center;
+}
+
+.signup-page {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  align-content: center;
+}
+
+.clerk-auth {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.clerk-auth img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.clerk-auth a {
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.clerk-auth p:hover {
+  color: #FFD700;
+}
+
+/* Ferrari Theme - My Account Page */
+.my-account {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #DC0000 0%, #8B0000 100%);
+  padding: 40px 20px;
+  font-family: 'Arial', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.my-account::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    url('https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=1200'),
+    linear-gradient(rgba(220, 0, 0, 0.85), rgba(139, 0, 0, 0.9));
+  background-blend-mode: overlay;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.3;
+  z-index: 0;
+}
+
+.my-account h1 {
+  text-align: center;
+  color: #FFD700;
+  font-size: 3.5em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 8px;
+  margin-bottom: 20px;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+  position: relative;
+  z-index: 1;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+.user-info h2 {
+  text-align: center;
+  font-size: 2.5em;
+  color: #DC0000;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin: 0 0 30px 0;
+  padding-bottom: 20px;
+  border-bottom: 3px solid #FFD700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  animation: slideInTop 0.8s ease-out;
+  font-weight: bold;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.5);
+  }
+
+  to {
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.8);
+  }
+}
+
+.my-account h1::before {
+  content: '🏎️ FORZA FERRARI 🏎️';
+  display: block;
+  font-size: 0.4em;
+  letter-spacing: 4px;
+  margin-bottom: 15px;
+  color: #FFFFFF;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+.user-info {
+  max-width: 800px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.98);
+  padding: 50px;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 1;
+  border: 5px solid #FFD700;
+}
+
+.user-info::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 120px;
+  background-image: url('https://upload.wikimedia.org/wikipedia/en/d/d9/Scuderia_Ferrari_Logo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+}
+
+.user-info p {
+  font-size: 1.3em;
+  margin: 20px 0;
+  padding: 15px;
+  background: linear-gradient(90deg, rgba(220, 0, 0, 0.1) 0%, rgba(255, 215, 0, 0.1) 100%);
+  border-left: 5px solid #DC0000;
+  border-radius: 5px;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.user-info p:hover {
+  transform: translateX(10px);
+  border-left-width: 8px;
+  background: linear-gradient(90deg, rgba(220, 0, 0, 0.2) 0%, rgba(255, 215, 0, 0.2) 100%);
+}
+
+.user-info strong {
+  color: #DC0000;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-right: 10px;
+}
+
+.user-info img {
+  display: block;
+  margin: 30px auto 0;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 6px solid #FFD700;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+}
+
+.user-info img:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.user-info::after {
+  content: 'SCUDERIA FERRARI';
+  display: block;
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+  color: #DC0000;
+  margin-top: 40px;
+  letter-spacing: 6px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.user-info p:nth-child(odd) {
+  animation: slideInLeft 0.6s ease-out;
+}
+
+.user-info p:nth-child(even) {
+  animation: slideInRight 0.6s ease-out;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Sign Out Button Styles */
+.sign-out-btn {
+  display: block;
+  margin: 40px auto 0;
+  padding: 15px 30px;
+  background: linear-gradient(135deg, #DC0000 0%, #8B0000 100%);
+  color: #FFD700;
+  border: 3px solid #FFD700;
+  border-radius: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  animation: slideInTop 0.8s ease-out;
+}
+
+.sign-out-btn:hover {
+  background: linear-gradient(135deg, #B00000 0%, #6B0000 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+  border-color: #FFFFFF;
+  color: #FFFFFF;
+}
+
+.sign-out-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.cta-section {
+  display: flex;
+}
+
+/* Edit Mode Styles for My Account */
+.user-info.edit-mode {
+  max-width: 700px;
+  padding: 40px 45px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+/* Avatar preview - reuse user-info image look but smaller */
+.user-info.edit-mode .avatar-preview {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 6px solid #FFD700;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease;
+}
+
+/* Input reuse from signin page for consistent UI */
+.signin-page input,
+.user-info.edit-mode input[type="text"],
+.user-info.edit-mode input[type="file"] {
+  padding: 0.8rem 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.user-info.edit-mode input[type="text"]:focus,
+.user-info.edit-mode input[type="file"]:focus {
+  border: 1.5px solid #fc575e;
+}
+
+/* Edit actions alignment */
+.user-info.edit-mode .edit-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 10px;
+}
+
+/* Reuse sign-out-btn visual style for action buttons, but scale down */
+.sign-out-btn,
+.user-info.edit-mode .edit-save-btn,
+.user-info.edit-mode .edit-cancel-btn {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #DC0000 0%, #8B0000 100%);
+  color: #FFD700;
+  border: 3px solid #FFD700;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.user-info.edit-mode .edit-cancel-btn {
+  background: linear-gradient(135deg, #9a9a9a 0%, #666666 100%);
+  border-color: rgba(0,0,0,0.2);
+  color: #FFF;
+}
+
+.user-info.edit-mode .edit-save-btn:hover,
+.user-info.edit-mode .edit-cancel-btn:hover {
+  transform: translateY(-3px);
+}
+
+.user-info.edit-mode .edit-save-btn:active,
+.user-info.edit-mode .edit-cancel-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Stack small inputs for smaller screens */
+@media (max-width: 640px) {
+  .user-info.edit-mode {
+    padding: 28px;
+  }
+  .user-info.edit-mode .edit-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .user-info.edit-mode .edit-save-btn,
+  .user-info.edit-mode .edit-cancel-btn {
+    width: 100%;
+  }
+}
+
+.icon-heart::before {
+  content: '❤️';
+}
+
+.icon-heart:hover::before {
+  content: '💖';
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.popup {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 400px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  animation: popupIn 0.2s ease-out;
+}
+
+@keyframes popupIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.popup-icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.popup p {
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.popup button {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.popup button:hover {
+  background: #c0392b;
+}
+
+.toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #4CAF50;
+  color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 1001;
+  animation: toastIn 0.3s ease-out;
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.popup div:last-child {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.popup .confirm-btn {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.popup .confirm-btn:hover {
+  background: #45a049;
+}
+
+.popup .cancel-btn {
+  background: #f44336;
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.popup .cancel-btn:hover {
+  background: #da190b;
+}
