@@ -1,0 +1,52 @@
+.notification-empty {
+  text-align: center;
+  color: #64748b;
+  padding: 40px 20px;
+  font-size: 16px;
+  font-style: italic;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Empty State */
+.notification-empty {
+  text-align: center;
+  color: #64748b;
+  padding: 60px 20px;
+  font-size: 16px;
+  font-style: italic;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin: 20px 0;
+}
+
+.notification-empty-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.notification-empty p {
+  margin: 8px 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.notification-empty small {
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+/* Order ID */
+.notification-order-id {
+  font-size: 12px;
+  color: #64748b;
+  margin: 4px 0 0 0;
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 2px 6px;
+  border-radius: 4px;
+  display: inline-block;
+}
