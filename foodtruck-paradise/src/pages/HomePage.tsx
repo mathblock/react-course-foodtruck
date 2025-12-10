@@ -1,28 +1,6 @@
-import { useEffect, useState } from "react";
-import { type MenuItem } from "../types/menu";
+
 
 function HomePage() {
-  const [menu, setMenu] = useState<MenuItem[] | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      // Example fetch to verify API is reachable
-      try {
-        const response = await fetch('/api/menu');
-        if (!response.ok) {
-          console.error('API health check failed');
-        } else {
-          const data = await response.json();
-          setMenu(data);
-        }
-
-      } catch (error) {
-        console.error('Error connecting to API:', error);
-      }
-    }
-
-    fetchData();
-  }, []);
 
   return (
     <div className="home-page">
