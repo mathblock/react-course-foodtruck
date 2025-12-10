@@ -35,7 +35,7 @@ function CartPage() {
         } catch (error) {
             setPaymentResult({
                 success: false,
-                message: 'Une erreur est survenue lors du paiement',
+                message: `Une erreur est survenue lors du paiement: ${error}`,
                 transactionId: undefined,
                 timestamp: new Date()
             });
