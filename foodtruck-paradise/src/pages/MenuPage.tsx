@@ -1,47 +1,85 @@
-import { useEffect, useState } from "react";
-import { type MenuItem } from "../types/menu";
-import "../styles/MenuPage.css";
+import { useEffect, useMemo, useState } from 'react';
+import { useMenuFilters } from '../hooks/useMenuFilters';
+import MenuFilters from '../components/menu/MenuFilters';
+import { MenuCard } from '../components/menuCard';
+import '../styles/MenuPage.css';
+import type { FilterState, MenuItem } from '../types/menu';
+
+function applyFilters(items: MenuItem[], f: FilterState) {
+    return items
+        .filter(i => {
+            // Filtre par catégorie
+            if (f.category && f.category !== 'all' && i.category !== f.category) return false;
+            
+            // Filtre par prix
+            if (i.price < f.minPrice) return false;
+            if (i.price > f.maxPrice) return false;
+            
+            // Filtre végétarien
+            if (f.isVegetarian && !i.isVegetarian) return false;
+            
+            // Filtre allergènes - exclure les items qui contiennent un allergène sélectionné
+            if (f.allergens.length > 0) {
+                for (const allergen of f.allergens) {
+                    if (i.allergens.includes(allergen)) return false;
+                }
+            }
+
+
+            return true;
+        })
+        .sort((a, b) => {
+            switch (f.sortBy) {
+                case 'price-asc':
+                    return a.price - b.price;
+                case 'price-desc':
+                    return b.price - a.price;
+                case 'name':
+                    return a.name.localeCompare(b.name);
+                case 'rating':
+                    return b.rating - a.rating;
+                default:
+                    return 0;
+            }
+        });
+}
 
 function MenuPage() {
-  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+   const { filters } = useMenuFilters();
 
-  useEffect(() => {
-    const fetchMenu = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch("/api/menu");
-        if (!response.ok) {
-          throw new Error("Erreur lors du chargement du menu");
-        }
-        const result = await response.json();
-        setMenuItems(result.data || []);
-        setError(null);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "Erreur inconnue");
-        setMenuItems([]);
-      } finally {
-        setLoading(false);
+const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState<string | null>(null);
+
+// 👉 Pas besoin d’un state séparé + d’un useEffect : useMemo suffit
+const filteredItems = useMemo(
+  () => applyFilters(menuItems, filters),
+  [menuItems, filters]
+);
+
+useEffect(() => {
+  const fetchMenu = async () => {
+    try {
+      setLoading(true);
+
+      const response = await fetch("/api/menu");
+      if (!response.ok) {
+        throw new Error("Erreur lors du chargement du menu");
       }
-    };
 
-    fetchMenu();
-  }, []);
+      const result = await response.json();
+      setMenuItems(result.data || []);
+      setError(null);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Erreur inconnue");
+      setMenuItems([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  const categories = [
-    { id: "all", label: "Tous les plats" },
-    { id: "entrees", label: "Entrées" },
-    { id: "plats", label: "Plats" },
-    { id: "desserts", label: "Desserts" },
-    { id: "boissons", label: "Boissons" },
-  ];
-
-  const filteredItems =
-    selectedCategory === "all"
-      ? menuItems
-      : menuItems.filter((item) => item.category === selectedCategory);
+  fetchMenu();
+}, []);
 
   if (loading) {
     return (
@@ -62,74 +100,36 @@ function MenuPage() {
     );
   }
 
-  return (
-    <div className="menu-page">
-      <div className="menu-header">
-        <h1>🍔 Notre Menu</h1>
-        <p>Découvrez nos délicieuses spécialités</p>
-      </div>
+    return (
+        <div className="menu-page p-6">
+            
+            <div className="flex gap-6 items-start">
+                <aside className="w-80 flex-shrink-0">
+                    <MenuFilters resultCount={filteredItems.length} />
+                </aside>
 
-      <div className="menu-filters">
-        {categories.map((category) => (
-          <button
-            key={category.id}
-            className={`filter-btn ${
-              selectedCategory === category.id ? "active" : ""
-            }`}
-            onClick={() => setSelectedCategory(category.id)}
-          >
-            {category.label}
-          </button>
-        ))}
-      </div>
-
-      <div className="menu-items">
-        {filteredItems.length > 0 ? (
-          filteredItems.map((item) => (
-            <div key={item.id} className="menu-item">
-              <div className="item-image">
-                <img src={item.imageUrl} alt={item.name} />
-                {item.isNew && <span className="badge-new">Nouveau</span>}
-                {item.isVegetarian && (
-                  <span className="badge-vegetarian">🌱</span>
-                )}
-              </div>
-              <div className="item-content">
-                <h3>{item.name}</h3>
-                <p className="item-description">{item.description}</p>
-
-                <div className="item-meta">
-                  <div className="rating">
-                    <span className="stars">⭐ {item.rating}</span>
-                    <span className="reviews">({item.reviewCount} avis)</span>
-                  </div>
-                  {item.allergens.length > 0 && (
-                    <div className="allergens">
-                      <span className="allergen-label">Allergènes:</span>
-                      {item.allergens.map((allergen) => (
-                        <span key={allergen} className="allergen-tag">
-                          {allergen}
-                        </span>
-                      ))}
+                <main className="flex-1">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {filteredItems.map(item => (
+                            <MenuCard key={item.id} item={item} />
+                        ))}
                     </div>
-                  )}
-                </div>
-
-                <div className="item-footer">
-                  <span className="item-price">{item.price}€</span>
-                  <button className="btn-add-cart">Ajouter au panier</button>
-                </div>
-              </div>
+                    
+                    {filteredItems.length === 0 && (
+                        <div className="text-center py-12">
+                            <p className="text-gray-500 text-lg">
+                                Aucun produit ne correspond à vos critères de recherche.
+                            </p>
+                            <p className="text-gray-400 text-sm mt-2">
+                                Essayez de modifier vos filtres.
+                            </p>
+                        </div>
+                    )}
+                </main>
             </div>
-          ))
-        ) : (
-          <div className="no-items">
-            <p>Aucun plat disponible dans cette catégorie</p>
-          </div>
-        )}
-      </div>
-    </div>
-  );
+        </div>
+    );
 }
+
 
 export default MenuPage;

@@ -91,6 +91,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const total = subtotal - discount;
 
     const addToCart = (item: MenuItem) => {
+        console.log(`le produit ${item.name} a ete ajouter au panier`)
         dispatch({ type: 'ADD_ITEM', payload: item });
     };
 

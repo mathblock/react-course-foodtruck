@@ -2,12 +2,15 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from "./components/Layout";
 import AdminLayout from "./components/AdminLayout";
+import CartPage from "./pages/CartPage";
 import HomePage from "./pages/HomePage";
+import { Layout } from "./pages/layout";
+import MenuPage from "./pages/MenuPage";
+import FavoritesPage from "./pages/Favorites";
 import MyAccountPage from "./pages/MyAccountPage";
 import SignInPageCustom from "./pages/SignInPageCustom";
 import { AuthProvider } from "./context/AuthContext";
 import NotFound from "./pages/NotFound";
-import CartPage from "./pages/CartPage";
 import { CartProvider } from "./context/CartContext";
 import SignUpPageCustom from "./pages/SignUpPageCustom";
 import CallbackScreen from "./pages/CallbackScreen";
@@ -28,6 +31,8 @@ function App() {
               <Route path="signin" element={<SignInPageCustom />} />
               <Route path="signup" element={<SignUpPageCustom />} />
               <Route path="/cart" element={<CartPage />} />
+              <Route path="/menu" element={<MenuPage />} />
+              <Route path="/favorites" element={<FavoritesPage />} />
               <Route path="*" element={<NotFound />} />
             </Route>
             <Route path="/admin" element={<AdminLayout/>}>

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './PaymentForm.css';
+import '../styles/PaymentForm.css';
 
 interface PaymentFormProps {
   total: number;

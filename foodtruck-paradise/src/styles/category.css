@@ -1,0 +1,83 @@
+/* Container avec espacement vertical */
+.category-filter-container {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem; /* équivalent à space-y-2 */
+
+}
+
+.category-button {
+  padding: 0.3rem 0.5rem; /* équivalent à px-4 py-2 */
+  font-size: 0.9rem; /* équivalent à text-sm */
+  font-weight: bold; /* équivalent à font-medium */
+  color: #4B5563; /* équivalent à text-gray-700 */
+  background-color: #ffffff; /* équivalent à bg-gray-100 */
+  border-radius: 2rem; /* équivalent à rounded-lg */
+  border: 2px solid transparent;
+  transition: background-color 0.2s; /* équivalent à transition-colors duration-200 */
+  width: fit-content;
+}
+
+.category-button-active {
+  background-color: #3B82F6; /* équivalent à bg-blue-500 */
+  color: white; /* équivalent à text-white */
+}
+
+.category-button-active:hover {
+  background-color: #2563EB; /* équivalent à hover:bg-blue-600 */
+}
+
+.category-button-all {
+  color: #10B981; /* équivalent à bg-green-500 */
+  border-color: #10B981;
+  /* color: white; équivalent à text-white */
+}
+.category-button-all:hover {
+  background-color: #059669; /* équivalent à hover:bg-green-600 */
+}
+
+.category-button:hover {
+  color: #E5E7EB; /* équivalent à hover:bg-gray-200 */
+  cursor: pointer;
+  position: relative;
+  bottom: 2px;
+  left: 2px;
+}
+
+.category-button-entrees {
+  color: #F59E0B; /* équivalent à bg-yellow-500 */
+  border-color: #F59E0B;
+  /* color: white; équivalent à text-white */
+}
+.category-button-entrees:hover {
+  background-color: #D97706; /* équivalent à hover:bg-yellow-600 */
+}
+
+.category-button-plats {
+  color: #EF4444; /* équivalent à bg-red-500 */
+  border-color: #EF4444; /* équivalent à text-white */
+}
+.category-button-plats:hover {
+  background-color: #DC2626; /* équivalent à hover:bg-red-600 */
+}
+
+.category-button-desserts {
+  color: #8B5CF6; /* équivalent à bg-purple-500 */
+  border-color: #8B5CF6; /* équivalent à text-white */
+}
+.category-button-desserts:hover {
+  background-color: #7C3AED; /* équivalent à hover:bg-purple-600 */
+}
+
+.category-button-boissons {
+  color: #3B82F6; /* équivalent à bg-blue-500 */
+  border-color: #3B82F6; /* équivalent à text-white */
+}
+.category-button-boissons:hover {
+  background-color: #2563EB; /* équivalent à hover:bg-blue-600 */
+}
+
+.category-icon {
+  margin-right: 0.5rem; /* équivalent à mr-2 */
+  vertical-align: middle; /* pour aligner l'icône avec le texte */
+}

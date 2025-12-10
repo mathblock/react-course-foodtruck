@@ -24,7 +24,8 @@ export const menuItems: MenuItem[] = [
     isVegetarian: true,
     allergens: ['gluten', 'soja'],
     rating: 4.7,
-    reviewCount: 42
+    reviewCount: 42,
+    isNew: true
   },
   {
     id: '3',
