@@ -4,7 +4,6 @@ import Layout from "./components/Layout";
 import AdminLayout from "./components/AdminLayout";
 import CartPage from "./pages/CartPage";
 import HomePage from "./pages/HomePage";
-import { Layout } from "./pages/layout";
 import MenuPage from "./pages/MenuPage";
 import FavoritesPage from "./pages/Favorites";
 import MyAccountPage from "./pages/MyAccountPage";
