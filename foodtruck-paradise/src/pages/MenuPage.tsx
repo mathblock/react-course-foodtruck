@@ -1,10 +1,9 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useMenuFilters } from '../hooks/useMenuFilters';
 import MenuFilters from '../components/menu/MenuFilters';
-import { menuItems } from '../data/menuData';
-import type { FilterState, MenuItem } from '../types/menu';
 import { MenuCard } from '../components/menuCard';
 import '../styles/MenuPage.css';
+import type { FilterState, MenuItem } from '../types/menu';
 
 function applyFilters(items: MenuItem[], f: FilterState) {
     return items
@@ -49,6 +48,51 @@ function MenuPage() {
     const { filters } = useMenuFilters();
     
     const filteredItems = useMemo(() => applyFilters(menuItems, filters), [filters]);
+    const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+    // const [selectedCategory, setSelectedCategory] = useState<string>("all");
+
+    useEffect(() => {
+    const fetchMenu = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch("/api/menu");
+        if (!response.ok) {
+          throw new Error("Erreur lors du chargement du menu");
+        }
+        const result = await response.json();
+        setMenuItems(result.data || []);
+        setError(null);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Erreur inconnue");
+        setMenuItems([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMenu();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="menu-page">
+        <div className="menu-loading">Chargement du menu...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="menu-page">
+        <div className="menu-error">
+          <p>❌ {error}</p>
+          <p>Veuillez réessayer plus tard.</p>
+        </div>
+      </div>
+    );
+  }
 
     return (
         <div className="menu-page p-6">
@@ -80,4 +124,6 @@ function MenuPage() {
         </div>
     );
 }
+
+
 export default MenuPage;

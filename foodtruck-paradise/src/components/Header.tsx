@@ -1,23 +1,32 @@
 import { Link } from "react-router-dom";
 
-import { useFavorites } from "../hooks/useFavorites";
+interface HeaderProps {
+  onNavigate?: (page: "home" | "menu") => void;
+}
 
-function Header() {
+function Header({ onNavigate }: HeaderProps) {
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    page: "home" | "menu"
+  ) => {
+    e.preventDefault();
+    onNavigate?.(page);
+  };
 
-  const {count}= useFavorites();
   return (
     <header className="header">
       <div className="container">
-        <Link  to="/" className="logo">
-        <Link to="/" className="logo">
+        <a href="/" className="logo" onClick={(e) => handleNavClick(e, "home")}>
           <h1>🌮 Foodtruck Paradise</h1>
-        </Link  > 
-        </Link>
+        </a  > 
         <nav>
-          <Link to="/">Accueil</Link>
-          <Link to="/menu">Menu</Link>
-          <Link to="/cart">Panier</Link>
-          <Link to="/favorites">Favoris ({count})</Link>
+          <a href="/" onClick={(e) => handleNavClick(e, "home")}>
+            Accueil
+          </a>
+          <a href="/menu" onClick={(e) => handleNavClick(e, "menu")}>
+            Menu
+          </a>
+          <a href="/cart">Panier</a>
         </nav>
       </div>
     </header>
