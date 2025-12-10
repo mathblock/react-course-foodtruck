@@ -6,4 +6,5 @@ export interface User {
   avatar?: string;
   role: 'customer' | 'admin';
   createdAt: Date;
+  bio?: string;
 }

@@ -21,6 +21,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     role: 'customer', // Default role, adjust as needed
     createdAt: new Date(clerkUser.createdAt),
     avatar: clerkUser.imageUrl,
+    bio: clerkUser.unsafeMetadata?.bio as string || '',
   } : null;
 
   const isAuthenticated = isSignedIn;
@@ -64,6 +65,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       await clerkUser.update({
         firstName: data.firstName,
         lastName: data.lastName,
+        unsafeMetadata: {
+          ...clerkUser.unsafeMetadata,
+          bio: data.bio,
+        },
       });
     }
   }

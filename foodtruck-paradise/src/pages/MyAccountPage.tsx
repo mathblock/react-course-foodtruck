@@ -37,6 +37,7 @@ function MyAccountPage() {
     setEditedUser({
       firstName: user.firstName,
       lastName: user.lastName,
+      bio: user.bio || '',
     });
     setAvatarFile(null);
     setPreviewUrl(null);
@@ -113,6 +114,13 @@ function MyAccountPage() {
               }
               placeholder="Last Name"
             />
+            <textarea
+              value={editedUser.bio || ''}
+              onChange={(e) => setEditedUser({ ...editedUser, bio: e.target.value })}
+              placeholder="Bio"
+              maxLength={500}
+              rows={4}
+            />
             <div className="edit-actions">
               <button className="edit-save-btn" onClick={handleSave}>
                 Save
@@ -140,6 +148,7 @@ function MyAccountPage() {
             <p>
               <strong>Created At:</strong> {user.createdAt.toLocaleDateString()}
             </p>
+            {user.bio && <p><strong>Bio:</strong> {user.bio}</p>}
             <div className="cta-section">
               <button className="sign-out-btn" onClick={handleEdit}>
                 ✎ Edit
