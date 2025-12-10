@@ -2,20 +2,23 @@ import { useLocalStorage } from "./useLocalStorage";
 
 // src/hooks/useFavorites.ts
 export function useFavorites() {
-  const [favorites, setFavorites] = useLocalStorage<string[]>('favorites', []);
+  const [favorites,setFavorites,loadStoredValue] = useLocalStorage<string[]>('favorites', []);
   
   const addFavorite = (itemId: string) => {
     if (!favorites.includes(itemId)) {
-      setFavorites([...favorites, itemId]);
+      const favs= loadStoredValue() as string[];
+      setFavorites([...favs, itemId]);
     }
   };
   
   const removeFavorite = (itemId: string) => {
-    setFavorites(favorites.filter(id => id !== itemId));
+    const favs= loadStoredValue() as string[];
+    setFavorites(favs.filter(id => id !== itemId));
   };
   
   const isFavorite = (itemId: string) => {
-    return favorites.includes(itemId);
+    const favs= loadStoredValue() as string[];
+    return favs.includes(itemId);
   };
   
   const toggleFavorite = (itemId: string) => {
@@ -27,7 +30,7 @@ export function useFavorites() {
   };
   
   return {
-    favorites,
+    favorites:loadStoredValue()??[],
     addFavorite,
     removeFavorite,
     isFavorite,

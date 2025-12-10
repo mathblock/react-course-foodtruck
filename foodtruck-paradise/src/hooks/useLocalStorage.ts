@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const  useLocalStorage = <T>(key: string, initialValue: T): [T, (value: T | ((prev: T) => T)) => void] => {
+export const  useLocalStorage = <T>(key: string, initialValue: T): [T, (value: T | ((prev: T) => T)) => void,()=>T|undefined] => {
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
       const item = localStorage.getItem(key);
@@ -21,5 +21,10 @@ export const  useLocalStorage = <T>(key: string, initialValue: T): [T, (value: T
     }
   };
 
-  return [storedValue, setValue];
+  const loadStoredValue=():T|undefined=>{
+      const item = localStorage.getItem(key);
+      return item ? JSON.parse(item) : undefined;
+  };
+
+  return [storedValue, setValue,loadStoredValue ];
 };
