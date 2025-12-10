@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { type MenuItem } from "../types/menu";
+import { menuService } from "../services/menuService";
+import { useCart } from "../context/CartContext";
 import "../styles/MenuPage.css";
 
 function MenuPage() {
@@ -7,17 +9,14 @@ function MenuPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const { addToCart } = useCart();
 
   useEffect(() => {
     const fetchMenu = async () => {
       try {
         setLoading(true);
-        const response = await fetch("/api/menu");
-        if (!response.ok) {
-          throw new Error("Erreur lors du chargement du menu");
-        }
-        const result = await response.json();
-        setMenuItems(result.data || []);
+        const items = await menuService.getAllMenuItems();
+        setMenuItems(items);
         setError(null);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Erreur inconnue");
@@ -55,7 +54,7 @@ function MenuPage() {
     return (
       <div className="menu-page">
         <div className="menu-error">
-          <p>❌ {error}</p>
+          <p>{error}</p>
           <p>Veuillez réessayer plus tard.</p>
         </div>
       </div>
@@ -65,7 +64,7 @@ function MenuPage() {
   return (
     <div className="menu-page">
       <div className="menu-header">
-        <h1>🍔 Notre Menu</h1>
+        <h1>Notre Menu</h1>
         <p>Découvrez nos délicieuses spécialités</p>
       </div>
 
@@ -91,7 +90,7 @@ function MenuPage() {
                 <img src={item.imageUrl} alt={item.name} />
                 {item.isNew && <span className="badge-new">Nouveau</span>}
                 {item.isVegetarian && (
-                  <span className="badge-vegetarian">🌱</span>
+                  <span className="badge-vegetarian">Végétarien</span>
                 )}
               </div>
               <div className="item-content">
@@ -100,7 +99,7 @@ function MenuPage() {
 
                 <div className="item-meta">
                   <div className="rating">
-                    <span className="stars">⭐ {item.rating}</span>
+                    <span className="stars">{item.rating}</span>
                     <span className="reviews">({item.reviewCount} avis)</span>
                   </div>
                   {item.allergens.length > 0 && (
@@ -117,7 +116,12 @@ function MenuPage() {
 
                 <div className="item-footer">
                   <span className="item-price">{item.price}€</span>
-                  <button className="btn-add-cart">Ajouter au panier</button>
+                  <button 
+                    className="btn-add-cart"
+                    onClick={() => addToCart(item, 1)}
+                  >
+                    Ajouter au panier
+                  </button>
                 </div>
               </div>
             </div>

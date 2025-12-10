@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useReducer, type ReactNode } from 'react';
 import type { CartItem } from '../types/cart';
 import type { MenuItem } from '../types/menu';
-import { menuItems } from '../data/menuData';
 
 interface CartState {
     items: CartItem[];
@@ -61,10 +60,7 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
 
 export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [state, dispatch] = useReducer(cartReducer, {
-        items: [
-            {item: menuItems[0], quantity: 1}
-        
-        ]
+        items: []
     });
 
     const subtotal = state.items.reduce((sum, cartItem) => {
