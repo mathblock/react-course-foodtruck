@@ -3,8 +3,8 @@ export interface User {
   email: string;
   firstName: string;
   lastName: string;
-  phone: string;
   avatar?: string;
   role: 'customer' | 'admin';
   createdAt: Date;
+  bio?: string;
 }

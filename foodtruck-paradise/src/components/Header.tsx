@@ -1,30 +1,39 @@
-interface HeaderProps {
-  onNavigate?: (page: "home" | "menu") => void;
-}
+import { Link } from 'react-router-dom';
+import { SignedIn, SignedOut, SignInButton, UserButton, SignIn } from '@clerk/clerk-react';
+import { useAuth } from '../context/AuthContext';
 
-function Header({ onNavigate }: HeaderProps) {
-  const handleNavClick = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    page: "home" | "menu"
-  ) => {
-    e.preventDefault();
-    onNavigate?.(page);
-  };
+const links : {path:string; label:string; auth:boolean}[]=[
+    { path: '/', label: 'Accueil', auth: 'both' },
+    { path: '/menu', label: 'Menu', auth: 'both' },
+    { path: '/cart', label: 'Panier', auth: 'both' },
+    { path: '/signin', label: 'Se connecter', auth: 'out' },
+    { path: '/signup', label: "S'inscrire", auth: 'out' }
+];
+
+function Header() {
+  const { user, isAuthenticated } = useAuth();
 
   return (
     <header className="header">
       <div className="container">
-        <a href="/" className="logo" onClick={(e) => handleNavClick(e, "home")}>
+        <Link to="/" className="logo">
           <h1>🌮 Foodtruck Paradise</h1>
-        </a>
+        </Link>
         <nav>
-          <a href="/" onClick={(e) => handleNavClick(e, "home")}>
-            Accueil
-          </a>
-          <a href="/menu" onClick={(e) => handleNavClick(e, "menu")}>
-            Menu
-          </a>
-          <a href="/cart">Panier</a>
+          {links
+            .filter(link => link.auth === 'both' || (link.auth === 'out' && !isAuthenticated))
+            .map(link => (
+              <Link key={link.path} to={link.path}>{link.label}</Link>
+            ))}
+          <div className="clerk-auth">
+              {isAuthenticated && (
+                <div className="info-user">
+                  <Link to="/account"><img src={user?.avatar} alt="Avatar" /></Link>                
+                  <Link to="/account">{user?.firstName}</Link>
+                </div>
+              )
+            }
+          </div>
         </nav>
       </div>
     </header>
