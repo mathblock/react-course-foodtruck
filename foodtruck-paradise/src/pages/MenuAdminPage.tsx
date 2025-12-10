@@ -109,6 +109,7 @@ export default function MenuAdminPage() {
             <thead>
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium">ID</th>
+                <th className="px-6 py-3 text-left text-xs font-medium">Image</th>
                 <th className="px-6 py-3 text-left text-xs font-medium">Name</th>
                 <th className="px-6 py-3 text-left text-xs font-medium">Category</th>
                 <th className="px-6 py-3 text-left text-xs font-medium">Price</th>
@@ -121,6 +122,13 @@ export default function MenuAdminPage() {
               {items.map((it) => (
                 <tr key={it.id}>
                   <td className="px-6 py-4 code">{it.id}</td>
+                  <td className="px-6 py-4">
+                    {it.imageUrl ? (
+                      <img src={it.imageUrl} alt={it.name} className="admin-menu-image" />
+                    ) : (
+                      <div className="admin-menu-image-placeholder">No Image</div>
+                    )}
+                  </td>
                   <td className="px-6 py-4">{it.name}</td>
                   <td className="px-6 py-4">{it.category}</td>
                   <td className="px-6 py-4">€{it.price.toFixed(2)}</td>
@@ -172,6 +180,7 @@ function MenuItemForm({
     isVegetarian: item?.isVegetarian || false,
     isNew: item?.isNew || false,
     allergens: item?.allergens?.join(', ') || '',
+    imageUrl: item?.imageUrl || '',
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -260,6 +269,16 @@ function MenuItemForm({
             onChange={(e) => setFormData({ ...formData, allergens: e.target.value })}
             className="w-full p-2"
             placeholder="gluten, lactose, etc."
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium mb-1">Image URL</label>
+          <input
+            type="text"
+            value={formData.imageUrl}
+            onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
+            className="w-full p-2"
+            placeholder="https://example.com/image.jpg"
           />
         </div>
         <div className="flex space-x-2">

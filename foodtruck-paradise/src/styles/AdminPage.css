@@ -261,3 +261,25 @@
 .admin-delete-button:hover {
   background: #dc2626; /* darker red */
 }
+
+/* Menu Item Image Styling */
+.admin-menu-image {
+  width: 64px; /* 16 * 4px = 64px */
+  height: 64px;
+  object-fit: cover;
+  border-radius: 0.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.admin-menu-image-placeholder {
+  width: 64px;
+  height: 64px;
+  background-color: #374151; /* gray-700 */
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af; /* gray-400 */
+  font-size: 0.75rem;
+  text-align: center;
+}
