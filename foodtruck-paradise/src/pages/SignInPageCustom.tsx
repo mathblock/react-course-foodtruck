@@ -41,7 +41,9 @@ function SignInPageCustom() {
         />
         <button type="submit">Se connecter</button>
         <div className="divider">ou</div>
-        <button type="button" className="google-btn" onClick={() => signIn.authenticateWithRedirect({ strategy: 'oauth_google', redirectUrl: '/account' })}>Se connecter avec Google</button>
+        <button type="button" className="google-btn" onClick={() => signIn.authenticateWithRedirect({ 
+          strategy: 'oauth_google', redirectUrl: "/sso-callback", redirectUrlComplete: "/account", })}>
+            Se connecter avec Google</button>
         {error && <div className="error-message">{error}</div>}
         <p>Je n'ai pas de compte <span className = "inscrire"><Link to="/signup">s'inscrire</Link></span> !</p>
       </form>
