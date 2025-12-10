@@ -35,6 +35,8 @@ export function useFavorites() {
     removeFavorite,
     isFavorite,
     toggleFavorite,
-    count: favorites.length
+    count: ()=>{
+      return loadStoredValue()?.length||0;
+    }
   };
 }

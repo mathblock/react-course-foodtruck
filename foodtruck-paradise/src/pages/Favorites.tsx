@@ -5,7 +5,7 @@ import { useFavorites } from "../hooks/useFavorites";
 
 
 function FavoritesPage() {
-  const { favorites, } = useFavorites();
+  const { favorites,count } = useFavorites();
 
   const favoriteItems = menuItems.filter(item =>
     favorites.includes(item.id)
@@ -26,7 +26,7 @@ function FavoritesPage() {
 
   return (
     <div className="favorites-page">
-      <h2>❤️ Mes Favoris ({favoriteItems.length})</h2>
+      <h2>❤️ Mes Favoris ({count()})</h2>
 
       <div className="menu-grid">
         {favoriteItems.map(item => (

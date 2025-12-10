@@ -5,7 +5,6 @@ import { Layout } from "./pages/layout";
 import MenuPage from "./pages/MenuPage";
 import FavoritesPage from "./pages/Favorites";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Layout from "./components/Layout";
 import MyAccountPage from "./pages/MyAccountPage";
 import SignInPageCustom from "./pages/SignInPageCustom";
 import { AuthProvider } from "./context/AuthContext";
