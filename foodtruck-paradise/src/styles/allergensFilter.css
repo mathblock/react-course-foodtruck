@@ -1,0 +1,185 @@
+/* AllergensFilter.css */
+
+.allergens-filter {
+  width: 100%;
+}
+
+/* En-tête avec label et bouton clear */
+.allergens-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.allergens-label {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.allergens-clear {
+  font-size: 0.75rem;
+  color: #ef4444;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.allergens-clear:hover {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+/* Grille des badges */
+.allergens-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+/* Badge individuel */
+.allergen-badge {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 0.75rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.5rem;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4b5563;
+  text-align: left;
+}
+
+.allergen-badge:hover {
+  border-color: #d1d5db;
+  background-color: #f9fafb;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.allergen-badge:active {
+  transform: translateY(0);
+}
+
+/* Badge sélectionné */
+.allergen-badge-selected {
+  border-color: #ef4444;
+  background-color: #fef2f2;
+  color: #991b1b;
+}
+
+.allergen-badge-selected:hover {
+  border-color: #dc2626;
+  background-color: #fee2e2;
+}
+
+/* Icône de l'allergène */
+.allergen-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* Label de l'allergène */
+.allergen-label {
+  flex: 1;
+  line-height: 1.2;
+}
+
+/* Checkmark pour badge sélectionné */
+.allergen-check {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ef4444;
+  color: white;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 700;
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
+  animation: popIn 0.2s ease;
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Résumé en bas */
+.allergens-summary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 0.5rem;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.summary-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.summary-text {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #991b1b;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .allergens-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Version alternative: 1 colonne sur petits écrans, 2 sur moyens, 3 sur grands */
+@media (min-width: 640px) {
+  .allergens-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .allergens-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

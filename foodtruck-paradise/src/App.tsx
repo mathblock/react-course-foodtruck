@@ -1,19 +1,22 @@
-import "./App.css";
-import { MenuCard } from "./components/menuCard";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import FavoritesPage from "./pages/Favorites";
+import "./App.css"
+import CartPage from "./pages/CartPage";
 import HomePage from "./pages/HomePage";
-
+import { Layout } from "./pages/layout";
+import MenuPage from "./pages/MenuPage";
+import FavoritesPage from "./pages/Favorites";
+import {  Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-       {/* <Header />
-      <HomePage />
-      <Footer /> */}
-      <FavoritesPage />
-    </div>
+      
+        <Routes >
+          <Route path="/" element={<Layout/>}>
+            <Route index element={<HomePage />} />
+            <Route path="/menu" element={<MenuPage />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/favorites" element={<FavoritesPage />} />
+          </Route>
+        </Routes>
   );
 }
 

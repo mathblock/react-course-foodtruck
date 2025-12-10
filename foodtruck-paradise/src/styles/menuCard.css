@@ -101,7 +101,7 @@
 
 /* ADD TO CART BUTTON */
 .add-to-cart-button {
-  background: #2563eb;
+  background: var(--primary);
   color: white;
   border: none;
   font-size: 18px;

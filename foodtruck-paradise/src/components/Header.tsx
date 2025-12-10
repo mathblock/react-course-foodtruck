@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+
 import { useFavorites } from "../hooks/useFavorites";
 
 function Header() {
@@ -7,8 +8,10 @@ function Header() {
   return (
     <header className="header">
       <div className="container">
+        <Link  to="/" className="logo">
         <Link to="/" className="logo">
           <h1>🌮 Foodtruck Paradise</h1>
+        </Link  > 
         </Link>
         <nav>
           <Link to="/">Accueil</Link>
