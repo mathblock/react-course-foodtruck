@@ -51,28 +51,6 @@ function HomePage() {
           <p>Des recettes maison préparées par nos chefs</p>
         </div>
       </section>
-      <section className="menu-preview">
-        <h2>Aperçu du menu</h2>
-        {menu ? (
-          <ul className="menu-items">
-            {menu.slice(0, 3).map((item: MenuItem) => (
-              <li key={item.id} className="menu-item">
-                <h3>{item.name}</h3>
-                <p>{item.description}</p>
-                <span className="price">{item.price} €</span>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>Chargement du menu...</p>
-        )}
-      </section>
-      <section className="cta">
-        <h2>Prêt à commander ?</h2>
-        <a href="/order" className="btn btn-secondary">
-          Passer une commande
-        </a>
-      </section>
     </div>
   );
 }
