@@ -246,7 +246,7 @@
 .user-info img {
   display: block;
   margin: 30px auto 0;
-  max-width: 200px;
+  width: 200px;
   height: 200px;
   object-fit: cover;
   border-radius: 50%;
