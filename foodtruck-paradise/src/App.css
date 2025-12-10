@@ -19,7 +19,7 @@
   background-position: center;
 }
 
-/* .signin-page form {
+.signin-page-custom form {
   background: #fff;
   padding: 2.5rem 2rem;
   border-radius: 16px;
@@ -28,7 +28,7 @@
   flex-direction: column;
   min-width: 600px;
   gap: 1.2rem;
-} */
+}
 
 .signin-page input {
   padding: 0.8rem 1rem;
@@ -57,6 +57,48 @@
 
 .signin-page button:hover {
   background: linear-gradient(90deg, #f7b42c 0%, #fc575e 100%);
+}
+
+.signin-page .google-btn {
+  background: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.9rem 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.signin-page .google-btn:hover {
+  background: #3367d6;
+}
+
+.signin-page .divider {
+  text-align: center;
+  margin: 1rem 0;
+  position: relative;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.signin-page .divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #e0e0e0;
+  z-index: 0;
+}
+
+.signin-page .divider {
+  background: #fff;
+  padding: 0 1rem;
+  position: relative;
+  z-index: 1;
 }
 
 .signin-page .error-message {
