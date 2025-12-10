@@ -1,4 +1,6 @@
-function HomePage() {
+
+
+export function HomePage() {
   return (
     <div className="home-page">
       <section className="hero">

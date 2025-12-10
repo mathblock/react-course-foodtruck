@@ -15,4 +15,7 @@ export interface Order {
   };
   promoCode?: string;
   discount?: number;
+
 }
+
+

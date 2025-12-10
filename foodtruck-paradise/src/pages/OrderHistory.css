@@ -1,0 +1,144 @@
+/* ======================================= */
+/* 1. Conteneur Global et Titre */
+/* ======================================= */
+.order-history-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f8f8f8; /* Léger fond pour détacher de l'arrière-plan */
+    border-radius: 12px;
+}
+
+.order-history-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 2em;
+    border-bottom: 3px solid #FF5733; /* Couleur d'accentuation */
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+/* ======================================= */
+/* 2. Liste des Commandes */
+/* ======================================= */
+.order-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espacement entre les commandes */
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Effet de survol professionnel */
+.order-item:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Structure interne */
+.order-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex-basis: 60%;
+}
+
+.order-summary {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    flex-basis: 35%;
+}
+
+/* ======================================= */
+/* 3. Typographie et Totaux */
+/* ======================================= */
+.order-id {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #FF5733; /* Couleur d'accentuation pour l'ID */
+}
+
+.order-date {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.order-total {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: #333;
+}
+
+/* ======================================= */
+/* 4. Statuts et Couleurs */
+/* ======================================= */
+.order-status {
+    font-weight: 500;
+    padding: 3px 0;
+}
+
+/* Styles pour les statuts (utilisez la classe dynamique `.status-[nom]`) */
+.order-item.status-delivered { 
+    border-left: 5px solid #28a745; /* Vert pour livré */
+}
+.order-item.status-preparing { 
+    border-left: 5px solid #ffc107; /* Jaune/Orange pour en cours */
+}
+.order-item.status-delivering { 
+    border-left: 5px solid #007bff; /* Bleu pour en livraison */
+}
+.order-item.status-cancelled { 
+    border-left: 5px solid #dc3545; /* Rouge pour annulé */
+}
+/* Ajoutez les autres statuts (pending, confirmed) si nécessaire */
+
+/* ======================================= */
+/* 5. Bouton Voir Détails */
+/* ======================================= */
+.view-detail-btn {
+    text-decoration: none;
+    padding: 8px 15px;
+    background-color: #4a90e2;
+    color: white;
+    border-radius: 20px;
+    font-weight: 600;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.view-detail-btn:hover {
+    background-color: #357ABD;
+    transform: scale(1.05);
+}
+
+/* ======================================= */
+/* 6. États de Chargement/Erreur/Vide */
+/* ======================================= */
+.loading-state, .error-state, .no-orders {
+    text-align: center;
+    padding: 50px 20px;
+    font-size: 1.2em;
+    color: #666;
+    background-color: #ffffff;
+    border-radius: 8px;
+    margin: 20px auto;
+}
+
+.error-state {
+    color: #dc3545;
+    border: 1px solid #dc3545;
+    background-color: #f8d7da;
+}
