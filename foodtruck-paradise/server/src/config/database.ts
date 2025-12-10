@@ -216,17 +216,24 @@ export class Database {
   }
 
   async getCartItems(): Promise<any[]> {
-
-    const items = await this.all<any>(`
+    // Pour l'instant, on retourne un panier vide car il n'y a pas de système d'authentification
+    // TODO: Implémenter la gestion des paniers par utilisateur avec sessions/auth
+    
+    // Retourne les items de tous les paniers (temporaire, en attendant l'auth)
+    const cartItems = await this.all<any>(`
       SELECT 
+        ci.id as cart_item_id,
+        ci.quantity,
         m.*,
         c.slug as category
-      FROM menu_items m
+      FROM cart_items ci
+      JOIN menu_items m ON ci.menu_item_id = m.id
       JOIN categories c ON m.category_id = c.id
-      ORDER BY m.created_at DESC
+      ORDER BY ci.id DESC
     `);
+
     // Get allergens for each item
-    for (const item of items) {
+    for (const item of cartItems) {
       const allergens = await this.all<{ name: string }>(
         `
         SELECT a.name
@@ -240,6 +247,7 @@ export class Database {
       item.isVegetarian = Boolean(item.is_vegetarian);
       item.isNew = Boolean(item.is_new);
       item.imageUrl = item.image_url;
+      
       // Remove snake_case properties
       delete item.is_vegetarian;
       delete item.is_new;
@@ -247,7 +255,8 @@ export class Database {
       delete item.category_id;
       delete item.created_at;
     }
-    return items;
+    
+    return cartItems;
   }
 
 
