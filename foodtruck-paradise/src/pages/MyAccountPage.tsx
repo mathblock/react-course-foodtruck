@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import type { User } from '../types/user';
+import { Navigate } from 'react-router-dom';
 
 function MyAccountPage() {
   const { user, isAuthenticated, loading, updateProfile, updateAvatar, logout } = useAuth();
@@ -8,13 +9,17 @@ function MyAccountPage() {
   const [editedUser, setEditedUser] = useState<Partial<User>>({});
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
   if (!isAuthenticated || !user) {
-    return <div>Please log in to view your account.</div>;
+    // redirect to sign-in page
+    return <Navigate to="/signin" replace />;
   }
 
   const handleEdit = () => {
@@ -35,7 +40,12 @@ function MyAccountPage() {
     }
   };
 
-  const handleSave = async () => {
+  const handleSave = () => {
+    setShowConfirmModal(true);
+  };
+
+  const handleConfirmSave = async () => {
+    setShowConfirmModal(false);
     try {
       await updateProfile(editedUser);
       if (avatarFile) {
@@ -46,8 +56,14 @@ function MyAccountPage() {
         URL.revokeObjectURL(previewUrl);
         setPreviewUrl(null);
       }
+      setToastMessage('Votre compte a été mis à jour avec succès!');
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 3000);
     } catch (error) {
       console.error('Failed to update profile:', error);
+      setToastMessage('Échec de la mise à jour du compte. Veuillez réessayer.');
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 3000);
     }
   };
 
@@ -99,6 +115,23 @@ function MyAccountPage() {
           </>
         )}
       </div>
+      {showConfirmModal && (
+        <div className="popup-overlay">
+          <div className="popup">
+            <div className="popup-icon">⚠️</div>
+            <p>Voulez-vous vraiment enregistrer les modifications apportées à votre compte ?</p>
+            <div>
+              <button className="confirm-btn" onClick={handleConfirmSave}>Confirm</button>
+              <button className="cancel-btn" onClick={() => setShowConfirmModal(false)}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      )}
+      {showToast && (
+        <div className="toast">
+          {toastMessage}
+        </div>
+      )}
     </div>
   );
 }
