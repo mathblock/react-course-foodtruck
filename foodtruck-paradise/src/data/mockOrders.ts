@@ -22,6 +22,27 @@ const mockCartItems2: CartItem[] = [
     },
 ];
 
+const mockCartItems3: CartItem[] = [
+    { 
+        item: { id: 'S003', name: 'Salade César', price: 15.00, category: 'entrees', description: '', imageUrl: '', isVegetarian: false, allergens: [], rating: 3, reviewCount: 5 }, 
+        quantity: 1 
+    },
+];
+
+const mockCartItems4: CartItem[] = [
+    { 
+        item: { id: 'S004', name: 'Salade César', price: 15.00, category: 'entrees', description: '', imageUrl: '', isVegetarian: false, allergens: [], rating: 3, reviewCount: 5 }, 
+        quantity: 1 
+    },
+];
+
+const mockCartItems5: CartItem[] = [
+    { 
+        item: { id: 'S004', name: 'Salade César', price: 15.00, category: 'entrees', description: '', imageUrl: '', isVegetarian: false, allergens: [], rating: 3, reviewCount: 5 }, 
+        quantity: 1 
+    },
+];
+
 export const mockOrders: Order[] = [
     {
         id: "id_9457",
@@ -45,4 +66,41 @@ export const mockOrders: Order[] = [
         promoCode: 'WELCOME10',
         discount: 1.40, // 10% de 14.00
     },
+    {
+        id: "id_9460",
+        orderNumber: "ORD-9458",
+        date: new Date('2025-12-09T14:05:00Z'),
+        items: mockCartItems3,
+        total: 12.60, // Total après réduction
+        status: 'cancelled', // Statut en cours
+        estimatedDelivery: new Date('2025-12-09T15:05:00Z'),
+        deliveryAddress: { street: '35 Avenue des Champs', city: 'Lyon', postalCode: '69002' },
+        promoCode: 'WELCOME10',
+        discount: 1.40, // 10% de 14.00
+    },
+    {
+        id: "id_9460",
+        orderNumber: "ORD-9458",
+        date: new Date('2025-12-09T14:05:00Z'),
+        items: mockCartItems4,
+        total: 12.60, // Total après réduction
+        status: 'delivering', // Statut en cours
+        estimatedDelivery: new Date('2025-12-09T15:05:00Z'),
+        deliveryAddress: { street: '35 Avenue des Champs', city: 'Lyon', postalCode: '69002' },
+        promoCode: 'WELCOME10',
+        discount: 1.40, // 10% de 14.00
+    },
+    {
+        id: "id_9465",
+        orderNumber: "ORD-9458",
+        date: new Date('2025-12-09T14:05:00Z'),
+        items: mockCartItems5,
+        total: 12.60, // Total après réduction
+        status: 'confirmed', // Statut en cours
+        estimatedDelivery: new Date('2025-12-09T15:05:00Z'),
+        deliveryAddress: { street: '35 Avenue des Champs', city: 'Lyon', postalCode: '69002' },
+        promoCode: 'LUXADA',
+        discount: 1.40, // 10% de 14.00
+    }
+
 ];
